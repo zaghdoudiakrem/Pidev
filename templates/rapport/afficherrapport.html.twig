@@ -1,0 +1,42 @@
+{% extends 'base2.html.twig'%}
+
+{% block body %}
+	<div class="row">
+		<a class="btn btn-primary rounded-pill" href="{{path('appadd_rapport')}}">
+			Ajouter</a>
+	</div>
+
+	<table class="table table-borderless datatable">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">description</th>
+				<th scope="col">rapport_preliminaire</th>
+				<th scope="col">rapport_expertise</th>
+
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr>
+				{% for i in rapports %}
+					<td>{{i.id}}</td>
+
+					<td>{{i.description}}</td>
+					<td>
+						{{i.rapport_preliminaire}}
+					</td>
+					<td>{{i.rapport_expertise}}</td>
+
+					<td>
+						<a href="{{path('app_delete',{id:i.id} )}}">delete</a>
+					</td>
+					<td>
+						<a href=" {{path('appadd_rapport',{id:i.id} )}}  ">edit</a>
+					</td>
+				</tr>
+			</tr>
+
+		</tbody>
+	{% endfor %}
+</tbody></table>{% endblock %}

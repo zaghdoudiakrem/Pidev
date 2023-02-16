@@ -1,0 +1,39 @@
+{% extends 'base2.html.twig'%}
+
+{% block body %}
+	<div class="row">
+		<a class="btn btn-primary rounded-pill" href="{{path('app_rendez_vous')}}">
+			Ajouter</a>
+	</div>
+
+	<table class="table table-borderless datatable">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Date</th>
+				<th scope="col">Lieux</th>
+
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr>
+				{% for rendezvous in rendezvouss %}
+
+					<td>{{rendezvous.id}}</td>
+					<td>
+						{{rendezvous.date.format('Y-m-d H:i:s')}}
+					</td>
+					<td>{{rendezvous.lieu}}</td>
+					<td>
+						<a href="{{path('app_delete',{id:rendezvous.id} )}}">delete</a>
+					</td>
+					<td>
+						<a href=" {{path('app_rendez_vous',{id:rendezvous.id} )}}  ">edit</a>
+					</td>
+				</tr>
+			</tr>
+
+		</tbody>
+	{% endfor %}
+</tbody></table>{% endblock %}
