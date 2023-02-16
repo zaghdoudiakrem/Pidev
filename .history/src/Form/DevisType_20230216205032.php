@@ -19,14 +19,14 @@ class DevisType extends AbstractType
             ->add('etat',ChoiceType::class, [
                 'choices' => [
                     'réparer' => 'réparer',
-                    'non réparer' => 'non réparer',
+                    'non réparer' => 'option2',
                 ],
                 'expanded' => true, // display as radio buttons
                 'multiple' => false, // only one choice can be selected
-                 
+                'label' => false, // remove the label to use custom HTML
             ])
             ->add('id_expert')
-            ->add('id_mecanicien')
+            ->add('id_mecanicien', IntegerType::class)
           
         ;
     }

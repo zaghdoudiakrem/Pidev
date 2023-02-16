@@ -1,6 +1,6 @@
 {% extends 'base2.html.twig' %}
 
-{% block title %}Devis{% endblock %}
+{% block title %}Devis index{% endblock %}
 {% block Sidebar %} 
 <!-- ======= Sidebar ======= -->
 		
@@ -56,46 +56,52 @@
 
 			</aside>
 			<!-- End Sidebar-->
-            {% endblock %}
 
 {% block body %}
  <div class="container">
-    <h2 class="text-center mt-5 mb-3">Show Project</h2>
+    <h1>Devis index</h1>
     <div class="card">
             <div class="card-header">
-                <a href="{{ path('app_devis_index') }}" class="btn btn-outline-info float-right" > 
-                   Liste des devis
+                <a class="btn btn-outline-primary" href="{{ path('app_devis_new') }} "> 
+                    créer un nouveau devis
                 </a>
             </div>
-
-    <table class="table">
-        <tbody>
+<div class="card-body">
+    <table class="table table-bordered">
+        <thead>
             <tr>
                 <th>Id</th>
-                <td>{{ devi.id }}</td>
-            </tr>
-            <tr>
                 <th>Montant</th>
-                <td>{{ devi.montant }}</td>
-            </tr>
-            <tr>
                 <th>Description</th>
-                <td>{{ devi.description }}</td>
-            </tr>
-            <tr>
                 <th>Etat</th>
-                <td>{{ devi.etat ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
                 <th>Id_expert</th>
-                <td>{{ devi.idExpert }}</td>
+                <th>show</th>
+                <th>Edit</th>
             </tr>
+        </thead>
+        <tbody>
+        {% for devi in devis %}
+            <tr>
+                <td>{{ devi.id }}</td>
+                <td>{{ devi.montant }}</td>
+                <td>{{ devi.description }}</td>
+                <td>{{ devi.etat ? 'Yes' : 'No' }}</td>
+                <td>{{ devi.idExpert }}</td>
+                <td>
+                    <a  class="btn btn-outline-info" href="{{ path('app_devis_show', {'id': devi.id}) }}">show</a>
+                </td>
+                <td>
+                <a  class="btn btn-outline-success" href="{{ path('app_devis_edit', {'id': devi.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
-
-
-    <a href="{{ path('app_devis_edit', {'id': devi.id}) }}">edit</a>
-
-   
+</div>
+    
     </div>
 {% endblock %}

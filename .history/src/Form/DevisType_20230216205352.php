@@ -23,10 +23,10 @@ class DevisType extends AbstractType
                 ],
                 'expanded' => true, // display as radio buttons
                 'multiple' => false, // only one choice can be selected
-                 
+                 // remove the label to use custom HTML
             ])
             ->add('id_expert')
-            ->add('id_mecanicien')
+            ->add('id_mecanicien', IntegerType::class)
           
         ;
     }

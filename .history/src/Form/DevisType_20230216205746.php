@@ -25,7 +25,7 @@ class DevisType extends AbstractType
                 'multiple' => false, // only one choice can be selected
                  
             ])
-            ->add('id_expert')
+            ->add('id_expert', IntegerType::class)
             ->add('id_mecanicien')
           
         ;

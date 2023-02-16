@@ -1,0 +1,14 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}New Devis{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Create new Devis</h1>
+    <h2 class="text-center mt-5 mb-3">Create Project</h2>
+
+    {{ include('devis/_form.html.twig') }}
+
+    <a href="{{ path('app_devis_index') }}">back to list</a>
+    </div>
+{% endblock %}

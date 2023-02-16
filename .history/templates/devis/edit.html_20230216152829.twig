@@ -1,0 +1,26 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Edit Devis{% endblock %}
+
+{% block body %}
+<div class="container pt-5">
+
+
+<div class="card ">
+    <div class="card-header">
+    
+    <h2 class="text-center mt-5 mb-3">Edit Devis</h2>
+                <a class="btn btn-outline-info float-right" href="{{ path('app_devis_index') }}"> 
+                    View All Devis
+                </a>
+    </div>
+
+     <div class="card-body">
+      {{ include('devis/_form.html.twig', {'button_label': 'Update', 'button_color': 'btn-outline-success'}) }}
+    </div>
+</div>
+
+    {{ include('devis/_delete_form.html.twig') }}
+
+</div>
+{% endblock %}

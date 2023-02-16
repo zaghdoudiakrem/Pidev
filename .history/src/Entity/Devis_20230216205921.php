@@ -27,8 +27,9 @@ class Devis
     #[ORM\JoinColumn(nullable: false)]
     private ?User $id_mecanicien = null;
 
-    #[ORM\Column]
-    private ?int $id_expert = null;
+    #[ORM\ManyToOne(inversedBy: 'devis')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $id_expert = null;
 
     public function getId(): ?int
     {
@@ -83,16 +84,15 @@ class Devis
         return $this;
     }
 
-    public function getIdExpert(): ?int
+    public function getIdExpert(): ?User
     {
         return $this->id_expert;
     }
 
-    public function setIdExpert(int $id_expert): self
+    public function setIdExpert(User$id_expert): self
     {
         $this->id_expert = $id_expert;
 
         return $this;
     }
-    
 }

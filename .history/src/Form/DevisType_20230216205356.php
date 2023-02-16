@@ -26,7 +26,7 @@ class DevisType extends AbstractType
                  
             ])
             ->add('id_expert')
-            ->add('id_mecanicien')
+            ->add('id_mecanicien', IntegerType::class)
           
         ;
     }
