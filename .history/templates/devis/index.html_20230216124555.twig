@@ -1,0 +1,52 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Devis index{% endblock %}
+
+{% block body %}
+ <div class="container">
+    <h1>Devis index</h1>
+    <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-primary" href="{{ path('app_devis_new') }} "> 
+                    créer un nouveau devis
+                </a>
+            </div>
+<div class="card-body">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Montant</th>
+                <th>Description</th>
+                <th>Etat</th>
+                <th>Id_expert</th>
+                <th>show</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for devi in devis %}
+            <tr>
+                <td>{{ devi.id }}</td>
+                <td>{{ devi.montant }}</td>
+                <td>{{ devi.description }}</td>
+                <td>{{ devi.etat ? 'Yes' : 'No' }}</td>
+                <td>{{ devi.idExpert }}</td>
+                <td>
+                    <a href="{{ path('app_devis_show', {'id': devi.id}) }}">show</a>
+                    
+                </td>
+                <td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <a href="{{ path('app_devis_new') }}">Create new</a>
+    </div>
+{% endblock %}

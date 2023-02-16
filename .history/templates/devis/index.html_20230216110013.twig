@@ -1,0 +1,26 @@
+{% extends 'devis.html.twig' %}
+
+{% block title %}Devis index{% endblock %}
+
+{% block body %}
+    <h1>Devis index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Montant</th>
+                <th>Description</th>
+                <th>Etat</th>
+                <th>Id_expert</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+       
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_devis_new') }}">Create new</a>
+{% endblock %}
