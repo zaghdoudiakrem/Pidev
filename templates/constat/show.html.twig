@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Constat{% endblock %}
+
+{% block body %}
+<div class="container">
+        <h2 class="text-center mt-5 mb-3">Constat</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_constat_index') }}"> Retour </a>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ constat.id }}</td>
+            </tr>
+            <tr>
+                <th>Nomclient_e</th>
+                <td>{{ constat.nomclientE }}</td>
+            </tr>
+            <tr>
+                <th>Prenomclient_e</th>
+                <td>{{ constat.prenomclientE }}</td>
+            </tr>
+            <tr>
+                <th>Typevehicule_e</th>
+                <td>{{ constat.typevehiculeE }}</td>
+            </tr>
+            <tr>
+                <th>Marquevehicule_e</th>
+                <td>{{ constat.marquevehiculeE }}</td>
+            </tr>
+            <tr>
+                <th>Assuranceclient_e</th>
+                <td>{{ constat.assuranceclientE }}</td>
+            </tr>
+            <tr>
+                <th>Adresseclient_e</th>
+                <td>{{ constat.adresseclientE }}</td>
+            </tr>
+            <tr>
+                <th>Emplacementaccid</th>
+                <td>{{ constat.emplacementaccid }}</td>
+            </tr>
+            <tr>
+                <th>Photoaccid</th>
+                <td>{{ constat.photoaccid }}</td>
+            </tr>
+            <tr>
+                <th>Descriptiondegat</th>
+                <td>{{ constat.descriptiondegat }}</td>
+            </tr>
+            <tr>
+                <th>Observations</th>
+                <td>{{ constat.observations }}</td>
+            </tr>
+            <tr>
+                <th>Numcontrat_e</th>
+                <td>{{ constat.numcontratE }}</td>
+            </tr>
+             <tr>
+             <td><a class="btn btn-outline-success" href="{{ path('app_constat_edit', {'id': constat.id}) }}">Modifier</a></td>
+
+            <td>{{ include('constat/_delete_form.html.twig') }}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+{% endblock %}
+

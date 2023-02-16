@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicule index{% endblock %}
+
+{% block body %}
+    <h1>Vehicule</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Matricule</th>
+                <th>Marque</th>
+                <th>Type</th>
+                <th>Nb_ch</th>
+                <th colspan ="3" width="240px" style="position: relative; left: 80px; top: 0px;" >Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vehicule in vehicules %}
+            <tr>
+                <td>{{ vehicule.id }}</td>
+                <td>{{ vehicule.matricule }}</td>
+                <td>{{ vehicule.marque }}</td>
+                <td>{{ vehicule.type }}</td>
+                <td>{{ vehicule.nbCh }}</td>
+                <td>
+                    <a class="btn btn-outline-info" href="{{ path('app_vehicule_show', {'id': vehicule.id}) }}">Lister</a>
+                    <a class="btn btn-outline-success" href="{{ path('app_vehicule_edit', {'id': vehicule.id}) }}">Modifier</a>
+                    <a class="btn btn-outline-danger" href="{{ path('app_vehicule_new') }}">Ajouter</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Table vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
