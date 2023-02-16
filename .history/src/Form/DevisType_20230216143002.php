@@ -15,7 +15,8 @@ class DevisType extends AbstractType
             ->add('montant')
             ->add('description')
             ->add('etat')
-          
+            ->add('id_expert',)
+            ->add('id_mecanicien')
         ;
     }
 

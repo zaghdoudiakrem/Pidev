@@ -4,12 +4,9 @@
     </div>
 
     <div class="form-group">
-  {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+  {{ form_row(form.des, {'attr': {'class': 'form-control'}}) }}
     </div>
 
-    <div class="form-group">
-  {{ form_row(form.etat, {'attr': {'class': 'form-control'}}) }}
-    </div>
 
     <div class="form-group">
     <button class="btn {{ button_color|default('btn-outline-primary') }}  mt-3">{{ button_label|default('Save Project') }}</button>
