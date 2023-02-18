@@ -1,0 +1,48 @@
+{{ form_start(form) }}
+
+
+     
+  
+    <div id="devis-items">
+        <div class="devis-item">
+            {{ form_row(form.items.0.description) }}
+            {{ form_row(form.items.0.quantity) }}
+            {{ form_row(form.items.0.unitPrice) }}
+            {{ form_row(form.items.0.totalPrice) }}
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-secondary mt-2" id="add-devis-item">Add Devis Item</button>
+
+    <hr>
+
+    <button type="submit" class="btn btn-primary">Create Devis</button>
+    {{ form_end(form) }}
+
+    <script>
+        var devisItemTemplate = `
+            <div class="devis-item">
+                {{ form_row(form.items['__name__'].description) }}
+                {{ form_row(form.items['__name__'].quantity) }}
+                {{ form_row(form.items['__name__'].unitPrice) }}
+                {{ form_row(form.items['__name__'].totalPrice) }}
+                <button type="button" class="btn btn-danger remove-devis-item mt-2">Remove Devis Item</button>
+            </div>
+        `;
+
+        $('#add-devis-item').click(function() {
+            $('#devis-items').append(devisItemTemplate.replace(/__name__/g, $('#devis-items .devis-item').length));
+        });
+
+        $('#devis-items').on('click', '.remove-devis-item', function() {
+            $(this).closest('.devis-item').remove();
+        });
+    </script>
+{% endblock %}
+The JavaScript function creates a new DevisItem form by cloning the base template and replacing the __name__ placeholder with a new unique identifier. The remove-devis-item button removes the corresponding DevisItem form from the page.
+
+
+
+
+
+{{ form_end(form) }}

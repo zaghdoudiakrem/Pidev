@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+
+
+
+    
+      <div class="form-group">
+  {{ form_row(form.id_expert, {'attr': {'class': 'form-control'}}) }}
+    </div>
+      <div class="form-group">
+  {{ form_row(form.id_mecanicien, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+    <button class="btn {{ button_color|default('btn-outline-primary') }}  mt-3">{{ button_label|default('Save Devis') }}</button>
+    </div>
+{{ form_end(form) }}

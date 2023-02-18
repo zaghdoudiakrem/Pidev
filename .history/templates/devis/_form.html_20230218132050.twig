@@ -1,0 +1,69 @@
+{{ form_start(form) }}
+
+<h2>Devis Items</h2>
+<div id="devis-items">
+    {% for itemForm in form.items %}
+        <div class="devis-item">
+            <div class="form-group">
+                {{ form_label(itemForm.description) }}
+                {{ form_widget(itemForm.description, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(itemForm.quantite) }}
+                {{ form_widget(itemForm.Quantite, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(itemForm.unitPrice) }}
+                {{ form_widget(itemForm.unitPrice, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(itemForm.totalPrice) }}
+                {{ form_widget(itemForm.totalPrice, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <button type="button" class="btn btn-danger remove-devis-item">Remove</button>
+        </div>
+    {% endfor %}
+</div>
+
+<button type="button" class="btn btn-secondary mt-2" id="add-devis-item">Add Devis Item</button>
+
+<hr>
+
+<button type="submit" class="btn btn-primary">Create Devis</button>
+
+{{ form_end(form) }}
+
+<script>
+    var devisItemTemplate = `
+    <div class="devis-item">
+        <div class="form-group">
+            <label for="{{ form_id }}_items___name___description" class="col-form-label">Description</label>
+            <input type="text" id="{{ form_id }}_items___name___description" name="{{ form_name }}[items][__name__][description]" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="{{ form_id }}_items___name___Quantite" class="col-form-label">QuantiteQuantite</label>
+            <input type="number" id="{{ form_id }}_items___name___Quantite" name="{{ form_name }}[items][__name__][Quantite]" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="{{ form_id }}_items___name___unitPrice" class="col-form-label">Unit Price</label>
+            <input type="number" id="{{ form_id }}_items___name___unitPrice" name="{{ form_name }}[items][__name__][unitPrice]" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="{{ form_id }}_items___name___totalPrice" class="col-form-label">Total Price</label>
+            <input type="number" id="{{ form_id }}_items___name___totalPrice" name="{{ form_name }}[items][__name__][totalPrice]" required="required" class="form-control">
+        </div>
+        <button type="button" class="btn btn-danger remove-devis-item">Remove</button>
+    </div>
+    `;
+
+
+       
+
+
+        $('#devis-items').on('click', '.remove-devis-item', function() {
+            $(this).closest('.devis-item').remove();
+        });
+    </script>
+
+
+{{ form_end(form) }}
