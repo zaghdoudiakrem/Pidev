@@ -1,0 +1,76 @@
+
+
+
+{{ form_start(form, {'attr': {'id': form_id, 'novalidate': 'novalidate'} }) }}
+
+ <button type="button" class="btn btn-secondary mt-2 mb-2" id="add-devis-item">Add Devis Item</button>
+    <div class="form-group">
+        
+    </div>
+
+    
+
+    <h2>Devis Items</h2>
+    <div id="devis-items">
+        {% for item in form.items %}
+        <div class="devis-item">
+            {{ form_label(item.description) }}
+            {{ form_widget(item.description) }}
+            {% if form_errors(item.description) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(item.description) }}
+                </div>
+            {% endif %}
+
+            {{form_label(item.quantite) }}
+            {{ form_widget(item.quantite) }}
+            {% if form_errors(item.quantite) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(item.quantite) }}
+                </div>
+            {% endif %}
+
+            {{form_label(unitPrice) }}
+            {{ form_widget(unitPrice) }}
+            {% if form_errors(item.quantite) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(item.quantite) }}
+                </div>
+            {% endif %}
+            {{ form_row(item.unitPrice) }}
+
+           
+            <button type="button" class="btn btn-danger remove-devis-item mt-2">Remove Item</button>
+        </div>
+          <hr>
+    {% endfor %}
+    </div>
+<br>
+    <button type="submit" class="btn btn-primary">Create Devis</button>
+
+    {{ form_end(form) }}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+   var devisItemTemplate = `
+            <div class="devis-item">
+            {{ form_row(form.items.vars.prototype.description) }}
+            {{ form_row(form.items.vars.prototype.quantite) }}
+            {{ form_row(form.items.vars.prototype.unitPrice) }}
+          
+            <button type="button" class="btn btn-danger remove-devis-item">Remove Item</button>
+        </div>
+        `;
+
+        $('#add-devis-item').click(function() {
+          console.log('add button clicked');
+            $('#devis-items').append(devisItemTemplate.replace(/__name__/g, $('#devis-items .devis-item').length));
+        });
+
+        $('#devis-items').on('click', '.remove-devis-item', function() {
+            $(this).closest('.devis-item').remove();
+        });
+});
+       
+    </script>
+

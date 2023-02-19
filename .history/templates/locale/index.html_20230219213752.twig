@@ -1,0 +1,35 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Locale index{% endblock %}
+
+{% block body %}
+    <h1>Locale index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Adresse</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for locale in locales %}
+            <tr>
+                <td>{{ locale.id }}</td>
+                <td>{{ locale.adresse }}</td>
+                <td>
+                    <a href="{{ path('app_locale_show', {'id': locale.id}) }}">show</a>
+                    <a href="{{ path('app_locale_edit', {'id': locale.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_locale_new') }}">Create new</a>
+{% endblock %}

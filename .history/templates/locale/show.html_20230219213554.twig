@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Locale{% endblock %}
+
+{% block body %}
+    <h1>Locale</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ locale.id }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ locale.adresse }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_locale_index') }}">back to list</a>
+
+    <a href="{{ path('app_locale_edit', {'id': locale.id}) }}">edit</a>
+
+    {{ include('locale/_delete_form.html.twig') }}
+{% endblock %}
