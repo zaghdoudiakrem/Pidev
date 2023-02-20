@@ -1,0 +1,31 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+{% block body %}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Reclamation</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_reclamation_index') }}"> 
+                    Retour à la liste
+                </a>
+            </div>
+            <div class="card-body">
+                <b class="text-muted">Id:</b>
+                <p>{{ reclamation.id }}</p>
+                <b class="text-muted">Description:</b>
+                <p>{{ reclamation.description }}</p>
+                <b class="text-muted">Objet:</b>
+                <p>{{ reclamation.objet }}</p>
+                <a class="btn btn-outline-primary" href="{{ path('app_reponse_new') }}"> 
+                 Répondre
+                </a>
+                
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+ 
