@@ -24,12 +24,12 @@
 
 					<td>{{i.description}}</td>
 					<td>
-						{{i.rapport_preliminaire}}
+						{{i.rapportpreliminaire}}
 					</td>
-					<td>{{i.rapport_expertise}}</td>
+					<td>{{i.rapportexpertise}}</td>
 
 					<td>
-						<a href="{{path('app_delete',{id:i.id} )}}">delete</a>
+						<a href="{{path('app_deleterapport',{id:i.id} )}}">delete</a>
 					</td>
 					<td>
 						<a href=" {{path('appadd_rapport',{id:i.id} )}}  ">edit</a>

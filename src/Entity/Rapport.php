@@ -18,10 +18,10 @@ class Rapport
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $rapport_preliminaire = null;
+    private ?string $rapportpreliminaire = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $rapport_expertise = null;
+    private ?string $rapportexpertise = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
@@ -50,24 +50,24 @@ class Rapport
 
     public function getRapportPreliminaire(): ?string
     {
-        return $this->rapport_preliminaire;
+        return $this->rapportpreliminaire;
     }
 
-    public function setRapportPreliminaire(string $rapport_preliminaire): self
+    public function setRapportPreliminaire(string $rapportpreliminaire): self
     {
-        $this->rapport_preliminaire = $rapport_preliminaire;
+        $this->rapportpreliminaire = $rapportpreliminaire;
 
         return $this;
     }
 
     public function getRapportExpertise(): ?string
     {
-        return $this->rapport_expertise;
+        return $this->rapportexpertise;
     }
 
-    public function setRapportExpertise(string $rapport_expertise): self
+    public function setRapportExpertise(string $rapportexpertise): self
     {
-        $this->rapport_expertise = $rapport_expertise;
+        $this->rapportexpertise = $rapportexpertise;
 
         return $this;
     }

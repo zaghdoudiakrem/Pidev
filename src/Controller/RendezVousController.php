@@ -87,4 +87,19 @@ class RendezVousController extends AbstractController
         }
         return $this->redirectToRoute('app_afficherrendez_vous');
     }
+    #[Route('/afficherfront', name: 'app_affichefrontrrendez_vous')]
+    public function afficherfront(ManagerRegistry $doctrine): Response
+    {
+        $repository = $doctrine->getRepository(RendezVous::class);
+        $rendezvous = $repository->findAll();
+
+
+        return $this->render(
+            'rendez_vous/afficherrendezvousfront.html.twig',
+            [
+                'rendezvouss' => $rendezvous
+            ]
+
+        );
+    }
 }

@@ -49,7 +49,7 @@ class RapportController extends AbstractController
             return $this->redirectToRoute('app_afficherrapport');
         } else {
             return $this->render(
-                'rapport/addraaport.html.twig',
+                'rapport/addrapport.html.twig',
                 [
                     'form' => $form->createView()
 
@@ -72,5 +72,19 @@ class RapportController extends AbstractController
             ]
 
         );
+    }
+    #[Route('/deleterapport/{id}', name: 'app_deleterapport')]
+    public function deletePerson(Rapport $rapport = null, ManagerRegistry $doctrine, $id): RedirectResponse
+    {
+        if ($rapport) {
+            $manager = $doctrine->getManager();
+
+            $manager->remove($rapport);
+            $manager->flush();
+            $this->addFlash('success', 'le rapport a ete supprimé avec succe');
+        } else {
+            $this->addFlash('error', 'le rapport inexistant');
+        }
+        return $this->redirectToRoute('app_afficherrapport');
     }
 }
