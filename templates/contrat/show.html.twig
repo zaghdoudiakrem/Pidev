@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contrat{% endblock %}
+
+{% block body %}
+    <h1>Contrat</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ contrat.id }}</td>
+            </tr>
+            <tr>
+                <th>Validitedu</th>
+                <td>{{ contrat.validitedu ? contrat.validitedu|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Validiteau</th>
+                <td>{{ contrat.validiteau ? contrat.validiteau|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Photo_cin</th>
+                <td>{{ contrat.photoCin }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_contrat_index') }}">back to list</a>
+
+    <a href="{{ path('app_contrat_edit', {'id': contrat.id}) }}">edit</a>
+
+    {{ include('contrat/_delete_form.html.twig') }}
+{% endblock %}
