@@ -1,0 +1,33 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+{{ form_start(form, {'attr': {'id': form_id, 'novalidate': 'novalidate'} }) }}
+
+    <div class="form-group">
+        
+    </div>
+
+    
+
+    <h2>Devis Items</h2>
+    <div id="devis-items">
+        {% for local in form.locale %}
+        <div class="devis-item">
+            {{ form_label(item.description) }}
+            {{ form_widget(item.description) }}
+            {% if form_errors(item.description) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(item.description) }}
+                </div>
+            {% endif %}
+         
+            
+        </div>
+          <hr>
+    {% endfor %}
+    </div>
+<br>
+    <button type="submit" class="btn btn-primary">Create Devis</button>
+
+    {{ form_end(form) }}

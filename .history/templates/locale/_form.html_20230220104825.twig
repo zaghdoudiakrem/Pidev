@@ -1,0 +1,21 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'} }) }}
+
+<div class="form-group">
+        
+</div>
+
+<h2>locales</h2>
+<div id="devis-locales">
+    {% for local in form.locales %}
+    <div class="devis-locale">
+        {{ form_row(local.adresse) }}
+
+        <hr>
+    </div>
+    {% endfor %}
+</div>
+<br>
+
+<button type="submit" class="btn btn-primary">Create Devis</button>
+
+{{ form_end(form) }}

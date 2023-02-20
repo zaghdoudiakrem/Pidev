@@ -1,0 +1,42 @@
+{# {{form_start(form, {'attr': {'novalidate': 'novalidate'} }) }}
+   
+        <div class="locale">
+            {{ form_label(form.adresse) }}
+            {{ form_widget(form.adresse) }}
+            {% if form_errors(form.adresse) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.adresse) }}
+                </div>
+            {% endif %}
+    </div>
+      <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+
+
+<!DOCTYPE html>
+<html lang="fr">
+ {% block css %}
+  <!-- bouton CSS  -->
+  <link href="{{ asset ('assets2/css/btn.css') }}" rel="stylesheet">
+  {% endblock %}
+
+
+ {{ form_start(form) }}
+<div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">adresse</label>
+                  <div class="col-sm-10">
+                     {{form_widget(form.adresse,{'attr':{'class':'form-control'}})}}
+                    {% if form_errors(form.adresse) is not empty %}
+                        <p type="date" class="form-text text-muted">{{ form_errors(form.adresse) }}</p>
+                    {% endif %}
+                  </div>
+             </div>
+<div class="col-sm-10">
+                  <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+                    {# <button class="btn btn-primary mr-2">{{ button_label|default('Save') }}</button> #}
+                    {# <button type="submit" class="btn btn-primary">Sauvgarder</button> #}
+                     {# <button class="btn btn-primary mr-2"><a href="{{ path('app_offre_index') }}">Retour</a></button> #}
+                  </div>
+                </div>
+
+{{ form_end(form) }}

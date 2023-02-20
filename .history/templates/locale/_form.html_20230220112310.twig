@@ -1,0 +1,15 @@
+{{ form_start(form2, {'attr': {'novalidate': 'novalidate'} }) }}
+   
+        <div class="locale">
+            {{ form_label(form.adresse) }}
+            {{ form_widget(form.adresse) }}
+            {% if form_errors(form.adresse) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.adresse) }}
+                </div>
+            {% endif %}
+            
+        
+    </div>
+    <button type="submit" class="btn btn-primary">Create locale</button>
+{{ form_end(form) }}

@@ -1,0 +1,15 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'} }) }}
+   
+        <div class="devis-item">
+            {{ form_label(local.adresse) }}
+            {{ form_widget(local.adresse) }}
+            {% if form_errors(local.adresse) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(local.adresse) }}
+                </div>
+            {% endif %}
+            
+             {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">Create Devis</button>
+{{ form_end(form) }}
