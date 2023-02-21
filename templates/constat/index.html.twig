@@ -75,17 +75,10 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nomclient_e</th>
-                <th>Prenomclient_e</th>
-                <th>Typevehicule_e</th>
-                <th>Marquevehicule_e</th>
-                <th>Assuranceclient_e</th>
-                <th>Adresseclient_e</th>
-                <th>Emplacementaccid</th>
-                <th>Photoaccid</th>
-                <th>Descriptiondegat</th>
-                <th>Observations</th>
-                <th>Numcontrat_e</th>
+                <th>Nomclient</th>
+                <th>Typevehicule</th>
+                <th>Assuranceclient</th>
+                <th>Numcontrat</th>
                 <th colspan ="3" width="240px" style="position: relative; left: 80px; top: 0px;" >Actions</th>
             </tr>
         </thead>
@@ -93,16 +86,9 @@
         {% for constat in constats %}
             <tr>
                 <td>{{ constat.id }}</td>
-                <td>{{ constat.nomclientE }}</td>
-                <td>{{ constat.prenomclientE }}</td>
+                <td>{{ constat.nomclientE }} {{ constat.prenomclientE }}</td>
                 <td>{{ constat.typevehiculeE }}</td>
-                <td>{{ constat.marquevehiculeE }}</td>
                 <td>{{ constat.assuranceclientE }}</td>
-                <td>{{ constat.adresseclientE }}</td>
-                <td>{{ constat.emplacementaccid }}</td>
-                <td>{{ constat.photoaccid }}</td>
-                <td>{{ constat.descriptiondegat }}</td>
-                <td>{{ constat.observations }}</td>
                 <td>{{ constat.numcontratE }}</td>
                 <td>
                  <a class="btn btn-outline-info" href="{{ path('app_constat_show', {'id': constat.id}) }}">Lister</a>

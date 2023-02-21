@@ -20,20 +20,20 @@ class VehiculeType extends AbstractType
             ->add('marque')
             ->add('type')
             ->add('nb_ch')
-            ->add('id_client' ,EntityType::class, [
-                            'class' => User::class,
-                            'choice_label' => 'id',
-                            'multiple' => false,
-                            'expanded' => false,
+            #->add('id_client' , EntityType::class, [
+                           # 'class' => User::class,
+                           # 'choice_label' => 'id',
+                           # 'multiple' => false,
+                           # 'expanded' => false,
             
-                        ])
-            ->add('id_contrat',EntityType::class, [
-                            'class' => Contrat::class,
-                            'choice_label' => 'id',
-                            'multiple' => false,
-                            'expanded' => false,
+                       # ])
+            #->add('id_contrat', EntityType::class, [
+                           # 'class' => Contrat::class,
+                           # 'choice_label' => 'id',
+                           # 'multiple' => false,
+                            #'expanded' => false,
             
-                        ])
+                       # ])
         ;
     }
 

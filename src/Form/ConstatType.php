@@ -38,21 +38,21 @@ class ConstatType extends AbstractType
             ->add('descriptiondegat', TextareaType::class)
             ->add('observations', TextareaType::class)
             ->add('numcontrat_e', NumberType::class)
-            ->add('id_expert',EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-                'multiple' => false,
-                'expanded' => false,
+            #->add('id_expert',EntityType::class, [
+               # 'class' => User::class,
+               # 'choice_label' => 'id',
+               # 'multiple' => false,
+               # 'expanded' => false,
 
-            ]) 
-            ->add('id_vehicule',EntityType::class, [
-                'class' => Vehicule::class,
-                'choice_label' => 'id',
-                'multiple' => false,
-                'expanded' => false,
+           # ]) 
+            # ->add('id_vehicule',EntityType::class, [
+              #  'class' => Vehicule::class,
+              # 'choice_label' => 'id',
+              #  'multiple' => false,
+              #  'expanded' => false,
 
-            ])   ;
-          ;
+            #])
+            ;
         
     }
 

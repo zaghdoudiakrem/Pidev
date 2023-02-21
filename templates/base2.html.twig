@@ -233,15 +233,15 @@
 						<li class="nav-item dropdown pe-3">
 
 							<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-								<img src="{{ asset ('assets2/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-								<span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+								<img src="{{ asset ('assets/img/testimonials/eya.png') }}" alt="Profile" class="rounded-circle">
+								<span class="d-none d-md-block dropdown-toggle ps-2">Eya Ben Khedher</span>
 							</a>
 							<!-- End Profile Iamge Icon -->
 
 							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 								<li class="dropdown-header">
-									<h6>Kevin Anderson</h6>
-									<span>Web Designer</span>
+									<h6>Eya Ben Khedher</h6>
+									<span>Comptable</span>
 								</li>
 								<li>
 									<hr class="dropdown-divider">
@@ -297,12 +297,11 @@
 		{% endblock %}
 		<!-- End Header -->
 
-{% block sidebar%}
-	<aside id="sidebar" class="sidebar">
+     {% block sidebar%}
+	    <aside id="sidebar" class="sidebar">
 
 				<ul class="sidebar-nav" id="sidebar-nav">
-
-				
+		
 					<!-- End Dashboard Nav -->
 					<li class="nav-item">
 						<a class="nav-link " href="{{ path ('app_constat_index') }}">
@@ -365,7 +364,7 @@
 			{% endblock %}
 
 		<!-- ======= Sidebar ======= -->
-		{% block body %}
+		{% block contenu %}
 		
 
 			<main id="main" class="main">
@@ -538,7 +537,7 @@
 								
 
 								<!-- Recent Sales -->
-								<div class="col-12">
+								<div class="col-12" >
 									<div class="card recent-sales overflow-auto">
 
 										<div class="filter">
@@ -561,6 +560,21 @@
 												</li>
 											</ul>
 										</div>
+										
+									{% for message in app.session.flashBag.get('info') %}
+
+									<div class="alert alert-info">{{ message }}</div>
+									{% endfor %}
+									{% for message in app.session.flashBag.get('success') %}
+
+										<div class="alert alert-success">{{ message }}</div>
+									{% endfor %}
+
+									{% for message in app.session.flashBag.get('error') %}
+
+										<div class="alert alert-danger">{{ message }}</div>
+									{% endfor %}
+									{% block body%}
 
 										<div class="card-body">
 											<h5 class="card-title">Client Recent
@@ -787,6 +801,7 @@
 										</li>
 									</ul>
 								</div>
+								{% endblock %}
 
 								<div class="card-body">
 									<h5 class="card-title">Recent Activity
@@ -839,101 +854,6 @@
 								</div>
 							</div>
 							<!-- End Recent Activity -->
-
-
-							<!-- Website Traffic -->
-							<div class="card">
-								<div class="filter">
-									<a class="icon" href="#" data-bs-toggle="dropdown">
-										<i class="bi bi-three-dots"></i>
-									</a>
-									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-										<li class="dropdown-header text-start">
-											<h6>Filter</h6>
-										</li>
-
-										<li>
-											<a class="dropdown-item" href="#">Today</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="#">This Month</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="#">This Year</a>
-										</li>
-									</ul>
-								</div>
-
-								<div class="card-body pb-0">
-									<h5 class="card-title">Website Traffic
-										<span>| Today</span>
-									</h5>
-
-									<div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-									<script>
-										document.addEventListener("DOMContentLoaded", () => {
-echarts.init(document.querySelector("#trafficChart")).setOption({
-tooltip: {
-trigger: 'item'
-},
-legend: {
-top: '5%',
-left: 'center'
-},
-series: [
-{
-name: 'Access From',
-type: 'pie',
-radius: [
-'40%', '70%'
-],
-avoidLabelOverlap: false,
-label: {
-show: false,
-position: 'center'
-},
-emphasis: {
-label: {
-show: true,
-fontSize: '18',
-fontWeight: 'bold'
-}
-},
-labelLine: {
-show: false
-},
-data: [
-{
-value: 1048,
-name: 'Search Engine'
-},
-{
-value: 735,
-name: 'Direct'
-},
-{
-value: 580,
-name: 'Email'
-},
-{
-value: 484,
-name: 'Union Ads'
-}, {
-value: 300,
-name: 'Video Ads'
-}
-]
-}
-]
-});
-});
-									</script>
-
-								</div>
-							</div>
-							<!-- End Website Traffic -->
-
 
 						</div>
 						<!-- End Right side columns -->

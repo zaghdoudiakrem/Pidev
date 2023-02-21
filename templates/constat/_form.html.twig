@@ -1,5 +1,54 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+  {{ form_errors(form) }}
+     <table class="table table-striped table-borderless">
+       <tbody>
+          <tr>
+                <td>{{ form_label(form.nomclient_e, 'Nom Client :') }}</td>
+                <td>{{ form_widget(form.nomclient_e, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.prenomclient_e, 'Prenom Client :') }}</td>
+                <td>{{ form_widget(form.prenomclient_e, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.typevehicule_e, 'Type Vehicule :') }}</td>
+                <td>{{ form_widget(form.typevehicule_e, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.marquevehicule_e, 'Marque Vehicule:') }}</td>
+                <td>{{ form_widget(form.marquevehicule_e, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+                <tr>
+                <td>{{ form_label(form.assuranceclient_e, 'Assurance Client:') }}</td>
+                <td>{{ form_widget(form.assuranceclient_e, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+                <tr>
+                <td>{{ form_label(form.adresseclient_e, 'Adresse Client:') }}</td>
+                <td>{{ form_widget(form.adresseclient_e, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+
+              <tr>
+                <td>{{ form_label(form.emplacementaccid, 'Emplacement Accident:') }}</td>
+                <td>{{ form_widget(form.emplacementaccid, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+              <tr>
+                <td>{{ form_label(form.photoaccid, 'Photo Accident:') }}</td>
+                <td>{{ form_widget(form.photoaccid, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+              <tr>
+                <td>{{ form_label(form.descriptiondegat, 'Description Degat:') }}</td>
+                <td>{{ form_widget(form.descriptiondegat, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.observations, 'Observations :') }}</td>
+                <td>{{ form_widget(form.observations, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.numcontrat_e, 'Numéro Contrat:') }}</td>
+                <td>{{ form_widget(form.numcontrat_e, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+        </tbody>
+    </table>
     <button class="btn {{ button_color|default('btn-outline-primary') }} mt-3">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
 
