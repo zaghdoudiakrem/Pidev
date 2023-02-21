@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Constat;
 use App\Form\ConstatType;
 use App\Entity\User;
-
+use App\Entity\Vehicule;
 use App\Repository\ConstatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,10 +27,14 @@ class ConstatController extends AbstractController
     public function new(Request $request, ConstatRepository $constatRepository): Response
     {
         $constat = new Constat();
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $vehicule = $this->getDoctrine()->getRepository(Vehicule::class)->find(1);
         $form = $this->createForm(ConstatType::class, $constat);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $constat -> setIdExpert($user);
+            $constat -> setIdVehicule($vehicule);
             $constatRepository->save($constat, true);
             return $this->redirectToRoute('app_constat_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -49,7 +49,9 @@
             </tr>
         </tbody>
     </table>
-    <button class="btn {{ button_color|default('btn-outline-primary') }} mt-3">{{ button_label|default('Enregistrer') }}</button>
+    <div style="text-align: center;">
+    <button class="btn {{ button_color|default('btn-outline-primary') }} mb-3">{{ button_label|default('Enregistrer') }}</button>
+    </div>
 {{ form_end(form) }}
 
      

@@ -3,11 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Vehicule;
-use App\Entity\User;
-use App\Entity\Contrat;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,21 +17,12 @@ class VehiculeType extends AbstractType
             ->add('marque')
             ->add('type')
             ->add('nb_ch')
-            #->add('id_client' , EntityType::class, [
-                           # 'class' => User::class,
-                           # 'choice_label' => 'id',
-                           # 'multiple' => false,
-                           # 'expanded' => false,
-            
-                       # ])
-            #->add('id_contrat', EntityType::class, [
-                           # 'class' => Contrat::class,
-                           # 'choice_label' => 'id',
-                           # 'multiple' => false,
-                            #'expanded' => false,
-            
-                       # ])
-        ;
+            ->add('id_client' ,HiddenType::class, [
+                              'data' =>$options['id_client'],
+           ])   
+            ->add('id_contrat',HiddenType::class, [
+                              'data' =>$options['id_contrat'],
+           ])       ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

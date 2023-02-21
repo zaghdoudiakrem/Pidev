@@ -1,11 +1,9 @@
-<?php
-
+<?php 
+ 
 namespace App\Form;
 
 use App\Entity\Constat;
-use App\Entity\Vehicule;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -38,21 +36,14 @@ class ConstatType extends AbstractType
             ->add('descriptiondegat', TextareaType::class)
             ->add('observations', TextareaType::class)
             ->add('numcontrat_e', NumberType::class)
-            #->add('id_expert',EntityType::class, [
-               # 'class' => User::class,
-               # 'choice_label' => 'id',
-               # 'multiple' => false,
-               # 'expanded' => false,
-
-           # ]) 
-            # ->add('id_vehicule',EntityType::class, [
-              #  'class' => Vehicule::class,
-              # 'choice_label' => 'id',
-              #  'multiple' => false,
-              #  'expanded' => false,
-
-            #])
-            ;
+            ->add('id_expert',HiddenType::class, [
+                            'data' =>$options['id_expert'],
+            ])   
+             ->add('id_vehicule',HiddenType::class, [
+                            'data' =>$options['id_vehicule'],
+            ])   
+        ;
+            
         
     }
 

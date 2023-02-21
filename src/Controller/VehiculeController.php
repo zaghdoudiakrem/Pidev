@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Vehicule;
+use App\Entity\User;
+use App\Entity\Contrat;
 use App\Form\VehiculeType;
 use App\Repository\VehiculeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,10 +27,14 @@ class VehiculeController extends AbstractController
     public function new(Request $request, VehiculeRepository $vehiculeRepository): Response
     {
         $vehicule = new Vehicule();
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $contrat = $this->getDoctrine()->getRepository(Contrat::class)->find(5);
         $form = $this->createForm(VehiculeType::class, $vehicule);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $vehicule -> setIdClient($user);
+            $vehicule -> setIdContrat($contrat);
             $vehiculeRepository->save($vehicule, true);
 
             return $this->redirectToRoute('app_vehicule_index', [], Response::HTTP_SEE_OTHER);
