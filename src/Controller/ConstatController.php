@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Constat;
 use App\Form\ConstatType;
+use App\Entity\User;
+
 use App\Repository\ConstatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +32,6 @@ class ConstatController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $constatRepository->save($constat, true);
-
             return $this->redirectToRoute('app_constat_index', [], Response::HTTP_SEE_OTHER);
         }
 

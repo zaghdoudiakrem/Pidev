@@ -297,24 +297,24 @@
 		{% endblock %}
 		<!-- End Header -->
 
-
-		<!-- ======= Sidebar ======= -->
-		{% block contenu %}
-			<aside id="sidebar" class="sidebar">
+{% block sidebar%}
+	<aside id="sidebar" class="sidebar">
 
 				<ul class="sidebar-nav" id="sidebar-nav">
 
-					<li class="nav-item">
-						<a class="nav-link " href="index.html">
-							<i class="bi bi-grid"></i>
-							<span>Utilisateurs</span>
-						</a>
-					</li>
+				
 					<!-- End Dashboard Nav -->
 					<li class="nav-item">
-						<a class="nav-link " href="index.html">
+						<a class="nav-link " href="{{ path ('app_constat_index') }}">
 							<i class="bi bi-newspaper"></i>
 							<span>Constat</span>
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link " href="{{ path ('app_vehicule_index') }}">
+							<i class="bi bi-person-workspace"></i>
+							<span>Vehicule</span>
 						</a>
 					</li>
 
@@ -336,19 +336,6 @@
 
 					<!-- End Tables Nav -->
 
-					<li class="nav-item">
-						<a class="nav-link " href="index.html">
-							<i class="bi bi-calendar2-date"></i>
-							<span>Rendez-vous</span>
-						</a>
-					</li>
-					<!-- End Icons Nav -->
-					<li class="nav-item">
-						<a class="nav-link " href="index.html">
-							<i class="bi bi-chat-left-text"></i>
-							<span>Réclamations</span>
-						</a>
-					</li>
 					<!-- End Icons Nav -->
 					<li class="nav-heading">
 						Pages</li>
@@ -375,6 +362,11 @@
 
 			</aside>
 			<!-- End Sidebar-->
+			{% endblock %}
+
+		<!-- ======= Sidebar ======= -->
+		{% block body %}
+		
 
 			<main id="main" class="main">
 
@@ -968,7 +960,7 @@ name: 'Video Ads'
 					<!-- Licensing information: https://bootstrapmade.com/license/ -->
 					<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
 					Designed by
-						<a href="https://bootstrapmade.com/"> BootstrapMade</a>
+						<a href="https://codingsquad.com/"> CodingSquad</a>
 				</div>
 			</footer>
 			<!-- End Footer -->

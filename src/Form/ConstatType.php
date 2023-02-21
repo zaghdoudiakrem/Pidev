@@ -3,9 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Constat;
-use ContainerDkO4lyB\getUserService;
+use App\Entity\Vehicule;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -37,8 +38,20 @@ class ConstatType extends AbstractType
             ->add('descriptiondegat', TextareaType::class)
             ->add('observations', TextareaType::class)
             ->add('numcontrat_e', NumberType::class)
-            #->add('id_expert', ChoiceType::class)
-            #->add('id_vehicule', ChoiceType::class);
+            ->add('id_expert',EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'id',
+                'multiple' => false,
+                'expanded' => false,
+
+            ]) 
+            ->add('id_vehicule',EntityType::class, [
+                'class' => Vehicule::class,
+                'choice_label' => 'id',
+                'multiple' => false,
+                'expanded' => false,
+
+            ])   ;
           ;
         
     }
@@ -47,6 +60,8 @@ class ConstatType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Constat::class,
+            "id_expert" => null ,
+            "id_vehicule" => null ,
         ]);
     }
 }
