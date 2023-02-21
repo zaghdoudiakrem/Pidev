@@ -19,8 +19,7 @@ class Facture
     #[ORM\JoinColumn(nullable: false)]
     private ?User $id_client = null;
 
-    #[ORM\OneToMany(mappedBy: 'facture', targetEntity: Offre::class)]
-    private Collection $id_offre;
+    
 
     public function __construct()
     {
@@ -44,33 +43,5 @@ class Facture
         return $this;
     }
 
-    /**
-     * @return Collection<int, Offre>
-     */
-    public function getIdOffre(): Collection
-    {
-        return $this->id_offre;
-    }
-
-    public function addIdOffre(Offre $idOffre): self
-    {
-        if (!$this->id_offre->contains($idOffre)) {
-            $this->id_offre->add($idOffre);
-            $idOffre->setFacture($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdOffre(Offre $idOffre): self
-    {
-        if ($this->id_offre->removeElement($idOffre)) {
-            // set the owning side to null (unless already changed)
-            if ($idOffre->getFacture() === $this) {
-                $idOffre->setFacture(null);
-            }
-        }
-
-        return $this;
-    }
+    
 }

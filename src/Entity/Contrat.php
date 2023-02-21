@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\ContratRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 
 #[ORM\Entity(repositoryClass: ContratRepository::class)]
 class Contrat
@@ -27,6 +30,21 @@ class Contrat
     #[ORM\ManyToOne(inversedBy: 'contrats')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $id_client = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $photo_cin = null;
+
+    #[ORM\ManyToMany(targetEntity: Offre::class, inversedBy: 'contrats')]
+    private Collection $id_offre;
+
+    public function __construct()
+    {
+        $this->id_offre = new ArrayCollection();
+    }
+
+   
+
+    
 
   
 
@@ -84,6 +102,46 @@ class Contrat
 
         return $this;
     }
+
+    public function getPhotoCin(): ?string
+    {
+        return $this->photo_cin;
+    }
+
+    public function setPhotoCin(string $photo_cin): self
+    {
+        $this->photo_cin = $photo_cin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Offre>
+     */
+    public function getIdOffre(): Collection
+    {
+        return $this->id_offre;
+    }
+
+    public function addIdOffre(Offre $idOffre): self
+    {
+        if (!$this->id_offre->contains($idOffre)) {
+            $this->id_offre->add($idOffre);
+        }
+
+        return $this;
+    }
+
+    public function removeIdOffre(Offre $idOffre): self
+    {
+        $this->id_offre->removeElement($idOffre);
+
+        return $this;
+    }
+
+    
+
+ 
 
  
 

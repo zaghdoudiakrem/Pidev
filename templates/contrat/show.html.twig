@@ -1,0 +1,78 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Contrat{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Afficher Contrat</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Accueil</li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Table Des Contrats</li>
+           <li class="breadcrumb-item active">Afficher Contrat</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div     id="element_a_imprimer" class="card-body">
+              <h5 class="card-title">Bienvenue</h5>
+
+            {# <h1>Table Des Offres</h1> #}
+     <table class="table table-striped">
+
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ contrat.id }}</td>
+            </tr>
+            <tr>
+                <th>Validitedu</th>
+                <td>{{ contrat.validitedu ? contrat.validitedu|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Validiteau</th>
+                <td>{{ contrat.validiteau ? contrat.validiteau|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Photo_cin</th>
+                <td><img src="{{ asset(contrat.photoCin) }}" width="300" height="150"></td>
+            </tr>
+        </tbody>
+    </table>
+
+     {# <a href="{{ path('app_offre_new') }}">Create new</a> #}
+    </br>
+
+    
+     <script type="text/javascript">
+                        function imprimer_page(){
+                             var element_a_imprimer = document.getElementById("partie-a-imprimer");
+                             window.print(element_a_imprimer);
+                        }
+                    </script>
+                <form>
+                    <input id="impression" class="btn btn-primary mr-2" name="impression" type="button" onclick="imprimer_page()" value="Imprimer Contrat" />
+                </form>
+                </br>
+
+    <a class="btn btn-primary mr-2" href="{{ path('app_contrat_index') }}">Retour</a>
+  
+            </div>
+          </div>
+
+        </div>
+
+        
+      </div>
+    </section>
+
+  </main>
+{% endblock %}
