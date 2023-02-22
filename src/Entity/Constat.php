@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ConstatRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ConstatRepository::class)]
 class Constat
@@ -15,37 +17,58 @@ class Constat
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:"le champ Nom Client est obligatoire")]
+
     private ?string $nomclient_e = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:"le champ Prenom Client est obligatoire")]
+
     private ?string $prenomclient_e = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:"le champ Type Vehicule est obligatoire")]
+  
     private ?string $typevehicule_e = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:"le champ Marque Vehicule est obligatoire")]
+
     private ?string $marquevehicule_e = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:"le champ Assurance Client est obligatoire")]
+
     private ?string $assuranceclient_e = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:"le champ Adresse Client est obligatoire")]
+
     private ?string $adresseclient_e = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:"le champ Emplacement Accident est obligatoire")]
+
     private ?string $emplacementaccid = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+   // #[Assert\NotBlank(message:"le champ Photo Accident est obligatoire")]
     private ?string $photoaccid = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message:"le champ Description Degat est obligatoire")]
+
     private ?string $descriptiondegat = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message:"le champ Observations est obligatoire")]
+
     
     private ?string $observations = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:"le champ Numéro Contrat est obligatoire")]
+
     private ?string $numcontrat_e = null;
 
     #[ORM\ManyToOne(inversedBy: 'constats')]

@@ -57,10 +57,14 @@ class VehiculeController extends AbstractController
     #[Route('/{id}/edit', name: 'app_vehicule_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Vehicule $vehicule, VehiculeRepository $vehiculeRepository): Response
     {
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $contrat = $this->getDoctrine()->getRepository(Contrat::class)->find(5);
         $form = $this->createForm(VehiculeType::class, $vehicule);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $vehicule -> setIdClient($user);
+            $vehicule -> setIdContrat($contrat);
             $vehiculeRepository->save($vehicule, true);
 
             return $this->redirectToRoute('app_vehicule_index', [], Response::HTTP_SEE_OTHER);

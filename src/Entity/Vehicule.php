@@ -6,6 +6,8 @@ use App\Repository\VehiculeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: VehiculeRepository::class)]
 class Vehicule
@@ -16,15 +18,30 @@ class Vehicule
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"le champ Matricule est obligatoire")]
+    #[Assert\Length([
+        'max' => 10,
+        'maxMessage' => 'Le champ matricule doit contenir moins de {{ limit }} caractères.',
+    ])]
+
     private ?string $matricule = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"le champ Marque est obligatoire")]
+
+
     private ?string $marque = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"le champ Type est obligatoire")]
+   
+
     private ?string $type = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"le champ Nombre de chevaux est obligatoire")]
+    #[Assert\Positive()]
+
     private ?int $nb_ch = null;
 
     #[ORM\ManyToOne(inversedBy: 'vehicules')]

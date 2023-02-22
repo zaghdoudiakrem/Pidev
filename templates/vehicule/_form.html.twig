@@ -1,22 +1,27 @@
-{{ form_start(form) }}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
   {{ form_errors(form) }}
    <table class="table table-striped table-borderless">
        <tbody>
           <tr>
                 <td>{{ form_label(form.matricule, 'Matricule Vehicule :') }}</td>
                 <td>{{ form_widget(form.matricule, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>  {{ form_errors(form.matricule) }} </td>
+            </tr>
+              <tr>
+                <td>{{ form_label(form.type, 'Type Vehicule :') }}</td>
+                <td>{{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>  {{ form_errors(form.type) }} </td>
             </tr>
             <tr>
                 <td>{{ form_label(form.marque, 'Marque Vehicule :') }}</td>
                 <td>{{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>  {{ form_errors(form.marque) }} </td>
             </tr>
-            <tr>
-                <td>{{ form_label(form.type, 'Type Vehicule :') }}</td>
-                <td>{{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}</td>
-            </tr>
+          
             <tr>
                 <td>{{ form_label(form.nb_ch, 'Nombre de chevaux :') }}</td>
                 <td>{{ form_widget(form.nb_ch, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>   {{ form_errors(form.nb_ch) }} </td>
             </tr>
         </tbody>
     </table>

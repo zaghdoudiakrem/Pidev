@@ -35,6 +35,13 @@ class ConstatController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $constat -> setIdExpert($user);
             $constat -> setIdVehicule($vehicule);
+
+            $file = $form->get('photoaccid')->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move('C:\xampp\htdocs\PiDEV\public\upload',$fileName);
+        
+            $constat->setPhotoaccid("/upload/".$fileName);
+        
             $constatRepository->save($constat, true);
             return $this->redirectToRoute('app_constat_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -56,10 +63,22 @@ class ConstatController extends AbstractController
     #[Route('/{id}/edit', name: 'app_constat_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Constat $constat, ConstatRepository $constatRepository): Response
     {
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $vehicule = $this->getDoctrine()->getRepository(Vehicule::class)->find(1);
         $form = $this->createForm(ConstatType::class, $constat);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $constat -> setIdExpert($user);
+            $constat -> setIdVehicule($vehicule);
+
+            $file = $form->get('photoaccid')->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move('C:\xampp\htdocs\PiDEV\public\upload',$fileName);
+        
+            $constat->setPhotoaccid("/upload/".$fileName);
+
+
             $constatRepository->save($constat, true);
 
             return $this->redirectToRoute('app_constat_index', [], Response::HTTP_SEE_OTHER);

@@ -11,8 +11,8 @@
             <tr>
                 <th>Id</th>
                 <th>Matricule</th>
-                <th>Marque</th>
                 <th>Type</th>
+                <th>Marque</th>
                 <th>Nb_ch</th>
                 <th colspan ="3" width="240px" style="text-align: center;">Actions</th>
             </tr>
@@ -22,8 +22,8 @@
             <tr>
                 <td>{{ vehicule.id }}</td>
                 <td>{{ vehicule.matricule }}</td>
-                <td>{{ vehicule.marque }}</td>
                 <td>{{ vehicule.type }}</td>
+                <td>{{ vehicule.marque }}</td>
                 <td>{{ vehicule.nbCh }}</td>
                 <td>
                     <a class="btn btn-outline-info" href="{{ path('app_vehicule_show', {'id': vehicule.id}) }}">Lister</a>
