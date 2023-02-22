@@ -19,8 +19,12 @@ class Facture
     #[ORM\JoinColumn(nullable: false)]
     private ?User $id_client = null;
 
+<<<<<<< HEAD
     #[ORM\OneToMany(mappedBy: 'facture', targetEntity: Offre::class)]
     private Collection $id_offre;
+=======
+    
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
 
     public function __construct()
     {
@@ -44,6 +48,7 @@ class Facture
         return $this;
     }
 
+<<<<<<< HEAD
     /**
      * @return Collection<int, Offre>
      */
@@ -73,4 +78,7 @@ class Facture
 
         return $this;
     }
+=======
+    
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
 }

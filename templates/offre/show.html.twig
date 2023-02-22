@@ -1,0 +1,80 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}New Offre{% endblock %}
+
+{% block body %}
+   <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Afficher Offre</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Accueil</li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Table Des Offres</li>
+           <li class="breadcrumb-item active">Afficher Offre</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Bienvenue</h5>
+
+            {# <h1>Table Des Offres</h1> #}
+
+     <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id </th>
+                <td>{{ offre.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ offre.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ offre.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ offre.prix }}</td>
+            </tr>
+            <tr>
+                <th>Validite Offre</th>
+                <td>{{ offre.ValiditeOffre }}</td>
+            </tr>
+            <tr>
+                <th>Image D'offre</th>
+                 {% if offre.ImageOffre|length > 0 %}
+                    <td><img src="{{ asset('\front\img\notfound.jpg' ~ offre.ImageOffre) }}" width="350" height="250"></td>
+                {% else %}
+                    <td><img src="{{ asset('.front/img/' ~ "notfound.jpg" ) }}" width="250" height="150"></td>
+                {% endif %} 
+                
+            </tr>
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_offre_new') }}">Create new</a> #}
+    </br>
+    <a class="btn btn-primary mr-2" href="{{ path('app_offre_index') }}">Retour</a>
+  
+            </div>
+          </div>
+
+        </div>
+
+        
+      </div>
+    </section>
+
+  </main>
+{% endblock %}
+
+
