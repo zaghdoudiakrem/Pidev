@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
@@ -25,23 +28,26 @@ class ReclamationController extends AbstractController
         ]);
     }
 
+    #[Route('/sup', name: 'app_reclamation_index1', methods: ['GET'])]
+    public function index1(ReclamationRepository $reclamationRepository): Response
+    {
+        return $this->render('reclamation/index1.html.twig', [
+            'reclamations' => $reclamationRepository->findAll(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_reclamation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReclamationRepository $reclamationRepository): Response
     {
         $reclamation = new Reclamation();
         $user = $this->getDoctrine()->getRepository(User::class)->find(1);
         $form = $this->createForm(ReclamationType::class, $reclamation);
-         
-    
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $reclamation -> setIdClient($user);
-            $reclamationRepository->save($reclamation, true);
-
-            return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
+            $reclamationRepository->save($reclamation, true); 
+            return $this->redirectToRoute('app_reclamation_index1', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->renderForm('reclamation/new.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form,
@@ -59,10 +65,12 @@ class ReclamationController extends AbstractController
     #[Route('/{id}/edit', name: 'app_reclamation_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reclamation $reclamation, ReclamationRepository $reclamationRepository): Response
     {
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
         $form = $this->createForm(ReclamationType::class, $reclamation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reclamation -> setIdClient($user);
             $reclamationRepository->save($reclamation, true);
 
             return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);

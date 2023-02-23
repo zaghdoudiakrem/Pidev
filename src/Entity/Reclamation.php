@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
+
 
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
@@ -17,9 +20,23 @@ class Reclamation
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message:"Le champ description est obligatoire.")]
+    #[Assert\Length([
+        'min' => 5,
+        'max' => 50,
+        'minMessage' => 'Votre description doit comporter au moins {{ limit }} caractères',
+        'maxMessage' => 'Votre description doit comporter au moins {{ limit }} caractères',
+    ])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le champ objet est obligatoire.")]
+    #[Assert\Length([
+        'min' => 5,
+        'max' => 50,
+        'minMessage' => 'Votre Objet doit comporter au moins {{ limit }} caractères',
+        'maxMessage' => 'Votre objet doit comporter au moins {{ limit }} caractères',
+    ])]
     private ?string $objet = null;
 
     #[ORM\OneToMany(mappedBy: 'id_reclamation', targetEntity: Reponse::class)]
