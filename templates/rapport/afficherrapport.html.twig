@@ -1,42 +1,57 @@
 {% extends 'base2.html.twig'%}
 
 {% block body %}
-	<div class="row">
-		<a class="btn btn-primary rounded-pill" href="{{path('appadd_rapport')}}">
-			Ajouter</a>
+	<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+
+
+		<table class="table table-borderless datatable">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">description</th>
+					<th scope="col">rapport_preliminaire</th>
+					<th scope="col">rapport_expertise</th>
+					<th scope="col">image</th>
+					<th scope="col">Actions</th>
+
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr>
+					{% for i in rapports %}
+						<td>{{i.id}}</td>
+
+						<td>{{i.description}}</td>
+						<td>
+							{{i.rapportpreliminaire}}
+						</td>
+						<td>{{i.rapportexpertise}}</td>
+
+
+						<td><img src="{{ asset ('uploads/rapport/' ~i.image) }}" alt="" width="50" height="50">
+						</td>
+
+						{#{% set image = '/uploads/images/' ~ i.image %}
+																																																																																												{% set resizedImage = imagine_filter(image, 'thumbnail', { size: [200, 200] }) %}
+																																																																																												<img src="{{ resizedImage }}" alt="My Image">>#}
+						<td>
+							<a class="btn btn-primary rounded-pill" href="{{path ('app_deleterapport',{id:i.id} )}}">delete</a>
+						</td>
+						<td>
+							<a class="btn btn-primary rounded-pill" href=" {{path ('appadd_rapport',{id:i.id} )}}  ">edit</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+
+			<a class="btn btn-primary btn-lg mx-5" href="{{path ('appadd_rapport')}}">
+				Ajouter</a>
+
+		</div>
 	</div>
 
-	<table class="table table-borderless datatable">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">description</th>
-				<th scope="col">rapport_preliminaire</th>
-				<th scope="col">rapport_expertise</th>
-
-			</tr>
-		</thead>
-		<tbody>
-
-			<tr>
-				{% for i in rapports %}
-					<td>{{i.id}}</td>
-
-					<td>{{i.description}}</td>
-					<td>
-						{{i.rapportpreliminaire}}
-					</td>
-					<td>{{i.rapportexpertise}}</td>
-
-					<td>
-						<a href="{{path('app_deleterapport',{id:i.id} )}}">delete</a>
-					</td>
-					<td>
-						<a href=" {{path('appadd_rapport',{id:i.id} )}}  ">edit</a>
-					</td>
-				</tr>
-			</tr>
-
-		</tbody>
-	{% endfor %}
-</tbody></table>{% endblock %}
+{% endblock %}

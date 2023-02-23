@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RapportRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RapportRepository::class)]
 class Rapport
@@ -15,12 +16,18 @@ class Rapport
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+
+
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min: 4,minMessage: "veuillez avoir au minimum 4 caractere" )]
+    #[Assert\NotBlank]
     private ?string $rapportpreliminaire = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min: 4,minMessage: "veuillez avoir au minimum 4 caractere" )]
+    #[Assert\NotBlank]
     private ?string $rapportexpertise = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
@@ -30,6 +37,9 @@ class Rapport
     #[ORM\ManyToOne(inversedBy: 'rapports')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $id_expert = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
 
     public function getId(): ?int
     {
@@ -92,6 +102,18 @@ class Rapport
     public function setIdExpert(?User $id_expert): self
     {
         $this->id_expert = $id_expert;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

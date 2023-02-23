@@ -38,6 +38,15 @@ class RendezVousRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findByRole(string $role)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.role LIKE :role')
+            ->setParameter('name', '%'.$role.'%');
+            
+
+        return $qb->getQuery()->getResult();
+    }
 
 //    /**
 //     * @return RendezVous[] Returns an array of RendezVous objects

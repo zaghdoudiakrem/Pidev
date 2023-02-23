@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\RendezVousRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: RendezVousRepository::class)]
 class RendezVous
@@ -15,9 +17,12 @@ class RendezVous
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\Range(min: 'now',max: "+1 year",)]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 4,minMessage: "veuillez avoir au minimum 4 caractere" )]
+    #[Assert\NotBlank]
     private ?string $lieu = null;
 
     #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
@@ -28,6 +33,7 @@ class RendezVous
 
     #[ORM\Column(nullable: true)]
     private ?int $id_mecanicien = null;
+    
 
     public function getId(): ?int
     {

@@ -14,13 +14,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RendezVousController extends AbstractController
 {
-    #[Route('/rendez/vous', name: 'app_rendez_vous')]
-    public function index(): Response
-    {
-        return $this->render('rendez_vous/index.html.twig', [
-            'controller_name' => 'RendezVousController',
-        ]);
-    }
+    
     #[Route('/afficher', name: 'app_afficherrendez_vous')]
     public function afficher(ManagerRegistry $doctrine): Response
     {
@@ -36,7 +30,7 @@ class RendezVousController extends AbstractController
 
         );
     }
-    #[Route('/add/{id?0}', name: 'app_rendez_vous')]
+    #[Route('/add/{id?0}', name: 'app_addrendez_vous')]
     public function addRendezVous(RendezVous $rendezvous = null, ManagerRegistry $doctrine, Request $request): Response
     {
         $new = false;
@@ -44,35 +38,46 @@ class RendezVousController extends AbstractController
             $new = true;
             $rendezvous = new RendezVous();
         }
-
+    
         $form = $this->createForm(RendezVousType::class, $rendezvous);
-        $form->remove('id_expert');
-        $form->remove('id_mecanicien');
-        $form->remove('id_client');
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $entitymanager = $doctrine->getManager();
-            $entitymanager->persist($rendezvous);
-            $entitymanager->flush();
+        if ($form->isSubmitted() && $form->isValid() ) {
+            // $selectedClientName = $form->get('id_client')->getData();
+            // $selectedExpertName = $form->get('id_expert')->getData();
+            // $selectedMechanicName = $form->get('id_mecanicien')->getData();
+    
+             $entityManager = $doctrine->getManager();
+            // $client = $entityManager->getRepository(User::class)->findOneBy(['role' => $selectedClientName]);
+            // $expert = $entityManager->getRepository(User::class)->findOneBy(['role' => $selectedExpertName]);
+            // $mechanic = $entityManager->getRepository(User::class)->findOneBy(['role' => $selectedMechanicName]);
+    
+            // $rendezvous->setIdClient($client->getId());
+            // $rendezvous->setIdExpert($expert->getId());
+            // $rendezvous->setIdMecanicien($mechanic->getId());
+    
+            $entityManager->persist($rendezvous);
+            $entityManager->flush();
+    
             if ($new) {
                 $message = "a eté ajouté avec succes";
             } else {
                 $message = "a eté modifié avec succes";
             }
             $this->addFlash('success', $message);
-            //$form->getData();
             return $this->redirectToRoute('app_afficherrendez_vous');
         } else {
             return $this->render(
                 'rendez_vous/addrendezvous.html.twig',
                 [
-                    'form' => $form->createView()
-
+                    
+                    'form' => $form->createView(),
+    
                 ]
-
+    
             );
         }
     }
+    
     #[Route('/delete/{id}', name: 'app_delete')]
     public function deletePerson(RendezVous $rendezvous = null, ManagerRegistry $doctrine, $id): RedirectResponse
     {
