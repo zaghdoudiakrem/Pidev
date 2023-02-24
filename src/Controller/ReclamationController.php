@@ -6,6 +6,7 @@ use App\Entity\Reclamation;
 use App\Entity\User;
 use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
+use App\Form\SearchReclamationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,14 +20,30 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 class ReclamationController extends AbstractController
 {
     
-    #[Route('/', name: 'app_reclamation_index', methods: ['GET'])]
-    public function index(ReclamationRepository $reclamationRepository): Response
+    #[Route('/', name: 'app_reclamation_index')]
+    public function index(Request $request,ReclamationRepository $repository): Response
     {
-  
-        return $this->render('reclamation/index.html.twig', [
-            'reclamations' => $reclamationRepository->findAll(),
-        ]);
+
+        $reclamations= $repository->findAll();
+        // $students= $this->getDoctrine()->getRepository(StudentRepository::class)->findAll();
+         //$sortByMoyenne= $repository->sortByMoyenne();
+        $formSearch= $this->createForm(SearchReclamationType::class);
+        $formSearch->handleRequest($request);
+       // $topStudents= $repository->topStudent();
+        if($formSearch->isSubmitted()){
+            $description= $formSearch->get('description')->getData();
+            //var_dump($nce).die();
+            $result= $repository->searchReclamation($description);
+            return $this->renderForm("reclamation/index.html.twig",
+                array("reclamations"=>$result,
+                    "searchForm"=>$formSearch));
+        }
+          return $this->renderForm("reclamation/index.html.twig",
+            array("reclamations"=>$reclamations,
+                 "searchForm"=>$formSearch));
     }
+
+    
 
     #[Route('/sup', name: 'app_reclamation_index1', methods: ['GET'])]
     public function index1(ReclamationRepository $reclamationRepository): Response
@@ -36,15 +53,14 @@ class ReclamationController extends AbstractController
         ]);
     }
 
+
     #[Route('/new', name: 'app_reclamation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReclamationRepository $reclamationRepository): Response
     {
         $reclamation = new Reclamation();
-        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
         $form = $this->createForm(ReclamationType::class, $reclamation);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $reclamation -> setIdClient($user);
             $reclamationRepository->save($reclamation, true); 
             return $this->redirectToRoute('app_reclamation_index1', [], Response::HTTP_SEE_OTHER);
         }

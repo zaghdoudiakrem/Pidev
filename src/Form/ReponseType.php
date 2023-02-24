@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ReponseType extends AbstractType
 {
@@ -16,9 +17,12 @@ class ReponseType extends AbstractType
     {
         $builder
             ->add('description')
-            ->add('id_reclamation', HiddenType::class, [
-                'data' =>$options['id_reclamation'],
-            ])   
+          
+            ->add('id_reclamation',
+            EntityType::class,array(
+            'class'=>Reclamation::class,
+                'choice_label'=>'id'
+            )) 
             ->add('id_assureur', HiddenType::class, [
                 'data' =>$options['id_assureur'],
             ]) 
@@ -29,7 +33,6 @@ class ReponseType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Reponse::class,
-            'id_reclamation' => null,
             'id_assureur' => null,
         ]);
     }

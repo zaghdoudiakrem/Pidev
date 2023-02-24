@@ -18,9 +18,12 @@ class ReclamationType extends AbstractType
         $builder
             ->add('description')
             ->add('objet')
-            ->add('id_client', HiddenType::class, [
-                'data' =>$options['id_client'],
-            ])   
+          
+            ->add('id_client',
+            EntityType::class,array(
+            'class'=>User::class,
+                'choice_label'=>'id'
+            ))  
         ;
     }
 
@@ -28,7 +31,7 @@ class ReclamationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Reclamation::class,
-            'id_client' => null,
+          
         ]);
     }
 }

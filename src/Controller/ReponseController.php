@@ -28,13 +28,11 @@ class ReponseController extends AbstractController
     {
         $reponse = new Reponse();
         $user = $this->getDoctrine()->getRepository(User::class)->find(1);
-        $reclamation = $this->getDoctrine()->getRepository(Reclamation::class)->find(2);
         $form = $this->createForm(ReponseType::class, $reponse);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $reponse -> setIdAssureur($user);
-            $reponse -> setIdReclamation($reclamation);
             $reponseRepository->save($reponse, true);
 
             return $this->redirectToRoute('app_reponse_index', [], Response::HTTP_SEE_OTHER);
