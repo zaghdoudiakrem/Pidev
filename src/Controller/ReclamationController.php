@@ -23,16 +23,11 @@ class ReclamationController extends AbstractController
     #[Route('/', name: 'app_reclamation_index')]
     public function index(Request $request,ReclamationRepository $repository): Response
     {
-
         $reclamations= $repository->findAll();
-        // $students= $this->getDoctrine()->getRepository(StudentRepository::class)->findAll();
-         //$sortByMoyenne= $repository->sortByMoyenne();
         $formSearch= $this->createForm(SearchReclamationType::class);
         $formSearch->handleRequest($request);
-       // $topStudents= $repository->topStudent();
         if($formSearch->isSubmitted()){
             $description= $formSearch->get('description')->getData();
-            //var_dump($nce).die();
             $result= $repository->searchReclamation($description);
             return $this->renderForm("reclamation/index.html.twig",
                 array("reclamations"=>$result,

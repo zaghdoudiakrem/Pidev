@@ -40,15 +40,13 @@ class ReclamationRepository extends ServiceEntityRepository
     }
 
 
-    public function searchReclamation($decription) {
-        $qb=  $this->createQueryBuilder('s')
-            ->where('s.description LIKE :x')
-            ->setParameter('x',$decription);
-        return $qb->getQuery()
-            ->getResult();
+    public function searchReclamation($description) {
+        return $this->createQueryBuilder('s')
+        ->andWhere('s.description LIKE :x')
+        ->setParameter('x', '%'.$description.'%')
+        ->getQuery()
+        ->execute();
     }
-
-   
 
 //    /**
 //     * @return Reclamation[] Returns an array of Reclamation objects

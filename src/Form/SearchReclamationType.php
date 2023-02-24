@@ -23,8 +23,6 @@ class SearchReclamationType extends AbstractType
                     'placeholder' => 'Entrez un ou plusieurs mots-clés'
                 ]
             ])
-            //->add('objet')
-            //->add('id_client')
             ->add("Rechercher", SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-outline-success',
