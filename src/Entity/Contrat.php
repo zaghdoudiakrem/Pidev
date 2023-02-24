@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: ContratRepository::class)]
@@ -18,9 +19,12 @@ class Contrat
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\GreaterThanOrEqual("today")]
     private ?\DateTimeInterface $validitedu = null;
 
+    
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\Range(min: '+1 year',max: "+3 year")]
     private ?\DateTimeInterface $validiteau = null;
 
     #[ORM\OneToOne(inversedBy: 'id_contrat', cascade: ['persist', 'remove'])]
@@ -32,6 +36,7 @@ class Contrat
     private ?User $id_client = null;
 
     #[ORM\Column(length: 255)]
+    
     private ?string $photo_cin = null;
 
     #[ORM\ManyToMany(targetEntity: Offre::class, inversedBy: 'contrats')]

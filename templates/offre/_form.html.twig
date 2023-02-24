@@ -10,9 +10,9 @@
   <!-- bouton CSS  -->
   <link href="{{ asset ('assets2/css/btn.css') }}" rel="stylesheet">
   {% endblock %}
-               {{ form_start(form) }}
+              {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Titre</label>
+                  <label  class="col-sm-2 col-form-label">Titre</label>
                   <div class="col-sm-10">
                      {{form_widget(form.titre,{'attr':{'class':'form-control'}})}}
                     {% if form_errors(form.titre) is not empty %}
@@ -26,7 +26,7 @@
                   
                   {{form_widget(form.description,{'attr':{'class':'form-control'}})}}
                     {% if form_errors(form.description) is not empty %}
-                        <textarea class="form-control" style="height: 100px">{{ form_errors(form.description) }}</textarea>
+                        {{ form_errors(form.description) }}
                     {% endif %}
                     
                   </div>
@@ -49,16 +49,14 @@
                     {% endif %}
                   </div>
                 </div>
-                <div class="row mb-3">
-                  
-                </div>
+                
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Image</label>
                   <div class="col-sm-10">
-                     {# <input class="form-control" type="file" id="formFile" name="formFile" accept="image/*"> #}
-                     {{form_widget(form.ImageOffre,{'attr':{'class':'form-control'}})}}
-                    {% if form_errors(form.ImageOffre) is not empty %}
-                        <p class="form-text text-muted">{{ form_errors(form.ImageOffre) }}</p>
+                    
+                     {{form_widget(form.image_offre,{'attr':{'class':'form-control'}})}}
+                    {% if form_errors(form.image_offre) is not empty %}
+                        {{ form_errors(form.image_offre) }}
                     {% endif %}
                   </div>
                 </div>

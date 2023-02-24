@@ -10,7 +10,7 @@
   <!-- bouton CSS  -->
   <link href="{{ asset ('assets2/css/btn.css') }}" rel="stylesheet">
   {% endblock %}
-               {{ form_start(form) }}
+               {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
                 <div class="row mb-3">
                   <label for="inputDate" class="col-sm-2 col-form-label">Validité du</label>
                   <div class="col-sm-10">

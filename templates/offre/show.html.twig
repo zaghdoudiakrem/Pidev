@@ -51,11 +51,7 @@
             </tr>
             <tr>
                 <th>Image D'offre</th>
-                 {% if offre.ImageOffre|length > 0 %}
-                    <td><img src="{{ asset('\front\img\notfound.jpg' ~ offre.ImageOffre) }}" width="350" height="250"></td>
-                {% else %}
-                    <td><img src="{{ asset('.front/img/' ~ "notfound.jpg" ) }}" width="250" height="150"></td>
-                {% endif %} 
+                <td></br><img src="{{ asset(offre.ImageOffre) }}" width="300" height="150"></td>
                 
             </tr>
         </tbody>

@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route('/offre')]
 class OffreController extends AbstractController
@@ -35,7 +36,13 @@ class OffreController extends AbstractController
             'offres' => $offreRepository->findAll(),
         ]);
     }
-
+    #[Route('/front', name: 'app_offrefront_index', methods: ['GET'])]
+    public function index4(OffreRepository $offreRepository): Response
+    {
+        return $this->render('offre/index4.html.twig', [
+            'offres' => $offreRepository->findAll(),
+        ]);
+    }
     #[Route('/new', name: 'app_offre_new', methods: ['GET', 'POST'])]
     public function new(Request $request, OffreRepository $offreRepository): Response
     {
@@ -44,8 +51,12 @@ class OffreController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('image_offre')->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move('C:/xampp/htdocs/PiDEV_V06/PiDEV_V06/public/upload',$fileName);
+            
+            $offre->setImageOffre("/upload/".$fileName);
             $offreRepository->save($offre, true);
-
             return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -70,8 +81,12 @@ class OffreController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('image_offre')->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move('C:/xampp/htdocs/PiDEV_V06/PiDEV_V06/public/upload',$fileName);
+            
+            $offre->setImageOffre("/upload/".$fileName);
             $offreRepository->save($offre, true);
-
             return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -88,8 +103,18 @@ class OffreController extends AbstractController
             $offreRepository->remove($offre, true);
         }
 
-        return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_modoffre_index', [], Response::HTTP_SEE_OTHER);
     }
+    // #[Route('/front1', name: 'app_offre_showfront')]
+    // public function showfront(Offre $offre=null ): Response
+    // {
+        
+
+
+    //     return $this->render('offre/index4.html.twig', [
+    //         'offres' => $offre->findAll(),
+    //     ]);
+    // }
 }
 // $pictureFile = $form->get('ImageCategorie')->getData();
 // if ($pictureFile) {

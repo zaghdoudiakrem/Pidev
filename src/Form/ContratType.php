@@ -12,6 +12,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 class ContratType extends AbstractType
 {
@@ -20,7 +24,23 @@ class ContratType extends AbstractType
         $builder
             ->add('validitedu')
             ->add('validiteau')
-            ->add('photo_cin',FileType::class)
+            ->add('photo_cin', FileType::class, [
+                'mapped' => false,
+        'required' => true,
+        'constraints' => [
+            new NotBlank([
+                'message' => 'svp choisir une image',
+            ]),
+            new File([
+                'maxSize' => '1024k',
+                'mimeTypes' => [
+                    'image/jpeg',
+                    'image/png',
+                ],
+                'mimeTypesMessage' => 'la format de l image doit etre jpeg ou png',
+            ])
+        ],
+    ])
             ->add('id_vehicule',EntityType::class, [
                 'class' => Vehicule::class,
                 'choice_label' => 'id',

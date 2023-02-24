@@ -6,55 +6,37 @@
    <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Supprimer Des Contrats</h1>
+      <h1>Ajouter Un Contrat</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">Accueil</li>
-          <li class="breadcrumb-item">Contrat</li>
-          <li class="breadcrumb-item active">Supprimer Contrats</li>
+          <li class="breadcrumb-item">Accueil </li>
+          <li class="breadcrumb-item">Contrats</li>
+          <li class="breadcrumb-item active">Ajouter Contrat</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-7">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Bienvenue</h5>
-
+            </br>
+             <div class="alert alert-success " role="alert">
+                <h4 class="alert-heading">Formulaire Envoyé</h4>
+                <p>Cher client, votre contrat a été envoyé avec succès. Il sera traité prochainement.</p>
+                <hr>
+                <p class="mb-0">Merci pour choisir 4Roues Assurance</p>
+                {# <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> #}
+              </div>
+              {# <img src="{{asset ('assets/img/clients/client-9.png')}}" class="img-fluid" alt=""> #}
             {# <h1>Table Des Offres</h1> #}
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                 <th>Id</th>
-                <th>Validitedu</th>
-                <th>Validiteau</th>
-                <th>Photo_cin</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for contrat in contrats %}
-            <tr>
-                <td>{{ contrat.id }}</td>
-                <td>{{ contrat.validitedu ? contrat.validitedu|date('Y-m-d') : '' }}</td>
-                <td>{{ contrat.validiteau ? contrat.validiteau|date('Y-m-d') : '' }}</td>
-                <td>{{ contrat.photoCin }}</td>
-                <td>
-                      {{ include('contrat/_delete_form.html.twig') }}
-                    {# <a href="{{ path('app_offre_edit', {'id': offre.id}) }}">edit</a> #} 
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+           
+            
+                  <a class="btn btn-primary  rounded-pill" href="{{ path('app_contrat_index') }}">
+                  Terminer  <i class="bi bi-check-circle"></i>
+                  </a>
 
     {# <a href="{{ path('app_offre_new') }}">Create new</a> #}
 

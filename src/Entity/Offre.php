@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OffreRepository::class)]
 class Offre
@@ -17,21 +18,38 @@ class Offre
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotNull(message:"La description est obligatoire")]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message:"Le prix est obligatoire")]
     private ?string $prix = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le titre est obligatoire")]
+    #[Assert\Length([
+        'min' => 5,
+        'max' => 15,
+        'minMessage' => 'le titre doit comporter au moins {{ limit }} caractères',
+        'maxMessage' => 'Votre titre doit comporter au moins {{ limit }} caractères',
+    ])]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message:"La validite est obligatoire")]
+    #[Assert\Length([
+        'min' => 5,
+        'max' => 50,
+        'minMessage' => 'La validité doit comporter au moins {{ limit }} caractères',
+        'maxMessage' => 'La validité  doit comporter au moins {{ limit }} caractères',
+    ])]
     private ?string $Validite_offre = null;
 
     #[ORM\ManyToMany(targetEntity: Contrat::class, mappedBy: 'id_offre')]
     private Collection $contrats;
 
     #[ORM\Column(length: 255)]
+    
     private ?string $image_offre = null;
 
     public function __construct()

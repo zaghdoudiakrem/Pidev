@@ -43,7 +43,7 @@
             </tr>
             <tr>
                 <th>Photo_cin</th>
-                <td><img src="{{ asset(contrat.photoCin) }}" width="300" height="150"></td>
+                <td></br><img src="{{ asset(contrat.photoCin) }}" width="300" height="150"></td>
             </tr>
         </tbody>
     </table>
@@ -58,12 +58,23 @@
                              window.print(element_a_imprimer);
                         }
                     </script>
-                <form>
-                    <input id="impression" class="btn btn-primary mr-2" name="impression" type="button" onclick="imprimer_page()" value="Imprimer Contrat" />
-                </form>
+                
                 </br>
+ <table class"table table-striped" >
+<tbody >
+            <tr>
+                <td><a  class="btn btn-primary mr-2" href="{{ path('app_contrat_edit', {'id': contrat.id}) }}">Modifier</a></td>
+                 
+                 <td><form>
+                    <input id="impression" class="btn btn-primary mr-2" name="impression" type="button" onclick="imprimer_page()" value="Imprimer Contrat" />
+                </form></td>
+                <td><a class="btn btn-primary mr-2" href="{{ path('app_contrat_index') }}">Retour</a></td>
+            </tr>
+        </tbody>
+    </table>
 
-    <a class="btn btn-primary mr-2" href="{{ path('app_contrat_index') }}">Retour</a>
+    
+     
   
             </div>
           </div>

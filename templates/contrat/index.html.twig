@@ -40,11 +40,14 @@
         <tbody>
         {% for contrat in contrats %}
             <tr>
-                <td>{{ contrat.id }}</td>
+                <th>{{ contrat.id }}</th>
                 <td>{{ contrat.validitedu ? contrat.validitedu|date('Y-m-d') : '' }}</td>
                 <td>{{ contrat.validiteau ? contrat.validiteau|date('Y-m-d') : '' }}</td>
                 <td>{{ contrat.photoCin }}</td>
-                <td></td>
+                <td>{% for offre in contrat.getIdOffre() %}
+                {{offre}}
+                {% endfor %}
+                </td>
                 <td>
                      <a class="btn btn-primary mr-8" href="{{ path('app_contrat_show', {'id': contrat.id}) }}">Afficher</a>
                     {# <a href="{{ path('app_offre_edit', {'id': offre.id}) }}">edit</a> #} 

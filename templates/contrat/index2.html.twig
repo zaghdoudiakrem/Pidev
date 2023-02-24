@@ -6,19 +6,19 @@
    <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Modifier Des Contrats</h1>
+      <h1>Modifier|Supprimer Des Contrats</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">Accueil</li>
           <li class="breadcrumb-item">Contrat</li>
-          <li class="breadcrumb-item active">Modifier Contrats</li>
+          <li class="breadcrumb-item active">Modifier|Supprimer Contrats</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
 
           <div class="card">
             <div class="card-body">
@@ -40,7 +40,7 @@
         <tbody>
         {% for contrat in contrats %}
             <tr>
-                <td>{{ contrat.id }}</td>
+                <th>{{ contrat.id }}</th>
                 <td>{{ contrat.validitedu ? contrat.validitedu|date('Y-m-d') : '' }}</td>
                 <td>{{ contrat.validiteau ? contrat.validiteau|date('Y-m-d') : '' }}</td>
                 <td>{{ contrat.photoCin }}</td>

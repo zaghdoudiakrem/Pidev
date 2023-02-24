@@ -31,7 +31,7 @@ class Vehicule
     #[ORM\JoinColumn(nullable: false)]
     private ?User $id_client = null;
 
-    #[ORM\OneToOne(mappedBy: 'id_vehicule', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'id_vehicule')]
     private ?Contrat $id_contrat = null;
 
     #[ORM\OneToMany(mappedBy: 'id_vehicule', targetEntity: Constat::class)]

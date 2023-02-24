@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class OffreType extends AbstractType
 {
@@ -20,27 +21,25 @@ class OffreType extends AbstractType
             ->add('description')
             ->add('prix')
             ->add('validiteOffre')
-            ->add('ImageOffre')
-            ;
-            // ->add('image_Offre', FileType::class, [
-            //     'label' => 'Picture',
-            //     'mapped' => false,
-            //     'required' => false,
-            //     'constraints' => [
-            //         new File([
-            //             'maxSize' => '1024k',
-            //             'mimeTypes' => [
-            //                 'image/*',
-            //             ],
-            //             'mimeTypesMessage' => 'Donner une image Valide',
-            //         ])
-            //     ],
-            // ])
-            // ->add('image_Offre', FileType::class, [
-            //     'label' => 'Sélectionnez une image :'
-            // ]);
+            ->add('image_offre', FileType::class, [
+                'mapped' => false,
+        'required' => true,
+        'constraints' => [
+            new NotBlank([
+                'message' => 'svp choisir une image',
+            ]),
+            new File([
+                'maxSize' => '1024k',
+                'mimeTypes' => [
+                    'image/jpeg',
+                    'image/png',
+                ],
+                'mimeTypesMessage' => 'la format de l image doit etre jpeg ou png',
+            ])
+        ],
+    ])
 
-        
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
