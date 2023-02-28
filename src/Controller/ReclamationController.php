@@ -27,8 +27,8 @@ class ReclamationController extends AbstractController
         $formSearch= $this->createForm(SearchReclamationType::class);
         $formSearch->handleRequest($request);
         if($formSearch->isSubmitted()){
-            $description= $formSearch->get('description')->getData();
-            $result= $repository->searchReclamation($description);
+            $objet= $formSearch->get('objet')->getData();
+            $result= $repository->searchReclamation($objet);
             return $this->renderForm("reclamation/index.html.twig",
                 array("reclamations"=>$result,
                     "searchForm"=>$formSearch));

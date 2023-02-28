@@ -40,10 +40,10 @@ class ReclamationRepository extends ServiceEntityRepository
     }
 
 
-    public function searchReclamation($description) {
+    public function searchReclamation($objet) {
         return $this->createQueryBuilder('s')
-        ->andWhere('s.description LIKE :x')
-        ->setParameter('x', '%'.$description.'%')
+        ->andWhere('s.objet LIKE :x')
+        ->setParameter('x', '%'.$objet.'%')
         ->getQuery()
         ->execute();
     }

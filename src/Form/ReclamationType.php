@@ -18,7 +18,6 @@ class ReclamationType extends AbstractType
         $builder
             ->add('description')
             ->add('objet')
-          
             ->add('id_client',
             EntityType::class,array(
             'class'=>User::class,

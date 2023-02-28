@@ -16,7 +16,7 @@ class SearchReclamationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('description', SearchType::class, [
+            ->add('objet', SearchType::class, [
                 'label' => false,
                 'attr' => [
                     'class' => 'form-control',
