@@ -36,8 +36,6 @@
                         <td>{{ reclamation.id }}</td>
                         <td>{{ reclamation.objet }}</td>
                         <td>{{ reclamation.description }}</td>
-                    
-                        
                         <td>
                             <form method="post" action="{{ path('app_reclamation_delete', {'id': reclamation.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
                             
