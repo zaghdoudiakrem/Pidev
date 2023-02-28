@@ -26,16 +26,17 @@
                 <table class="table table-bordered" >
                     <tr>
                         <th>Id</th>
-                        <th>Description</th>
                         <th>Objet</th>
+                        <th>Description</th>    
                         <th colspan ="4" width="1100px" style="position: relative; left: 100px; top: 0px;*">Actions</th>
                     </tr>
                     
                  {% for reclamation in reclamations %}
                     <tr>
                         <td>{{ reclamation.id }}</td>
-                        <td>{{ reclamation.description }}</td>
                         <td>{{ reclamation.objet }}</td>
+                        <td>{{ reclamation.description }}</td>
+                    
                         
                         <td>
                             <form method="post" action="{{ path('app_reclamation_delete', {'id': reclamation.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
