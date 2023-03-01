@@ -33,6 +33,7 @@ class ConstatType extends AbstractType
                 ],
                 'placeholder' => 'Veuillez choisir un type de véhicule valide',
                 ])
+
             ->add('marquevehicule_e', ChoiceType::class, [
                 'choices' => [
                     'Ford' => 'Ford',

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/constat')]
 class ConstatController extends AbstractController
@@ -38,7 +39,7 @@ class ConstatController extends AbstractController
 
             $file = $form->get('photoaccid')->getData();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move('C:\xampp\htdocs\PiDEV\public\upload',$fileName);
+            $file->move('C:\wamp64\www\PiDEV\public\upload',$fileName);
         
             $constat->setPhotoaccid("/upload/".$fileName);
         
@@ -70,15 +71,15 @@ class ConstatController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $constat -> setIdExpert($user);
-            $constat -> setIdVehicule($vehicule);
-
+            $constat -> setIdVehicule($vehicule);        
+          
             $file = $form->get('photoaccid')->getData();
+            if($file){
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move('C:\xampp\htdocs\PiDEV\public\upload',$fileName);
-        
+            $file->move('C:\wamp64\www\PiDEV\public\upload',$fileName);
             $constat->setPhotoaccid("/upload/".$fileName);
-
-
+            }
+            
             $constatRepository->save($constat, true);
 
             return $this->redirectToRoute('app_constat_index', [], Response::HTTP_SEE_OTHER);
@@ -87,6 +88,7 @@ class ConstatController extends AbstractController
         return $this->renderForm('constat/edit.html.twig', [
             'constat' => $constat,
             'form' => $form,
+
         ]);
     }
 

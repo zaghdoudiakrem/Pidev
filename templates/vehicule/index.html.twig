@@ -5,7 +5,9 @@
 {% block body %}
 <div class="container">
      <h2 class="text-center mt-5 mb-3">Vehicule</h2>
-
+      <div class="card" style="text-align: center;">
+                <a class="btn btn-outline-primary" href="{{ path('app_vehicule_new') }}"> Ajouter une vehicule </a>
+                </div>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -39,5 +41,6 @@
         {% endfor %}
         </tbody>
     </table>
+                    </div>
 
 {% endblock %}

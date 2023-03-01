@@ -40,7 +40,7 @@ class Vehicule
 
     #[ORM\Column]
     #[Assert\NotBlank(message:"le champ Nombre de chevaux est obligatoire")]
-    #[Assert\Positive()]
+    #[Assert\Positive(message:"le champ Nombre de chevaux doit etre positive")]
 
     private ?int $nb_ch = null;
 

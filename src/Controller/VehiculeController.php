@@ -28,7 +28,7 @@ class VehiculeController extends AbstractController
     {
         $vehicule = new Vehicule();
         $user = $this->getDoctrine()->getRepository(User::class)->find(1);
-        $contrat = $this->getDoctrine()->getRepository(Contrat::class)->find(5);
+        $contrat = $this->getDoctrine()->getRepository(Contrat::class)->find(4);
         $form = $this->createForm(VehiculeType::class, $vehicule);
         $form->handleRequest($request);
 
@@ -58,7 +58,7 @@ class VehiculeController extends AbstractController
     public function edit(Request $request, Vehicule $vehicule, VehiculeRepository $vehiculeRepository): Response
     {
         $user = $this->getDoctrine()->getRepository(User::class)->find(1);
-        $contrat = $this->getDoctrine()->getRepository(Contrat::class)->find(5);
+        $contrat = $this->getDoctrine()->getRepository(Contrat::class)->find(4);
         $form = $this->createForm(VehiculeType::class, $vehicule);
         $form->handleRequest($request);
 
