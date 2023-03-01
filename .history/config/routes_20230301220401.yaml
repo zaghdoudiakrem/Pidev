@@ -1,0 +1,7 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+print_devis:
+    path: '/devis/{id}/print'
+    controller: App\Controller\DevisController::printDevis'
+    methods: ['GET']
