@@ -46,10 +46,16 @@ class Reclamation
     #[ORM\JoinColumn(nullable: false)]
     private ?User $id_client = null;
 
+   
+
+
     public function __construct()
     {
         $this->id_reponse = new ArrayCollection();
     }
+
+   
+ 
 
     public function getId(): ?int
     {
@@ -125,4 +131,5 @@ class Reclamation
     public function __toString() {
         return (string) $this->getId();
     }
+
 }

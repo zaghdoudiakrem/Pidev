@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Reclamation;
+use App\Entity\Rating;
+use App\Form\RatingType;
 use App\Entity\User;
 use App\Form\ReclamationType;
+use App\Services\QrcodeService;
 use App\Repository\ReclamationRepository;
 use App\Form\SearchReclamationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,27 +18,36 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
 {
     
     #[Route('/', name: 'app_reclamation_index')]
-    public function index(Request $request,ReclamationRepository $repository): Response
+    public function index(Request $request,ReclamationRepository $repository,PaginatorInterface $paginator): Response
     {
         $reclamations= $repository->findAll();
+
+        $reclamations = $paginator->paginate(
+            $reclamations, /* query NOT result */
+            $request->query->getInt('page', 1),
+            2
+        );
         $formSearch= $this->createForm(SearchReclamationType::class);
         $formSearch->handleRequest($request);
         if($formSearch->isSubmitted()){
+          
             $objet= $formSearch->get('objet')->getData();
             $result= $repository->searchReclamation($objet);
             return $this->renderForm("reclamation/index.html.twig",
                 array("reclamations"=>$result,
-                    "searchForm"=>$formSearch));
+                    "searchForm"=>$formSearch,));
         }
           return $this->renderForm("reclamation/index.html.twig",
             array("reclamations"=>$reclamations,
-                 "searchForm"=>$formSearch));
+                 "searchForm"=>$formSearch,));
     }
 
     
@@ -48,6 +60,7 @@ class ReclamationController extends AbstractController
         ]);
     }
 
+   
 
     #[Route('/new', name: 'app_reclamation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReclamationRepository $reclamationRepository): Response
@@ -69,7 +82,7 @@ class ReclamationController extends AbstractController
     public function show(Reclamation $reclamation): Response
     {
         return $this->render('reclamation/show.html.twig', [
-            'reclamation' => $reclamation,
+            'reclamation' => $reclamation
         ]);
     }
 
@@ -102,6 +115,7 @@ class ReclamationController extends AbstractController
 
         return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
     }
+
 
     
 }
