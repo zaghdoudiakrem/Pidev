@@ -13,7 +13,9 @@
 					
 					<th scope="col">EXpert</th>
 					<th scope="col">Mecanicien</th>
+					<th scope="col">rapport</th>
 					<th scope="col">Actions</th>
+
 
 				</tr>
 			</thead>
@@ -30,6 +32,7 @@
 						
 						<td>{{rendezvous.getIdExpert()}}</td>
 						<td>{{rendezvous.getIdMecanicien()}}</td>
+						<td>{{rendezvous.type}}</td>
 
 						<td>
 							<a href="{{path ('app_delete',{id:rendezvous.id} )}}">delete</a>

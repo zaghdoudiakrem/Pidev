@@ -41,6 +41,9 @@ class Rapport
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    #[ORM\OneToOne(mappedBy: 'type', cascade: ['persist', 'remove'])]
+    private ?RendezVous $rendezVous = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -117,4 +120,31 @@ class Rapport
 
         return $this;
     }
+
+    public function getRendezVous(): ?RendezVous
+    {
+        return $this->rendezVous;
+    }
+
+    public function setRendezVous(?RendezVous $rendezVous): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($rendezVous === null && $this->rendezVous !== null) {
+            $this->rendezVous->setType(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($rendezVous !== null && $rendezVous->getType() !== $this) {
+            $rendezVous->setType($this);
+        }
+
+        $this->rendezVous = $rendezVous;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+    
 }

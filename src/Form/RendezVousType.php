@@ -29,6 +29,7 @@ class RendezVousType extends AbstractType
             ->add('lieu')
             ->add('id_expert')
             ->add('id_mecanicien')
+            ->add('type')
         //    ->add('id_expert', ChoiceType::class, [
         //         'choices' => $this->getExperts(),
         //         'choice_label' => function ($user) {

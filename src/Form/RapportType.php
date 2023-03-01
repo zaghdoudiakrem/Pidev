@@ -53,7 +53,7 @@ class RapportType extends AbstractType
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
-                            ' image/gif',
+                            
                             'image/png',
                             'image/jpeg',
                         ],
