@@ -11,7 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+
+
 
 #[Route('/constat')]
 class ConstatController extends AbstractController
@@ -25,7 +27,7 @@ class ConstatController extends AbstractController
     }
 
     #[Route('/new', name: 'app_constat_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ConstatRepository $constatRepository): Response
+    public function new(Request $request, ConstatRepository $constatRepository,FlashBagInterface $flashBag): Response
     {
         $constat = new Constat();
         $user = $this->getDoctrine()->getRepository(User::class)->find(1);
@@ -42,6 +44,8 @@ class ConstatController extends AbstractController
             $file->move('C:\wamp64\www\PiDEV\public\upload',$fileName);
         
             $constat->setPhotoaccid("/upload/".$fileName);
+
+            $flashBag->add('success', 'Your action was successful!');
         
             $constatRepository->save($constat, true);
             return $this->redirectToRoute('app_constat_index', [], Response::HTTP_SEE_OTHER);
@@ -62,7 +66,7 @@ class ConstatController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_constat_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Constat $constat, ConstatRepository $constatRepository): Response
+    public function edit(Request $request, Constat $constat, ConstatRepository $constatRepository,FlashBagInterface $flashBag): Response
     {
         $user = $this->getDoctrine()->getRepository(User::class)->find(1);
         $vehicule = $this->getDoctrine()->getRepository(Vehicule::class)->find(1);
@@ -79,7 +83,8 @@ class ConstatController extends AbstractController
             $file->move('C:\wamp64\www\PiDEV\public\upload',$fileName);
             $constat->setPhotoaccid("/upload/".$fileName);
             }
-            
+
+            $flashBag->add('success', 'Your action was successful!');            
             $constatRepository->save($constat, true);
 
             return $this->redirectToRoute('app_constat_index', [], Response::HTTP_SEE_OTHER);
@@ -93,12 +98,16 @@ class ConstatController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_constat_delete', methods: ['POST'])]
-    public function delete(Request $request, Constat $constat, ConstatRepository $constatRepository): Response
+    public function delete(Request $request, Constat $constat, ConstatRepository $constatRepository,FlashBagInterface $flashBag): Response
     {
         if ($this->isCsrfTokenValid('delete'.$constat->getId(), $request->request->get('_token'))) {
             $constatRepository->remove($constat, true);
         }
+        $flashBag->add('success', 'Your action was successful!');
 
         return $this->redirectToRoute('app_constat_index', [], Response::HTTP_SEE_OTHER);
-    }
+    } 
+
+
 }
+ 

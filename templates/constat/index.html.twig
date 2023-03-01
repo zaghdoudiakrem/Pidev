@@ -104,8 +104,14 @@
                 <td colspan="13">Table vide</td>
             </tr>
         {% endfor %}
-        </tbody>
+			{% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+             <div class="alert alert-{{ type }}">
+                  {{ message }}
+             </div>
+            {% endfor %}
+             {% endfor %}
+         </tbody>
     </table>
 	                </div>
-	
 {% endblock %}

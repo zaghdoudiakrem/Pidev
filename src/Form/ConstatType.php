@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Constat;
-use App\Entity\Vehicule;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -14,9 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\File;
-
-
-
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 class ConstatType extends AbstractType
 {
@@ -54,7 +51,13 @@ class ConstatType extends AbstractType
                 ])
 
             ->add('assuranceclient_e', TextType::class)
-            ->add('adresseclient_e', TextType::class)
+            ->add('adresseclient_e', TextType::class,[ 
+                'label' => 'Address',
+                'attr' => [
+                'placeholder' => 'Enter your address'
+            ]
+        ])
+    
             ->add('emplacementaccid', TextType::class)
             ->add('photoaccid', FileType::class, [
                 'label' => 'Télécharger une image',
@@ -75,7 +78,9 @@ class ConstatType extends AbstractType
             ])   
              ->add('id_vehicule',HiddenType::class, [
                             'data' =>$options['id_vehicule'],
-            ])   
+            ])               
+
+            ->add('captcha', CaptchaType::class)
         ;
             
         
@@ -90,3 +95,4 @@ class ConstatType extends AbstractType
         ]);
     }
 }
+

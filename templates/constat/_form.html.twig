@@ -60,6 +60,10 @@
             </tr>
         </tbody>
     </table>
+    <div style="center">
+            {{ form_label(form.captcha, "Retaper les caractères de l'image :  ") }}
+            {{ form_widget(form.captcha, {'attr': {'class': 'form-control'}}) }}
+            </div><br>
     <div style="text-align: center;">
     <button class="btn {{ button_color|default('btn-outline-primary') }} mb-3">{{ button_label|default('Enregistrer') }}</button>
     </div>

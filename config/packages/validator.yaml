@@ -11,3 +11,8 @@ when@test:
     framework:
         validation:
             not_compromised_password: false
+
+    properties:
+        captcha:
+            - Gregwar\CaptchaBundle\Validator\Constraints\ValidCaptcha:
+                message: "Invalid captcha code"
