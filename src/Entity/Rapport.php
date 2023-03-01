@@ -22,12 +22,12 @@ class Rapport
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(min: 4,minMessage: "veuillez avoir au minimum 4 caractere" )]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Ce champ ne doit pas être vide.')]
     private ?string $rapportpreliminaire = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(min: 4,minMessage: "veuillez avoir au minimum 4 caractere" )]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Ce champ ne doit pas être vide.')]
     private ?string $rapportexpertise = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]

@@ -47,7 +47,23 @@ class RendezVousRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
-
+    public function findRendezVousbylieux($lieu)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.lieu LIKE :lieu')
+            ->setParameter('lieu', '%'.$lieu.'%')
+            ->getQuery()
+            ->getResult();
+    }
+    public function countbylieux($lieu)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.lieu LIKE :lieu')
+            ->setParameter('lieu', '%'.$lieu.'%')
+            ->select('count(e.lieu)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 //    /**
 //     * @return RendezVous[] Returns an array of RendezVous objects
 //     */

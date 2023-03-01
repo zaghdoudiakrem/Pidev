@@ -142,6 +142,50 @@ class RendezVousController extends AbstractController
         $jsonContent = $Normalizer->normalize($rendezvous, 'json', ['groups' => 'rendezvous']);
         return new Response("Rendez vous deleted successfully " . json_encode($jsonContent));
     }
+    #[Route("/stat", name: "statistique")]
+    public function statistique(RendezVousRepository $repository) :Response 
+    {
+        $rendezvouss=$repository->findAll();
+        $lieux=[];
+        $countlieux=[];
+        //$nbrerendezvous=[];
+        //calculer le nombre des rendezvous par lieux
+        foreach($rendezvouss as $rendez){
+            $lieux[]=$rendez->getLieu();
+            
+            $countlieux[]=$repository->countbylieux($rendez->getLieu());
+            
+            
+
+        }
+        //dd($countlieux);
+        
+       
+        
+        
+       
+       
+        //$rendezvouscount=[];
+
+       /* foreach($rendezvouss as $rendez)
+        {
+            $lieux[]=$rendez->getLieu();
+            $countlieu[]
+
+           // $rendezvouscount[]= count($lieux);
+            
+        }*/
+       
+
+
+
+        return $this->render('rendez_vous/stat.html.twig',[
+            'lieux'=>json_encode( $lieux),
+            'rendezvouscount'=>json_encode($countlieux),
+        ])
+           
+        ;
+    }
 
 
 }
