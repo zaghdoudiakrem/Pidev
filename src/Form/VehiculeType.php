@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 class VehiculeType extends AbstractType
 {
@@ -49,7 +49,10 @@ class VehiculeType extends AbstractType
            ])   
             ->add('id_contrat',HiddenType::class, [
                               'data' =>$options['id_contrat'],
-           ])       ;
+           ])     
+
+           ->add('captcha', CaptchaType::class)
+           ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

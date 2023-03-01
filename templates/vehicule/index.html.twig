@@ -38,6 +38,14 @@
             <tr>
                 <td colspan="6">Table vide</td>
             </tr>
+             {% endfor %}
+			{% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+             <div class="alert alert-{{ type }}">
+                  {{ message }}
+             </div>
+            {% endfor %}
+             {% endfor %}
         {% endfor %}
         </tbody>
     </table>
