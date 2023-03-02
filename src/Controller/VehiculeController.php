@@ -68,10 +68,10 @@ class VehiculeController extends AbstractController
             $vehicule -> setIdClient($user);
             $vehicule -> setIdContrat($contrat);
             $vehiculeRepository->save($vehicule, true);
-
+            $flashBag->add('success', 'Your action was successful!');
+            
             return $this->redirectToRoute('app_vehicule_index', [], Response::HTTP_SEE_OTHER);
         }
-        $flashBag->add('success', 'Your action was successful!');
 
 
         return $this->renderForm('vehicule/edit.html.twig', [

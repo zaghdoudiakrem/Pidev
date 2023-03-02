@@ -30,7 +30,7 @@
                 <td>
                     <a class="btn btn-outline-info" href="{{ path('app_vehicule_show', {'id': vehicule.id}) }}">Lister</a>
                     <td><a class="btn btn-outline-success" href="{{ path('app_vehicule_edit', {'id': vehicule.id}) }}">Modifier</a</td>
-                    <td>{{ include('vehicule/_delete_form.html.twig') }}</td>
+                    <td><i class="fa fa-trash">{{ include('vehicule/_delete_form.html.twig') }}</i></td>
 
                 </td>
             </tr>
@@ -46,7 +46,6 @@
              </div>
             {% endfor %}
              {% endfor %}
-        {% endfor %}
         </tbody>
     </table>
                     </div>
