@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/vehicule')]
 class VehiculeController extends AbstractController
@@ -89,5 +90,84 @@ class VehiculeController extends AbstractController
         $flashBag->add('success', 'Your action was successful!');
 
         return $this->redirectToRoute('app_vehicule_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/AllVehicule', name: 'list')]
+    public function index_JSON(VehiculeRepository $vehiculeRepository,SerializerInterface $serializer)
+    {
+       $vehicules = $vehiculeRepository->findAll();
+
+       $json = $serializer->serialize($vehicules,'json',['groups' => "vehicules"]);
+       
+       return new Response($json);
+    }
+
+    #[Route('/addVehiculeJSON/new', name: 'addVehiculeJSON')]
+    public function new_JSON(Request $request, NormalizerInterface $Normalizer)
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $contrat = $this->getDoctrine()->getRepository(Contrat::class)->find(5);
+
+        $em= $this->getDoctrine()->getManager();
+        $vehicule = new Vehicule();
+        $vehicule->setMatricule($request->get('matricule'));
+        $vehicule->setMarque($request->get('marque'));
+        $vehicule->setType($request->get('type'));
+        $vehicule->setNbCh($request->get('nb_ch'));
+
+        $vehicule -> setIdClient($user);
+        $vehicule -> setIdContrat($contrat);
+        $em->persist($vehicule);
+        $em->flush();
+
+        $jsonContent = $Normalizer->normalize($vehicule, 'json',['groups' => "vehicules"]);
+        return new Response(json_encode($jsonContent));
+
+    }
+
+    #[Route('/{id}', name: 'vehicule')]
+    public function show_JSON($id,NormalizerInterface $normalizer,VehiculeRepository $repo): Response
+    {
+        $vehicule = $repo->find($id);
+        $vehiculeNormalises = $normalizer->normalize($vehicule, 'json', ['groups' => "vehicules"]);
+        return new Response(json_encode($vehiculeNormalises));
+    }
+
+    #[Route('/updateVehiculeJSON/{id}', name: 'updateVehiculeJSON')]
+    public function edit_JSON($id,Request $request, NormalizerInterface $Normalizer): Response
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $contrat = $this->getDoctrine()->getRepository(Contrat::class)->find(5);
+
+        $em= $this->getDoctrine()->getManager();
+
+        $vehicule = $em->getRepository(Vehicule::class)->find($id);
+        $vehicule->setMatricule($request->get('matricule'));
+        $vehicule->setMarque($request->get('marque'));
+        $vehicule->setType($request->get('type'));
+        $vehicule->setNbCh($request->get('nb_ch'));
+
+        $vehicule -> setIdClient($user);
+        $vehicule -> setIdContrat($contrat);
+
+        $em->flush();
+
+        $jsonContent = $Normalizer->normalize($vehicule, 'json',['groups' => "vehicules"]);
+        return new Response("Vehicule updated successfully" .json_encode($jsonContent));
+
+       
+    }
+
+    #[Route('/deletedVehiculeJSON/{id}', name: 'deletedVehiculeJSON')]
+    public function delete_JSON($id,Request $request,NormalizerInterface $Normalizer): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $vehicule = $em->getRepository(Vehicule::class)->find($id);
+        $em->remove($vehicule);
+        $em->flush();
+        $jsonContent = $Normalizer->normalize($vehicule, 'json', ['groups' => "vehicules"]);
+        return new Response("Vehicule deleted successfully" .json_encode($jsonContent));
+       
     }
 }

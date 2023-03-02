@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 #[ORM\Entity(repositoryClass: VehiculeRepository::class)]
@@ -15,9 +17,12 @@ class Vehicule
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("vehicules")]
+
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("vehicules")]
     #[Assert\NotBlank(message:"le champ Matricule est obligatoire")]
     #[Assert\Length([
         'max' => 10,
@@ -27,18 +32,21 @@ class Vehicule
     private ?string $matricule = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("vehicules")]
     #[Assert\NotBlank(message:"le champ Marque est obligatoire")]
 
 
     private ?string $marque = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("vehicules")]
     #[Assert\NotBlank(message:"le champ Type est obligatoire")]
    
 
     private ?string $type = null;
 
     #[ORM\Column]
+    #[Groups("vehicules")]
     #[Assert\NotBlank(message:"le champ Nombre de chevaux est obligatoire")]
     #[Assert\Positive(message:"le champ Nombre de chevaux doit etre positive")]
 
@@ -133,8 +141,9 @@ class Vehicule
     public function setIdContrat(Contrat $id_contrat): self
     {
         // set the owning side of the relation if necessary
-        if ($id_contrat->getIdVehicule() !== $this) {
-            $id_contrat->setIdVehicule($this);
+        if ($id_contrat->getId() !== $this) {
+            $id_contrat->getId($this);
+            //a retenir
         }
 
         $this->id_contrat = $id_contrat;
