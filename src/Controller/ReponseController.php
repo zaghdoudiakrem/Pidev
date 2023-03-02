@@ -18,6 +18,9 @@ use Symfony\Component\Serializer\SerializerInterface;
 #[Route('/reponse')]
 class ReponseController extends AbstractController
 {
+
+
+
     #[Route('/', name: 'app_reponse_index', methods: ['GET'])]
     public function index(ReponseRepository $reponseRepository): Response
     {
@@ -25,6 +28,18 @@ class ReponseController extends AbstractController
         return $this->render('reponse/index.html.twig', [
             'reponses' => $reponseRepository->findAll(),
         ]);
+    }
+
+    
+    #[Route('/searchReponsex', name: 'searchReponsex')]
+    public function searchReponsex(Request $request,NormalizerInterface $Normalizer,ReponseRepository $sr)
+    {
+     $repository = $this->getDoctrine()->getRepository(Reponse::class);
+     $requestString=$request->get('searchValue');
+     $reponse = $sr->searchReponse($requestString);
+     $jsonContent = $Normalizer->normalize($reponse,'json',['groups'=>'reclamation']);
+     $retour=json_encode($jsonContent);
+    return new Response($retour);
     }
 
     #[Route('/listeR', name:'listeR')]

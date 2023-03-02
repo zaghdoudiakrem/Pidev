@@ -39,6 +39,14 @@ class ReponseRepository extends ServiceEntityRepository
         }
     }
 
+    public function searchReponse($description) {
+        return $this->createQueryBuilder('reponse')
+        ->andWhere('reponse.description LIKE :description')
+        ->setParameter('description', '%'.$description.'%')
+        ->getQuery()
+        ->execute();
+    }
+
 //    /**
 //     * @return Reponse[] Returns an array of Reponse objects
 //     */
