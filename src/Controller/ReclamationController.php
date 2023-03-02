@@ -50,25 +50,75 @@ class ReclamationController extends AbstractController
         }
           return $this->renderForm("reclamation/index.html.twig",
             array('reclamations' => $pagination,
-            
                  "searchForm"=>$formSearch,
                  'reclamationsByObjet'=>$reclamationsByObjet,));
     }
 
-    
 
     #[Route('/searchReclamationx', name: 'searchReclamationx')]
- public function searchReclamationx(Request $request,NormalizerInterface $Normalizer,ReclamationRepository $sr)
- {
+    public function searchReclamationx(Request $request,NormalizerInterface $Normalizer,ReclamationRepository $sr)
+    {
+     $repository = $this->getDoctrine()->getRepository(Reclamation::class);
+     $requestString=$request->get('searchValue');
+     $reclamation = $sr->searchReclamation($requestString);
+     $jsonContent = $Normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
+     $retour=json_encode($jsonContent);
+    return new Response($retour);
+    }
+
+  
+    #[Route('/liste', name:'liste')]
+    public function getReclamation(ReclamationRepository $reclamationRepository,SerializerInterface $serializerInterface){
+        $reclamation=$reclamationRepository->findAll();
+        $json=$serializerInterface->serialize($reclamation,'json',['groups'=>'reclamation']);
+        //dump($reclamation);
+        return new Response($json);
+        //die;
+    }
+
+    #[Route('/par/{id}', name:'reclamation')]
+    public function ReclamationId($id,NormalizerInterface $normalizer,ReclamationRepository $reclamationRepository){
+        $reclamation=$reclamationRepository->find($id);
+        $reclamationNormalises=$normalizer->normalize($reclamation,'json',['groups'=>"reclamation"]);
+        return new Response(json_encode($reclamationNormalises));
+    }
+
+    #[Route('/addReclamationJSON/new', name:'addReclamationJSON')]
+    public function addReclamationJSON(Request $request, NormalizerInterface $normalizer){
+        $em=$this->getDoctrine()->getManager();
+        $reclamation=new Reclamation();
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $reclamation -> setIdClient($user);
+        $reclamation->setDescription($request->get('description'));
+        $reclamation->setObjet($request->get('objet'));
+        $em->persist($reclamation);
+        $em->flush();
+        $jsonContent=$normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
+        return new Response(json_encode($jsonContent));
+    }
+
+    #[Route('/updateReclamationJSON/{id}', name:'updateReclamationJSON')]
+    public function updateReclamationJSON(Request $request,$id,NormalizerInterface $normalizer){
+        $em=$this->getDoctrine()->getManager();
+        $reclamation=$em->getRepository(Reclamation::class)->find($id);
+        $reclamation->setDescription($request->get('description'));
+        $reclamation->setObjet($request->get('objet'));
+        $em->flush();
+        $jsonContent=$normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
+        return new Response('Reclamation updated succefully'.json_encode($jsonContent));
+    }
+
 
     
-$repository = $this->getDoctrine()->getRepository(Reclamation::class);
-$requestString=$request->get('searchValue');
-$reclamation = $sr->searchReclamation($requestString);
-$jsonContent = $Normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
-$retour=json_encode($jsonContent);
-return new Response($retour);
-}
+    #[Route('/deleteReclamationJSON/{id}', name:'deleteReclamationJSON')]
+    public function deleteReclamationJSON(Request $request,$id,NormalizerInterface $normalizer){
+        $em=$this->getDoctrine()->getManager();
+        $reclamation=$em->getRepository(Reclamation::class)->find($id);
+        //$em->flush;
+        $jsonContent=$normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
+        return new Response('Reclamation delete succefuly'.json_encode($jsonContent));
+    }
+
 
 
     #[Route('/sup', name: 'app_reclamation_index1', methods: ['GET'])]

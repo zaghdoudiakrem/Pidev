@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/reponse')]
 class ReponseController extends AbstractController
@@ -23,6 +25,56 @@ class ReponseController extends AbstractController
         return $this->render('reponse/index.html.twig', [
             'reponses' => $reponseRepository->findAll(),
         ]);
+    }
+
+    #[Route('/listeR', name:'listeR')]
+    public function getReponse(ReponseRepository $reponseRepository,SerializerInterface $serializerInterface){
+        $reponse=$reponseRepository->findAll();
+        $json=$serializerInterface->serialize($reponse,'json',['groups'=>'reclamation']);
+        //dump($reclamation);
+        return new Response($json);
+        //die;
+    }
+
+    #[Route('/parR/{id}', name:'reponse')]
+    public function ReponseId($id,NormalizerInterface $normalizer,ReponseRepository $reponseRepository){
+        $reponse=$reponseRepository->find($id);
+        $reponseNormalises=$normalizer->normalize($reponse,'json',['groups'=>"reclamation"]);
+        return new Response(json_encode($reponseNormalises));
+    }
+
+    #[Route('/addReponseJSON/new', name:'addReponseJSON')]
+    public function addReponseJSON(Request $request, NormalizerInterface $normalizer){
+        $em=$this->getDoctrine()->getManager();
+        $reponse=new Reponse();
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $reclamation = $this->getDoctrine()->getRepository(Reclamation::class)->find(2);
+        $reponse -> setIdAssureur($user);
+        $reponse -> setIdReclamation($reclamation);
+        $reponse->setDescription($request->get('description'));
+        $em->persist($reponse);
+        $em->flush();
+        $jsonContent=$normalizer->normalize($reponse,'json',['groups'=>'reclamation']);
+        return new Response(json_encode($jsonContent));
+    }
+
+    #[Route('/updateReponseJSON/{id}', name:'updateReponseJSON')]
+    public function updateReponseJSON(Request $request,$id,NormalizerInterface $normalizer){
+        $em=$this->getDoctrine()->getManager();
+        $reponse=$em->getRepository(Reponse::class)->find($id);
+        $reponse->setDescription($request->get('description'));
+        $em->flush();
+        $jsonContent=$normalizer->normalize($reponse,'json',['groups'=>'reclamation']);
+        return new Response('Reponse updated succefully'.json_encode($jsonContent));
+    }
+
+    #[Route('/deleteReponseJSON/{id}', name:'deleteReponseJSON')]
+    public function deleteReponseJSON(Request $request,$id,NormalizerInterface $normalizer){
+        $em=$this->getDoctrine()->getManager();
+        $reponse=$em->getRepository(Reponse::class)->find($id);
+        //$em->flush;
+        $jsonContent=$normalizer->normalize($reponse,'json',['groups'=>'reclamation']);
+        return new Response('Reponse delete succefuly'.json_encode($jsonContent));
     }
 
     #[Route('/new', name: 'app_reponse_new', methods: ['GET', 'POST'])]
