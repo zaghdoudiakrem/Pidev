@@ -14,6 +14,7 @@ class Reponse
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("reclamation")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -24,6 +25,7 @@ class Reponse
         'minMessage' => 'Votre reponse doit comporter au moins {{ limit }} caractères',
         'maxMessage' => 'Votre reponse doit comporter au moins {{ limit }} caractères',
     ])]
+    #[Groups("reclamation")]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'id_reponse')]

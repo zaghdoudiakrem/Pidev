@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/reponse')]
 class ReponseController extends AbstractController
@@ -18,6 +19,7 @@ class ReponseController extends AbstractController
     #[Route('/', name: 'app_reponse_index', methods: ['GET'])]
     public function index(ReponseRepository $reponseRepository): Response
     {
+
         return $this->render('reponse/index.html.twig', [
             'reponses' => $reponseRepository->findAll(),
         ]);

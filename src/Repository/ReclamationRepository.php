@@ -52,9 +52,9 @@ class ReclamationRepository extends ServiceEntityRepository
 
 
     public function searchReclamation($objet) {
-        return $this->createQueryBuilder('s')
-        ->andWhere('s.objet LIKE :x')
-        ->setParameter('x', '%'.$objet.'%')
+        return $this->createQueryBuilder('reclamation')
+        ->andWhere('reclamation.objet LIKE :objet')
+        ->setParameter('objet', '%'.$objet.'%')
         ->getQuery()
         ->execute();
     }
@@ -67,6 +67,14 @@ class ReclamationRepository extends ServiceEntityRepository
             ->setMaxResults($limit)
         ;
         return $query->getQuery()->getResult();
+    }
+
+
+    public function sortByObjet() {
+        $qb=  $this->createQueryBuilder('s')
+            ->orderBy('s.objet','DESC');
+        return $qb ->getQuery()
+            ->getResult();
     }
 
 //    /**

@@ -3,18 +3,9 @@
 {% block title %}Reclamation{% endblock %}
 
 {% block body %}
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
-    <div class="container">
-    <div class="testbox">
-    <div style=" width: 100%;
-            padding: 20px;
-            border-radius: 6px;
-            background: #fff;
-            box-shadow: 0 0 8px #006622;">
-    {{form(searchForm)}}
-
-    </div>
-    </div>
+   
         <h2 class="text-center mt-5 mb-3">Reclamation</h2>
         <div class="col-lg-20">
         <div class="card">
@@ -24,6 +15,7 @@
                 </a>
             </div>
             <input type="text" id="search" class="form-control" placeholder="Search">
+           
             <br>
             <br>
             <div class="card-body">
@@ -62,7 +54,7 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reclamation.id) }}">
                                 <button class="btn btn-outline-danger">Supprimer</button> 
                               
-                       
+                               
                             </form>  
                         </td> 
                     </tr>
@@ -74,20 +66,20 @@
                     </tbody>
                  <tbody id="searchtab">
                  </tbody>
-                </table>
-            
-              {{ knp_pagination_render(reclamations) }}
+                </table>         
             </div>
         </div>
     </div>
+        {{ knp_pagination_render(reclamations) }}
 {% endblock %}
 {% block script %}
-<script
-src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-</script>
+<h1>Hi</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
 $( document ).ready(function() {
-$("#search").keyup(function(e){
+    console.log("tesr")
+  $("#search").keyup(function(e){
+    console.log("tesr")
 /* La variable value va prendre la valeur insérer dans le champ de texte
 afin d’effectuer la recherche */
 var value = $(this).val();
@@ -96,7 +88,7 @@ var value = $(this).val();
 $.ajax({
 /* l’url est une chaine de caractères contenant l’adresse où la requête est
 envoyée */
-url : "{{ path('/') }}",
+url : "{{ path('searchReclamationx') }}",
 /* La méthode utilisée pour transférer les données est GET */
 type :'GET',
 /*Ici search value va prendre la chaine entrée par un utilisateur dans la
@@ -111,11 +103,11 @@ if(retour){
 $('#t tbody#searchtab').empty();
 $.each(JSON.parse(retour), function(i, obj) {
 $('#t tbody#all').hide();
-$('#t tbody#searchtab').append('<tr><td> '+obj.id+ </td><td> '+obj.objet+' </td><td> '+obj.description+' </td><td> 
-<a href="app_reclamation_edit/'+obj.id+'">modifier</a></br>
-<a href="app_reclamation_delete/'+obj.id+'">supprimer</a></td> </tr>');
+$('#t tbody#searchtab').append('<tr><td> '+obj.id+ '</td><td> '+obj.objet+' </td><td> '+obj.description+' </td><td> '+
+"<a href='app_reclamation_edit/" +obj.id+"'>modifier</a></br>"+
+"<a href='app_reclamation_delete/"+obj.id+"'>supprimer</a></td></tr>"); 
 });
-}
+} 
 else
 {
 $('#t tbody#all').show();

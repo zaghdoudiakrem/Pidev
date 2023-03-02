@@ -3,11 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Reclamation;
-use App\Entity\Rating;
-use App\Form\RatingType;
 use App\Entity\User;
 use App\Form\ReclamationType;
-use App\Services\QrcodeService;
 use App\Repository\ReclamationRepository;
 use App\Form\SearchReclamationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,6 +16,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 #[Route('/reclamation')]
@@ -28,29 +27,49 @@ class ReclamationController extends AbstractController
     #[Route('/', name: 'app_reclamation_index')]
     public function index(Request $request,ReclamationRepository $repository,PaginatorInterface $paginator): Response
     {
+    
         $reclamations= $repository->findAll();
-
-        $reclamations = $paginator->paginate(
+        $pagination = $paginator->paginate(
             $reclamations, /* query NOT result */
             $request->query->getInt('page', 1),
             2
         );
+        $reclamationsByObjet= $repository->sortByObjet();
+
         $formSearch= $this->createForm(SearchReclamationType::class);
         $formSearch->handleRequest($request);
+       
         if($formSearch->isSubmitted()){
           
             $objet= $formSearch->get('objet')->getData();
             $result= $repository->searchReclamation($objet);
             return $this->renderForm("reclamation/index.html.twig",
                 array("reclamations"=>$result,
-                    "searchForm"=>$formSearch,));
+                    "searchForm"=>$formSearch,
+                    'reclamationsByObjet'=>$reclamationsByObjet,));
         }
           return $this->renderForm("reclamation/index.html.twig",
-            array("reclamations"=>$reclamations,
-                 "searchForm"=>$formSearch,));
+            array('reclamations' => $pagination,
+            
+                 "searchForm"=>$formSearch,
+                 'reclamationsByObjet'=>$reclamationsByObjet,));
     }
 
     
+
+    #[Route('/searchReclamationx', name: 'searchReclamationx')]
+ public function searchReclamationx(Request $request,NormalizerInterface $Normalizer,ReclamationRepository $sr)
+ {
+
+    
+$repository = $this->getDoctrine()->getRepository(Reclamation::class);
+$requestString=$request->get('searchValue');
+$reclamation = $sr->searchReclamation($requestString);
+$jsonContent = $Normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
+$retour=json_encode($jsonContent);
+return new Response($retour);
+}
+
 
     #[Route('/sup', name: 'app_reclamation_index1', methods: ['GET'])]
     public function index1(ReclamationRepository $reclamationRepository): Response

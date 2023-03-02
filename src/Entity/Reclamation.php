@@ -17,6 +17,7 @@ class Reclamation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("reclamation")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -27,6 +28,7 @@ class Reclamation
         'minMessage' => 'Votre description doit comporter au moins {{ limit }} caractères',
         'maxMessage' => 'Votre description doit comporter au moins {{ limit }} caractères',
     ])]
+    #[Groups("reclamation")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
@@ -37,13 +39,16 @@ class Reclamation
         'minMessage' => 'Votre Objet doit comporter au moins {{ limit }} caractères',
         'maxMessage' => 'Votre objet doit comporter au moins {{ limit }} caractères',
     ])]
+    #[Groups("reclamation")]
     private ?string $objet = null;
 
     #[ORM\OneToMany(mappedBy: 'id_reclamation', targetEntity: Reponse::class)]
+    #[Groups("reclamation")]
     private Collection $id_reponse;
 
     #[ORM\ManyToOne(inversedBy: 'reclamations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups("reclamation")]
     private ?User $id_client = null;
 
    
