@@ -53,6 +53,8 @@ class Reclamation
     #[Groups("reclamation")]
     private ?User $id_client = null;
 
+  
+
 
 
 
@@ -139,5 +141,6 @@ class Reclamation
     public function __toString() {
         return (string) $this->getId();
     }
+
 
 }
