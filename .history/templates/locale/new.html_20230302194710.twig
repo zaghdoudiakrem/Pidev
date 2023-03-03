@@ -1,0 +1,99 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}New Locale{% endblock %}
+{% block Sidebar %} 
+<!-- ======= Sidebar ======= -->
+		
+			<aside id="sidebar" class="sidebar">
+
+				<ul class="sidebar-nav" id="sidebar-nav">
+
+
+					<!-- End Forms Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="{{ path('app_devis_index')}}">
+							<i class="bi bi-clipboard-data"></i>
+							<span>Devis</span>
+						</a>
+					</li>
+
+					<!-- End Tables Nav -->
+
+					<li class="nav-item">
+						<a class="nav-link " href="{{ path('app_locale_index')}}">
+							<i class="bi bi-house-gear
+                            
+                            q"></i>
+							<span>Locale</span>
+						</a>
+					</li>
+					<!-- End Icons Nav -->
+                    <li class="nav-item">
+						<a class="nav-link " href="{{ path('app_devis_index')}}">
+							<i class="bi bi-calendar2-date"></i>
+							<span>Rendez_Vous</span>
+						</a>
+					</li>
+					<!-- End Icons Nav -->
+				
+					<li class="nav-heading">
+						Pages</li>
+
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="users-profile.html">
+							<i class="bi bi-person"></i>
+							<span>Profile</span>
+						</a>
+					</li>
+					<!-- End Profile Page Nav -->
+
+
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="pages-login.html">
+							<i class="bi bi-box-arrow-in-right"></i>
+							<span>Logout</span>
+						</a>
+					</li>
+					<!-- End Login Page Nav -->
+
+
+				</ul>
+
+			</aside>
+			<!-- End Sidebar-->
+{% endblock %}
+{% block body %}
+    <h1>New Locale</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.address) }}
+        <div id="map"></div>
+        {{ form_row(form.latitude) }}
+        {{ form_row(form.longitude) }}
+        <button type="submit" class="btn btn-primary">Create</button>
+    {{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+    <script>
+        mapboxgl.accessToken = '{{ mapbox_token }}';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-122.486052, 37.830348],
+            zoom: 13
+        });
+        var marker = new mapboxgl.Marker({
+            draggable: true
+        }).setLngLat([-122.486052, 37.830348])
+          .addTo(map);
+        function onDragEnd() {
+            var lngLat = marker.getLngLat();
+            document.getElementById('app_locale_latitude').value = lngLat.lat;
+            document.getElementById('app_locale_longitude').value = lngLat.lng;
+        }
+        marker.on('dragend', onDragEnd);
+    </script>
+{% endblock %}
