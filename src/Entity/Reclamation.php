@@ -53,9 +53,10 @@ class Reclamation
     #[Groups("reclamation")]
     private ?User $id_client = null;
 
-   
 
 
+
+    
     public function __construct()
     {
         $this->id_reponse = new ArrayCollection();
