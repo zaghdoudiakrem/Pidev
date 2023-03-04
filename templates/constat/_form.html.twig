@@ -32,7 +32,6 @@
                 <td>{{ form_widget(form.adresseclient_e, {'attr': {'class': 'form-control'}}) }}</td>
                 <td>  {{ form_errors(form.adresseclient_e) }} </td>
             </tr>
-
               <tr>
                 <td>{{ form_label(form.emplacementaccid, 'Emplacement Accident:') }}</td>
                 <td>{{ form_widget(form.emplacementaccid, {'attr': {'class': 'form-control'}}) }}</td>
@@ -54,9 +53,39 @@
                 <td>  {{ form_errors(form.observations) }} </td>
             </tr>
             <tr>
-                <td>{{ form_label(form.numcontrat_e, 'Numéro Contrat:') }}</td>
+                <td>{{ form_label(form.numcontrat_e, 'Numéro Contrat :') }}</td>
                 <td>{{ form_widget(form.numcontrat_e, {'attr': {'class': 'form-control'}}) }}</td>
                 <td>  {{ form_errors(form.numcontrat_e) }} </td>
+            </tr>
+             <tr>
+                <td>{{ form_label(form.mail, 'Email :') }}</td>
+                <td>{{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>  {{ form_errors(form.mail) }} </td>
+            </tr>
+             <tr>
+                <td>{{ form_label(form.Date_creation, 'Date_Création :') }}</td>
+                <td>{{ form_widget(form.Date_creation, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>  {{ form_errors(form.Date_creation) }} </td>
+            </tr>
+             <tr>
+                <td>{{ form_label(form.signatureId, 'Signature Id:') }}</td>
+                <td>{{ form_widget(form.signatureId, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>  {{ form_errors(form.signatureId) }} </td>
+            </tr>
+             <tr>
+                <td>{{ form_label(form.documentId, 'Document Id:') }}</td>
+                <td>{{ form_widget(form.documentId, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>  {{ form_errors(form.documentId) }} </td>
+            </tr>
+             <tr>
+                <td>{{ form_label(form.signerId, 'Signer Id:') }}</td>
+                <td>{{ form_widget(form.signerId, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>  {{ form_errors(form.signerId) }} </td>
+            </tr>
+               <tr>
+                <td>{{ form_label(form.PdfSansSignature, 'Pdf Sans Signature:') }}</td>
+                <td>{{ form_widget(form.PdfSansSignature, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>  {{ form_errors(form.PdfSansSignature) }} </td>
             </tr>
         </tbody>
     </table>
@@ -65,7 +94,7 @@
             {{ form_widget(form.captcha, {'attr': {'class': 'form-control'}}) }}
             </div><br>
     <div style="text-align: center;">
-    <button class="btn {{ button_color|default('btn-outline-primary') }} mb-3">{{ button_label|default('Enregistrer') }}</button>
+    <button style="background-color: #ff8521; color: white;" class="btn {{ button_color|default('btn-outline-primary') }} mb-3">{{ button_label|default('Enregistrer') }}</button>
     </div>
 {{ form_end(form) }}
 

@@ -4,9 +4,9 @@
 
 {% block body %}
 <div class="container">
-     <h2 class="text-center mt-5 mb-3">Vehicule</h2>
+     <h2 style="color: #ff8521;" class="text-center mt-5 mb-3">Vehicule</h2>
       <div class="card" style="text-align: center;">
-                <a class="btn btn-outline-primary" href="{{ path('app_vehicule_new') }}"> Ajouter une vehicule </a>
+                <a style="background-color: #ff8521; color: white;" class="btn btn-outline-primary" href="{{ path('app_vehicule_new') }}"> Ajouter une vehicule </a>
                 </div>
     <table class="table table-bordered">
         <thead>
@@ -29,8 +29,8 @@
                 <td>{{ vehicule.nbCh }}</td>
                 <td>
                     <a class="btn btn-outline-info" href="{{ path('app_vehicule_show', {'id': vehicule.id}) }}">Lister</a>
-                    <td><a class="btn btn-outline-success" href="{{ path('app_vehicule_edit', {'id': vehicule.id}) }}">Modifier</a</td>
-                    <td><i class="fa fa-trash">{{ include('vehicule/_delete_form.html.twig') }}</i></td>
+                    <td><a  class="btn btn-outline-success" href="{{ path('app_vehicule_edit', {'id': vehicule.id}) }}">Modifier</a</td>
+                    <td>{{ include('vehicule/_delete_form.html.twig') }}</td>
 
                 </td>
             </tr>
@@ -48,6 +48,6 @@
              {% endfor %}
         </tbody>
     </table>
-                    </div>
+     </div>
 
 {% endblock %}

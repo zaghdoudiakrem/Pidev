@@ -7,6 +7,8 @@ use App\Form\ConstatType;
 use App\Entity\User;
 use App\Entity\Vehicule;
 use App\Repository\ConstatRepository;
+use App\Service\YousignService;
+use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,8 +45,7 @@ class ConstatController extends AbstractController
 
             $file = $form->get('photoaccid')->getData();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move('C:\wamp64\www\PiDEV\public\upload',$fileName);
-        
+            $file->move('C:/xampp/htdocs/PiDEV/public/upload',$fileName);
             $constat->setPhotoaccid("/upload/".$fileName);
 
             $flashBag->add('success', 'Your action was successful!');
@@ -80,13 +81,18 @@ class ConstatController extends AbstractController
             $constat -> setIdVehicule($vehicule);        
           
             $file = $form->get('photoaccid')->getData();
+
             if($file){
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move('C:\wamp64\www\PiDEV\public\upload',$fileName);
+            $file->move('C:/xampp/htdocs/PiDEV/public/upload',$fileName);
             $constat->setPhotoaccid("/upload/".$fileName);
-            $flashBag->add('success', 'Your action was successful!');            
-
+        
             }
+            else
+            {
+                $constat->setPhotoaccid($constat->getPhotoaccid());
+            }
+            $flashBag->add('success', 'Your action was successful!');            
 
             $constatRepository->save($constat, true);
 
@@ -110,9 +116,69 @@ class ConstatController extends AbstractController
 
         return $this->redirectToRoute('app_constat_index', [], Response::HTTP_SEE_OTHER);
     } 
+     
+    //partie PDF
+    #[Route('/{id}/pdf', name: 'app_constat_pdf' , methods: ['GET'])]
+    public function pdf(Request $request, Constat $constat, ConstatRepository $constatRepository)
+    {
+        $dompdf = new Dompdf();
+        $html = $this->renderView('constat/pdf.html.twig', [
+            'constat' => $constat,
+        ]);
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        $output = $dompdf->output();
+        $filename = 'Constat_'.$constat->getId().'.pdf';
+        $file = $this->getParameter('kernel.project_dir').'/public/pdf/'.$filename;
+
+        $constat->setPdfSansSignature($filename);
+        $constatRepository->save($constat, true);
+
+        file_put_contents($file, $output);
+
+        return $this->redirectToRoute('app_constat_show', ['id' => $constat->getId()],Response::HTTP_SEE_OTHER);
+
+        #dd($html);    
+        #return $this->redirectToRoute('app_constat_index', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/{id}/signature', name: 'app_constat_signature', methods:['GET'])]
+    
+    public function signature(Constat $constat, ConstatRepository $constatRepository, YousignService $yousignService): Response
+    {
+        //1 création de la demande de signature
+        $yousignSignatureRequest = $yousignService->signatureRequest();
+        $constat->setSignatureId($yousignSignatureRequest['id']);
+        $constatRepository->save($constat, true);
+
+        //2 upload du document
+        $uploadDocument = $yousignService->addDocumentToSignatureRequest($constat->getSignatureId(), $constat->getPdfSansSignature() );
+        $constat->setDocumentId($uploadDocument['id']);
+        $constatRepository->save($constat, true);
+
+        //3 ajout des signataires
+        $signerId = $yousignService->addSignerToSignatureRequest(
+            $constat->getSignatureId(),
+            $constat->getDocumentId(),
+            $constat->getMail(),
+            $constat->getPrenomclientE(),
+            $constat->getNomclientE()
+        );
+
+        $constat->setSignerId($signerId['id']);
+        $constatRepository->save($constat,true);
+        
+
+        //4 Envoi de la demande de signature
+        $yousignService->activateSignatureRequest($constat->getSignatureId());
+        
+        return $this->redirectToRoute('app_constat_show', ['id' => $constat->getId()], Response::HTTP_SEE_OTHER);
+    }
 
 
-
+    // partie JSON
     #[Route('/AllConstat', name: 'list')]
     public function index_Json(ConstatRepository $constatRepository,SerializerInterface $serializer): Response
     {

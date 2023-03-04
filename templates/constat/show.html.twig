@@ -67,10 +67,10 @@
 			{% endblock %}
 {% block body %}
 <div class="container">
-        <h2 class="text-center mt-5 mb-3">Liste Constat</h2>
+        <h2 style="color: #ff8521;" class="text-center mt-5 mb-3">Liste Constat</h2>
         <div class="card">
             <div class="card-header">
-                <a class="btn btn-outline-info float-right" href="{{ path('app_constat_index') }}"> Retour </a>
+                <a style="background-color: #ff8521; color: white;"  class="btn btn-outline-info float-right" href="{{ path('app_constat_index') }}"> Retour </a><br><br>
     <table class="table table-bordered">
         <tbody>
             <tr>
@@ -121,9 +121,37 @@
                 <th>Numcontrat_e</th>
                 <td>{{ constat.numcontratE }}</td>
             </tr>
+              <tr>
+                <th>Email</th>
+                <td>{{ constat.mail }}</td>
+            </tr>
+              <tr>
+                <th>Date_Création</th>
+                <td>{{ constat.Date_creation|date('Y-m-d H:i:s') }}</td>
+            </tr>
+              <tr>
+                <th>Signature Id</th>
+                <td>{{ constat.signatureId }}</td>
+            </tr>
+              <tr>
+                <th>Document Id</th>
+                <td>{{ constat.documentId }}</td>
+            </tr>
+              <tr>
+                <th>Signer Id</th>
+                <td>{{ constat.signerId }}</td>
+            </tr>
+             <tr>
+                <th> Pdf Sans Signature</th>
+                <td>{{ constat.PdfSansSignature }}</td>
+            </tr>     
         </tbody>
     </table>
     </div>
+        <a  style="background-color: #ff8521; color: white;" class="btn btn-outline-info float-left" href="{{ path('app_constat_signature', {'id': constat.id}) }}">Envoyer à la signature</a>
+        </div>
+        </div>
+        </div>
         </div>
 {% endblock %}
 

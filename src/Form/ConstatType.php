@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\File;
 use Gregwar\CaptchaBundle\Type\CaptchaType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class ConstatType extends AbstractType
 {
@@ -81,6 +82,12 @@ class ConstatType extends AbstractType
             ])               
 
             ->add('captcha', CaptchaType::class)
+            ->add('mail' , EmailType::class)
+            ->add('Date_creation')
+            ->add('signatureId', TextType::class)
+            ->add('documentId', TextType::class)
+            ->add('signerId' , TextType::class)
+            ->add('PdfSansSignature', TextType::class)
         ;
             
         

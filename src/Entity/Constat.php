@@ -8,6 +8,7 @@ use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+
 #[ORM\Entity(repositoryClass: ConstatRepository::class)]
 class Constat
 {
@@ -37,7 +38,7 @@ class Constat
         minMessage : "The lastname must be at least {{ limit }} characters long",
         maxMessage : "The lastname cannot be longer than {{ limit }} characters"   )]
 
-        private ?string $prenomclient_e = null;
+    private ?string $prenomclient_e = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups("constats")]
@@ -141,6 +142,24 @@ class Constat
     #[ORM\ManyToOne(inversedBy: 'constats')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Vehicule $id_vehicule = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $mail = null;
+
+    #[ORM\Column(type:"datetime", nullable: true)]
+    public ?\DateTime $Date_creation = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $signatureId = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $documentId = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $signerId = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $PdfSansSignature = null;
 
     public function getId(): ?int
     {
@@ -303,8 +322,81 @@ class Constat
         return $this;
     }
     
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTime
+    {
+        return $this->Date_creation;
+    }
+
+    public function setDateCreation(\DateTime $Date_creation): self
+    {
+        $this->Date_creation = $Date_creation;
+
+        return $this;
+    }
+
+    public function getSignatureId(): ?string
+    {
+        return $this->signatureId;
+    }
+
+    public function setSignatureId(?string $signatureId): self
+    {
+        $this->signatureId = $signatureId;
+
+        return $this;
+    }
+
+    public function getDocumentId(): ?string
+    {
+        return $this->documentId;
+    }
+
+    public function setDocumentId(?string $documentId): self
+    {
+        $this->documentId = $documentId;
+
+        return $this;
+    }
+
+    public function getSignerId(): ?string
+    {
+        return $this->signerId;
+    }
+
+    public function setSignerId(?string $signerId): self
+    {
+        $this->signerId = $signerId;
+
+        return $this;
+    }
+
+    public function getPdfSansSignature(): ?string
+    {
+        return $this->PdfSansSignature;
+    }
+
+    public function setPdfSansSignature(?string $PdfSansSignature): self
+    {
+        $this->PdfSansSignature = $PdfSansSignature;
+
+        return $this;
+    }
+
     public function __toString()
     {       
       return (string) $this->getId();
     }
+
 }

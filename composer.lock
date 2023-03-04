@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4249e2532bb409dc51b6c88b09bb1de9",
+    "content-hash": "bacef8b07e7d6f19d7e555a0eda44bad",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -9801,6 +9801,46 @@
                 "source": "https://github.com/geocoder-php/php-common/tree/4.6.0"
             },
             "time": "2022-07-30T11:09:43+00:00"
+        },
+        {
+            "name": "yousign/yousign-api-client",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Yousign/yousign-api-client-php.git",
+                "reference": "8b03c76c68ba9002bc169523fa39c37a7bb4b57c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Yousign/yousign-api-client-php/zipball/8b03c76c68ba9002bc169523fa39c37a7bb4b57c",
+                "reference": "8b03c76c68ba9002bc169523fa39c37a7bb4b57c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Yousign": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Kevin Auvinet",
+                    "email": "kevin@yousign.fr"
+                }
+            ],
+            "description": "This is simple client for the soap api v1 of Yousign",
+            "support": {
+                "issues": "https://github.com/Yousign/yousign-api-client-php/issues",
+                "source": "https://github.com/Yousign/yousign-api-client-php/tree/2.0.4"
+            },
+            "time": "2017-05-30T14:45:00+00:00"
         }
     ],
     "packages-dev": [
