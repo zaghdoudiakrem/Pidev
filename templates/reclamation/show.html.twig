@@ -4,14 +4,14 @@
 {% block body %}
 
     <div class="container">
-        <h2 class="text-center mt-5 mb-3">Reclamation</h2>
+        <h2 class="text-center mt-5 mb-3" style="color: #FFA500"> Détail de Reclamation</h2>
         <div class="card">
             <div class="card-header">
-                <a class="btn btn-outline-info float-right" href="{{ path('app_reclamation_index') }}"> 
+                <a class="btn btn-outline-secondary" href="{{ path('app_reclamation_index') }}"> 
                     Retour à la liste
                 </a>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="color: #008000">
                 <b class="text-muted">Id:</b>
                 <p>{{ reclamation.id }}</p>
                 <b class="text-muted">Description:</b>
@@ -48,11 +48,12 @@
         });
     </script>
 
-
+ <br>
+ <div class="d-grid gap-2 col-6 mx-auto">
      <a class="btn btn-outline-primary" href="{{ path('app_reponse_new') }}"> 
                  Répondre
      </a>
-
+ </div>
      </div>
     </div>
 

@@ -64,6 +64,8 @@ class ReclamationController extends AbstractController
     {
      $repository = $this->getDoctrine()->getRepository(Reclamation::class);
      $requestString=$request->get('searchValue');
+     // Appeler la fonction tri "sortByObjet"
+     $reclamation = $sr->sortByObjet();
      $reclamation = $sr->searchReclamation($requestString);
      $jsonContent = $Normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
      $retour=json_encode($jsonContent);
