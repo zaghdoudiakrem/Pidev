@@ -53,6 +53,12 @@ class Reclamation
     #[Groups("reclamation")]
     private ?User $id_client = null;
 
+    #[ORM\OneToMany(mappedBy: 'reclamation', targetEntity: Evaluation::class)]
+    private Collection $evaluations;
+
+    #[ORM\Column(type:"integer")]
+    private $note;
+
   
 
 
@@ -62,10 +68,26 @@ class Reclamation
     public function __construct()
     {
         $this->id_reponse = new ArrayCollection();
+        $this->evaluations = new ArrayCollection();
+        $this->note = 0; // initialiser la note à 0 par défaut
+
     }
 
    
- 
+  
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(int $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+    
 
     public function getId(): ?int
     {
@@ -141,6 +163,37 @@ class Reclamation
     public function __toString() {
         return (string) $this->getId();
     }
+
+    /**
+     * @return Collection<int, Evaluation>
+     */
+    public function getEvaluations(): Collection
+    {
+        return $this->evaluations;
+    }
+
+    public function addEvaluation(Evaluation $evaluation): self
+    {
+        if (!$this->evaluations->contains($evaluation)) {
+            $this->evaluations->add($evaluation);
+            $evaluation->setReclamation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvaluation(Evaluation $evaluation): self
+    {
+        if ($this->evaluations->removeElement($evaluation)) {
+            // set the owning side to null (unless already changed)
+            if ($evaluation->getReclamation() === $this) {
+                $evaluation->setReclamation(null);
+            }
+        }
+
+        return $this;
+    }
+   
 
 
 }

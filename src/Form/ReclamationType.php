@@ -2,12 +2,15 @@
 
 namespace App\Form;
 use App\Entity\User;
+use App\Entity\Evaluation;
 use App\Entity\Reclamation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
 
@@ -22,7 +25,20 @@ class ReclamationType extends AbstractType
             EntityType::class,array(
             'class'=>User::class,
                 'choice_label'=>'id'
-            ))  
+            )) 
+            ->add('note', ChoiceType::class, [
+                'choices' => [
+                    '1 étoile' => 1,
+                    '2 étoiles' => 2,
+                    '3 étoiles' => 3,
+                    '4 étoiles' => 4,
+                    '5 étoiles' => 5,
+                ],
+                'expanded' => true,
+                'multiple' => false,
+                'required' => false,
+                'label' => 'Notez le service'
+            ]) 
         ;
     }
 

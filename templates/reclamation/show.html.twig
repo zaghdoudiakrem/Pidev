@@ -18,11 +18,42 @@
                 <p>{{ reclamation.description }}</p>
                 <b class="text-muted">Objet:</b>
                 <p>{{ reclamation.objet }}</p>
-                <a class="btn btn-outline-primary" href="{{ path('app_reponse_new') }}"> 
-                 Répondre
-                </a>
+                 
+                   <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Note : {{ reclamation.note }}</li>
+                    
+                   </ul>
 
-        </div>
+
+               
+
+  <div id="rating">
+        <input type="hidden" name="score" value="{{ reclamation.getNote() }}">
+    </div>
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/jquery.raty.min.js"></script>
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.raty.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#rating').raty({
+                readOnly: true,
+                score: $('#rating input[name="score"]').val(),
+                path: "{{ asset('assets2/img') }}",
+                starOn: 'star-on.png',
+                starOff: 'star-off.png',
+                starHalf: 'star-half.png'
+            });
+        });
+    </script>
+
+
+     <a class="btn btn-outline-primary" href="{{ path('app_reponse_new') }}"> 
+                 Répondre
+     </a>
+
+     </div>
     </div>
 
 {% endblock %}

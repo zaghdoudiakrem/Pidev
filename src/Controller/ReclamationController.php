@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Reclamation;
 use App\Entity\User;
+use App\Entity\Evaluation;
+use App\Entity\Reclamation;
+use App\Form\EvaluationType;
 use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
 use App\Form\SearchReclamationType;
@@ -18,6 +20,8 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Notifier\NotifierInterface;
+use Symfony\Component\Notifier\Recipient\Recipient;
 
 
 #[Route('/reclamation')]
@@ -141,17 +145,35 @@ class ReclamationController extends AbstractController
             $reclamationRepository->save($reclamation, true); 
             return $this->redirectToRoute('app_reclamation_index1', [], Response::HTTP_SEE_OTHER);
         }
+       
         return $this->renderForm('reclamation/new.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form,
         ]);
     }
 
+
     #[Route('/{id}', name: 'app_reclamation_show', methods: ['GET'])]
-    public function show(Reclamation $reclamation): Response
+    public function show(Request $request,Reclamation $reclamation): Response
     {
+
+        $evaluation = new Evaluation();
+        $evaluation->setReclamation($reclamation);
+
+        $form = $this->createForm(EvaluationType::class, $evaluation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($evaluation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_reclamation_show', ['id' => $reclamation->getId()]);
+        }
+
         return $this->render('reclamation/show.html.twig', [
-            'reclamation' => $reclamation
+            'reclamation' => $reclamation,
+            'form' => $form->createView(),
         ]);
     }
 
