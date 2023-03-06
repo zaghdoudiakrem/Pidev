@@ -1,0 +1,60 @@
+{% extends 'base2.html.twig' %}
+
+{% block titre %} {{parent()}}Utlisateurs{% endblock %}
+
+{% block contenu %}
+<main >
+<section class="section">
+      <div class="row">
+       
+    <h1 style="color: #012970;font-family: "Nunito", sans-serif; margin-top:40px;"> Liste des  Utilisateurs </h1>
+       
+    <table class="table table-striped">
+         <thead>
+            <tr>
+                <th scope="row">Id</th>
+                <th scope="row">Email</th>
+                <th scope="row">Roles</th>
+                <th scope="row">Nom</th>
+                <th scope="row">Prenom</th>
+                <th scope="row">Adresse</th>
+                <th scope="row">Cin</th>
+                <th scope="row">Numéro Telephone </th>
+                <th width="240px">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.cin }}</td>
+                <td>{{ user.numTel }}</td>
+                <td>
+                    
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}"><button  class="btn btn-outline-success"> Modifier</button> </a>
+                    <a href="{{ path('app_user_delete', {'id': user.id}) }}"> <button class="btn btn-outline-danger">Supprimer </button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">Pas d'utilisateurs </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_new') }}"> <button  class="btn btn-outline-info float-right " width="40%">Ajouter un utilisateur </button></a>
+    </div>
+    
+    <span><a href="{{ path('app_back')}}" >Dashboard</a></span>
+    </div>
+    </div>
+    </div>
+    </section>
+    </main>  
+{% endblock %}
