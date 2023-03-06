@@ -9,6 +9,7 @@ use App\Form\EvaluationType;
 use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
 use App\Form\SearchReclamationType;
+use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +37,7 @@ class ReclamationController extends AbstractController
         $pagination = $paginator->paginate(
             $reclamations, /* query NOT result */
             $request->query->getInt('page', 1),
-            2
+            3
         );
         $reclamationsByObjet= $repository->sortByObjet();
 
@@ -97,6 +98,7 @@ class ReclamationController extends AbstractController
         $reclamation -> setIdClient($user);
         $reclamation->setDescription($request->get('description'));
         $reclamation->setObjet($request->get('objet'));
+        $reclamation->setNote($request->get('note'));
         $em->persist($reclamation);
         $em->flush();
         $jsonContent=$normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
@@ -109,6 +111,7 @@ class ReclamationController extends AbstractController
         $reclamation=$em->getRepository(Reclamation::class)->find($id);
         $reclamation->setDescription($request->get('description'));
         $reclamation->setObjet($request->get('objet'));
+        $reclamation->setNote($request->get('note'));
         $em->flush();
         $jsonContent=$normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
         return new Response('Reclamation updated succefully'.json_encode($jsonContent));
@@ -118,9 +121,13 @@ class ReclamationController extends AbstractController
     
     #[Route('/deleteReclamationJSON/{id}', name:'deleteReclamationJSON')]
     public function deleteReclamationJSON(Request $request,$id,NormalizerInterface $normalizer){
+        $id=$request->get("id");
         $em=$this->getDoctrine()->getManager();
         $reclamation=$em->getRepository(Reclamation::class)->find($id);
-        //$em->flush;
+        //if($reclamation!=null){
+            $em->remove($reclamation);
+            $em->flush();
+        
         $jsonContent=$normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
         return new Response('Reclamation delete succefuly'.json_encode($jsonContent));
     }
@@ -146,6 +153,9 @@ class ReclamationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $reclamationRepository->save($reclamation, true); 
             return $this->redirectToRoute('app_reclamation_index1', [], Response::HTTP_SEE_OTHER);
+        }
+        if ($form->isSubmitted() && !$form->isValid()) {
+            // gérer les erreurs de validation ici
         }
        
         return $this->renderForm('reclamation/new.html.twig', [
@@ -207,6 +217,33 @@ class ReclamationController extends AbstractController
         }
 
         return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/pdf', name: 'app_reclamation_pdf')]
+    public function generatePdfAction($id)
+    {
+    $reclamation = $this->getDoctrine()->getRepository(Reclamation::class)->find($id);
+    $user = $this->getDoctrine()->getRepository('App\Entity\User')->findOneBy(['id' => $reclamation->getIdClient()]);
+    
+    $reclamation->setClientNom($user ? $user->getNom() : null);
+    $reclamation->setClientPrenom($user ? $user->getPrenom() : null);
+    
+    $html = $this->renderView('reclamation/pdf.html.twig', [
+        'reclamation' => $reclamation,
+    ]);
+    
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+    
+    $pdf = $dompdf->output();
+    
+    return new Response($pdf, 200, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'attachment; filename="reclamation_'.$reclamation->getId().'.pdf"',
+    ]);
+
     }
 
 

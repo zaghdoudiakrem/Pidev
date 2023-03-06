@@ -57,6 +57,7 @@ class Reclamation
     private Collection $evaluations;
 
     #[ORM\Column(type:"integer")]
+    #[Groups("reclamation")]
     private $note;
 
   
@@ -156,6 +157,21 @@ class Reclamation
     public function setIdClient(?User $id_client): self
     {
         $this->id_client = $id_client;
+
+        return $this;
+    }
+
+    public ?String $nom_client="";
+    public function setClientNom(String $nom_client): self
+    {
+        $this->nom_client = $nom_client;
+
+        return $this;
+    }
+    public ?String $prenom_client="";
+    public function setClientPrenom(String $prenom_client): self
+    {
+        $this->prenom_client = $prenom_client;
 
         return $this;
     }

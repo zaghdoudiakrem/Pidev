@@ -5,10 +5,11 @@
 
 {% block body %}
     <div class="container">
-        <h2 class="text-center mt-5 mb-3">Reponse</h2>
+        <h2 class="text-center mt-5 mb-3" style="color: #FFA500">Liste des Réponses</h2>
         <div class="card">
             <div class="card-header">
-                <a class="btn btn-outline-primary" href="{{ path('app_reponse_new') }}"> 
+                <a class="btn btn-outline-secondary" href="{{ path('app_reponse_new') }}"> 
+                <i class="bi bi-align-middle"></i>
                     Créer une nouvelle réponse
                 </a>
             </div>
@@ -35,16 +36,18 @@
                                 <a
                                     class="btn btn-outline-info"
                                     href="{{ path('app_reponse_show', {'id': reponse.id}) }}">
+                                    <i class="bi bi-eye-fill"></i>
                                     Lister
                                 </a>
                                 <a
                                     class="btn btn-outline-success"
                                     href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">
+                                    <i class="bi bi-pencil-square"></i>
                                     Modifier
                                 </a>
  
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reponse.id) }}">
-                                <button class="btn btn-outline-danger">Supprimer</button>
+                                <button class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i>Supprimer</button>
                             </form>
                         </td>
                     </tr>

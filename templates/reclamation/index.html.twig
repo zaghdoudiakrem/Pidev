@@ -3,14 +3,17 @@
 {% block title %}Reclamation{% endblock %}
 
 {% block body %}
-        <h2 class="text-center mt-5 mb-3" style="color: #FFA500">Liste de Reclamation</h2>
+        <h2 class="text-center mt-5 mb-3" style="color: #FFA500">Liste des Réclamations</h2>
         <div class="col-lg-20">
         <div class="card">
         <br>
+        <div class="card-header">
             <div class="d-grid gap-2 d-md-block">
                 <a class="btn btn-outline-secondary" href="{{ path('app_reclamation_new') }}"> 
+                <i class="bi bi-align-middle"></i>
                     Créer une nouvelle réclamation
                 </a>
+            </div>
             </div>
             <br>
             <br>
@@ -41,18 +44,20 @@
                                 <a
                                     class="btn btn-outline-info"
                                     href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">
+                                    <i class="bi bi-eye-fill"></i>
                                     Lister
                                 </a>
 
                                 <a
                                     class="btn btn-outline-success"
                                     href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">
+                                    <i class="bi bi-pencil-square"></i>
                                     Modifier
                                 </a>
  
                                 
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reclamation.id) }}">
-                                <button class="btn btn-outline-danger">Supprimer</button> 
+                                <button class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i>Supprimer</button>
                               
                                
                             </form>  
@@ -70,7 +75,9 @@
             </div>
         </div>
     </div>
+         <div class="pagination justify-content-center">
         {{ knp_pagination_render(reclamations) }}
+        </div>
 {% endblock %}
 {% block script %}
 <h1>Hi</h1>

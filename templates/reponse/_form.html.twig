@@ -1,10 +1,15 @@
 
 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
-      <div class="form-group">
+      <div class="form-label" style="color: #008000">
         {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
     </div>
-     <div class="form-group">
+     <div class="form-label" style="color: #008000">
         {{ form_row(form.id_reclamation, {'attr': {'class': 'form-control'}}) }}
     </div>
-    <button class="btn {{ button_color|default('btn-outline-primary') }}  mt-3">{{ button_label|default('Envoyer') }}</button>
+    <div class="vstack gap-2 col-md-5 mx-auto">
+    <button class="btn {{ button_color|default('btn btn-secondary') }}  mt-3">{{ button_label|default('Envoyer') }}</button>
+     <button type="reset" class="btn btn-outline-secondary">Annuler</button>
+    </div>
+    <br>
+    <br>
 {{ form_end(form) }}

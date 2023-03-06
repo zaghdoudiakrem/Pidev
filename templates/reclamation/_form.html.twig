@@ -5,13 +5,8 @@
     </div>
 
     
-    <div class="form-label"  style="color: #008000">  
-     {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
-      {% if form_errors(form.description) %}
-       <div class="alert alert-danger">
-             {{ form_errors(form.description) }}
-       </div>
-      {% endif %}
+    <div class="text-break"  style="color: #008000">  
+     {{ form_row(form.description, {'attr': {'class': 'form-control'}})  }}
     </div>
 
    <div class="form-label" style="color: #008000">
@@ -26,7 +21,7 @@
 
  <div class="vstack gap-2 col-md-5 mx-auto">
      <button class="btn {{ button_color|default('btn btn-secondary') }}  mt-3">{{ button_label|default('Envoyer') }}</button>
-     <button type="button" class="btn btn-outline-secondary">Cancel</button>
+     <button type="reset" class="btn btn-outline-secondary">Annuler</button>
 </div>
 {{ form_end(form) }}
 
