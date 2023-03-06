@@ -72,7 +72,7 @@
 <div class="container">
         <h2  style="color: #ff8521;" class="text-center mt-5 mb-3">Constat</h2>
             <div class="card" style="text-align: center;">
-                <a  style="background-color: #ff8521; color: white;" class="btn btn-outline-primary" href="{{ path('app_constat_new') }}"> Ajouter un constat </a>
+                <a  style="background-color: #ff8521; color: white; border-color: #ff8521;" class="btn btn-outline-primary" href="{{ path('app_constat_new') }}"> <i class="bi bi-plus-square"></i>      Ajouter un constat </a>
 				</div>
     <table class="table table-bordered">
         <thead>
@@ -94,10 +94,10 @@
                 <td>{{ constat.assuranceclientE }}</td>
                 <td>{{ constat.numcontratE }}</td>
                 <td>
-                 <a class="btn btn-outline-info" href="{{ path('app_constat_show', {'id': constat.id}) }}">Lister</a>
-                 <td><a class="btn btn-outline-success" href="{{ path('app_constat_edit', {'id': constat.id}) }}">Modifier</a></td>
+                 <a class="btn btn-outline-info  d-inline-flex align-items-center" href="{{ path('app_constat_show', {'id': constat.id}) }}"><i class="bi bi-eye me-2"></i> Lister </a>
+                 <td><a class="btn btn-outline-success  d-inline-flex align-items-center" href="{{ path('app_constat_edit', {'id': constat.id}) }}"><i class="bi bi-pencil-fill me-2"></i> Modifier</a></td>
 				 <td>{{ include('constat/_delete_form.html.twig') }}</td>
-				 <td><a   class="btn btn-outline-secondary" href="{{ path('app_constat_pdf', {'id': constat.id}) }}">PDF</a></td>
+				 <td> <a   class="btn btn-outline-secondary  d-inline-flex align-items-center " href="{{ path('app_constat_pdf', {'id': constat.id}) }}"><i class="bi bi-filetype-pdf me-2"></i>  PDF  </a></td>
                 </td>
             </tr>
         {% else %}

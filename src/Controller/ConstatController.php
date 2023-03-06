@@ -16,6 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use DateTime;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
+
+
 
 
 
@@ -177,6 +183,74 @@ class ConstatController extends AbstractController
         return $this->redirectToRoute('app_constat_show', ['id' => $constat->getId()], Response::HTTP_SEE_OTHER);
     }
 
+     //bundle Excel  
+    #[Route('/{id}/excel', name: 'app_constat_excel', methods:['GET'])]
+    public function exportExcelAction()
+    {
+    // get the data from your constat
+    $constatData = $this->getDoctrine()->getRepository(Constat::class)->findAll();
+
+    // sort the data by name
+    usort($constatData, function($a, $b) {
+        //return strcmp($a->getDateCreation(), $b->getDateCreation());
+        return strcmp($a->getDateCreation()->format('Y-m-d H:i:s'), $b->getDateCreation()->format('Y-m-d H:i:s'));
+    });
+
+    // create new spreadsheet
+    $spreadsheet = new Spreadsheet();
+
+    // set the worksheet title
+    $spreadsheet->getActiveSheet()->setTitle('Constat');
+
+    // add data to the worksheet
+    $spreadsheet->getActiveSheet()->setCellValue('A1', 'Nom : ');
+    $spreadsheet->getActiveSheet()->setCellValue('B1', 'Prénom :');
+    $spreadsheet->getActiveSheet()->setCellValue('C1', 'Type Vehicule : ');
+    $spreadsheet->getActiveSheet()->setCellValue('D1', 'Marque Vehicule : ');
+    $spreadsheet->getActiveSheet()->setCellValue('E1', 'Assurance Client : ');
+    $spreadsheet->getActiveSheet()->setCellValue('F1', 'Adresse Client : ');
+    $spreadsheet->getActiveSheet()->setCellValue('G1', 'Emplacement Accident : ');
+    $spreadsheet->getActiveSheet()->setCellValue('I1', 'Description Degat : ');
+    $spreadsheet->getActiveSheet()->setCellValue('J1', 'Observations : ');
+    $spreadsheet->getActiveSheet()->setCellValue('K1', 'Numéro Contrat : ');
+    $spreadsheet->getActiveSheet()->setCellValue('L1', 'Email : ');
+    $spreadsheet->getActiveSheet()->setCellValue('M1', 'Date Création : ');
+    $spreadsheet->getActiveSheet()->setCellValue('N1', 'Id Expert : ');
+    $spreadsheet->getActiveSheet()->setCellValue('O1', 'ID Vehicule : ');
+
+    $row = 2;
+    foreach($constatData as $constat) {
+        $spreadsheet->getActiveSheet()->setCellValue('A'.$row, $constat->getNomClientE());
+        $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $constat->getPrenomClientE());
+        $spreadsheet->getActiveSheet()->setCellValue('C'.$row, $constat->getTypevehiculeE());
+        $spreadsheet->getActiveSheet()->setCellValue('D'.$row, $constat->getMarquevehiculeE());
+        $spreadsheet->getActiveSheet()->setCellValue('E'.$row, $constat->getAssuranceclientE());
+        $spreadsheet->getActiveSheet()->setCellValue('F'.$row, $constat->getAdresseclientE());
+        $spreadsheet->getActiveSheet()->setCellValue('G'.$row, $constat->getEmplacementaccid());
+        $spreadsheet->getActiveSheet()->setCellValue('I'.$row, $constat->getDescriptiondegat());
+        $spreadsheet->getActiveSheet()->setCellValue('J'.$row, $constat->getObservations());
+        $spreadsheet->getActiveSheet()->setCellValue('K'.$row, $constat->getNumcontratE());
+        $spreadsheet->getActiveSheet()->setCellValue('L'.$row, $constat->getMail());
+        $spreadsheet->getActiveSheet()->setCellValue('M'.$row, $constat->getDatecreation());
+        $spreadsheet->getActiveSheet()->setCellValue('N'.$row, $constat->getIdExpert());
+        $spreadsheet->getActiveSheet()->setCellValue('O'.$row, $constat->getIdVehicule());
+
+
+
+        $row++;
+    }
+
+    // save the spreadsheet as a file
+    $writer = new Xlsx($spreadsheet);
+    $filename = 'constat.xlsx';
+    $writer->save($filename);
+
+    // return the file as a response
+    return $this->file($filename);
+}
+    
+   
+
 
     // partie JSON
     #[Route('/AllConstat', name: 'list')]
@@ -210,7 +284,11 @@ class ConstatController extends AbstractController
         $constat-> setDescriptiondegat($request->get('descriptiondegat'));
         $constat-> setObservations($request->get('observations'));
         $constat-> setNumcontratE($request->get('numcontrat_e'));
-
+        $constat->setMail($request->get('mail'));
+        if ($request->get('Date_creation')) {
+            $constat->setDateCreation(new DateTime($request->get('Date_creation')));
+        }        
+    
         $constat -> setIdExpert($user);
         $constat -> setIdVehicule($vehicule);
         $em->persist($constat);
@@ -249,6 +327,11 @@ class ConstatController extends AbstractController
         $constat-> setNumcontratE($request->get('numcontrat_e'));
         $constat-> setIdExpert($request->get('id_expert'));
         $constat->setIdVehicule($request->get('id_vehicule'));
+        $constat->setMail($request->get('mail'));
+        if ($request->get('Date_creation')) {
+            $constat->setDateCreation(new DateTime($request->get('Date_creation')));
+        }        
+    
 
         $constat -> setIdExpert($user);
         $constat -> setIdVehicule($vehicule);        

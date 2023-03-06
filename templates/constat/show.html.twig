@@ -70,7 +70,7 @@
         <h2 style="color: #ff8521;" class="text-center mt-5 mb-3">Liste Constat</h2>
         <div class="card">
             <div class="card-header">
-                <a style="background-color: #ff8521; color: white;"  class="btn btn-outline-info float-right" href="{{ path('app_constat_index') }}"> Retour </a><br><br>
+                <a style="background-color: #ff8521; color: white; border-color: #ff8521;" class="btn btn-outline-primary" href="{{ path('app_constat_index') }}"><i class="bi bi-backspace me-2"></i>  Retour </a><br><br>
     <table class="table table-bordered">
         <tbody>
             <tr>
@@ -144,12 +144,13 @@
              <tr>
                 <th> Pdf Sans Signature</th>
                 <td>{{ constat.PdfSansSignature }}</td>
-            </tr>     
+            </tr>    
         </tbody>
     </table>
+    <div>
+            <a  style="background-color: #ff8521; color: white;  border-color: #ff8521; margin-right: 70px;" class="btn btn-outline-info float-left" href="{{ path('app_constat_signature', {'id': constat.id}) }}"> <i class="bi bi-send-check-fill me-2"></i> Envoyer à la signature</a>
+            <a  class="btn btn-success d-inline-flex align-items-center justify-content-center" style="width: 210px; text-align: center; margin-left: 150px;" href="{{ path('app_constat_excel', {'id': constat.id}) }}"><i class="bi bi-file-earmark-spreadsheet-fill me-2"></i>        Excel  </a>
     </div>
-        <a  style="background-color: #ff8521; color: white;" class="btn btn-outline-info float-left" href="{{ path('app_constat_signature', {'id': constat.id}) }}">Envoyer à la signature</a>
-        </div>
         </div>
         </div>
         </div>

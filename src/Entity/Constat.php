@@ -143,10 +143,12 @@ class Constat
     #[ORM\JoinColumn(nullable: false)]
     private ?Vehicule $id_vehicule = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("constats")]
     private ?string $mail = null;
 
     #[ORM\Column(type:"datetime", nullable: true)]
+    #[Groups("constats")]
     public ?\DateTime $Date_creation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
