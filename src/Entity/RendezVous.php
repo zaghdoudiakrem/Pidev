@@ -36,6 +36,7 @@ class RendezVous
     private ?User $id_client = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("rendezvous")]
     private ?int $id_expert = null;
 
     #[ORM\Column(nullable: true)]
@@ -120,5 +121,9 @@ class RendezVous
         $this->type = $type;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return (string) $this->date;
     }
 }

@@ -6,6 +6,7 @@ use App\Repository\RapportRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: RapportRepository::class)]
 class Rapport
@@ -17,17 +18,19 @@ class Rapport
 
     #[ORM\Column(type: Types::TEXT)]
 
-
+    #[Groups("post:read")]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(min: 4,minMessage: "veuillez avoir au minimum 4 caractere" )]
     #[Assert\NotBlank(message: 'Ce champ ne doit pas être vide.')]
+    #[Groups("post:read")]
     private ?string $rapportpreliminaire = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(min: 4,minMessage: "veuillez avoir au minimum 4 caractere" )]
     #[Assert\NotBlank(message: 'Ce champ ne doit pas être vide.')]
+    #[Groups("post:read")]
     private ?string $rapportexpertise = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
@@ -39,6 +42,7 @@ class Rapport
     private ?User $id_expert = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("post:read")]
     private ?string $image = null;
 
     #[ORM\OneToOne(mappedBy: 'type', cascade: ['persist', 'remove'])]

@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Controller\FileException;
+use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 
 class RapportController extends AbstractController
@@ -119,4 +121,28 @@ class RapportController extends AbstractController
         return $this->redirectToRoute('app_afficherrapport');
     }
     
+
+    #[Route("/allRapport", name:"list_rapportJSON")]
+    public function AllRapportJSON(NormalizerInterface $Normalizer)
+    {
+        $repository= $this->getDoctrine()->getRepository(Rapport::class);
+        $rapport = $repository->findAll();
+        $jsonContent = $Normalizer->normalize($rapport,'json',['groups'=>'post:read']);
+        return new Response(json_encode($jsonContent));
+    }
+    #[Route("/addRapportJSON", name:"add_rapportJSON")]
+    public function AddRapportJSON(Request $request,NormalizerInterface $Normalizer)
+    {
+        $em= $this->getDoctrine()->getManager();
+        $rapport = new Rapport();
+        $rapport->setDescription($request->get('description'));
+        $rapport->setRapportPreliminaire($request->get('rapportpreliminaire'));
+        $rapport-> setRapportExpertise($request->get('rapportexpertise'));
+        $rapport->setImage($request->get('image'));
+        $em->persist($rapport);
+        $em->flush();
+        $jsonContent = $Normalizer->normalize($rapport,'json',['groups'=>'post:read']);
+         return new Response(json_encode($jsonContent));
+    }
+
 }

@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Twilio\Rest\Client;
+
 
 class RendezVousController extends AbstractController
 {
@@ -60,7 +62,11 @@ class RendezVousController extends AbstractController
     
             $entityManager->persist($rendezvous);
             $entityManager->flush();
-    
+            $accountSid='ACeb4f42e01aed761f46989f2f9ddbdc08';
+            $authToken='37948b8c86ecfbf02717a21840542bd7';
+            $twilio= new Client($accountSid,$authToken);
+            $message = $twilio->messages->create('+21654207503',array( 'from'=>'+15674302677','body'=>'Votre rendez-vous aura lieu'.$rendezvous->getLieu().'à :'.$rendezvous->getDate()->format('Y-m-d H:i:s'),));
+             
             if ($new) {
                 $message = "a eté ajouté avec succes";
             } else {
@@ -117,31 +123,51 @@ class RendezVousController extends AbstractController
         $json =$serializer->serialize($rendezvous, 'json', ['groups'=>"rendezvous"]);
         return new Response($json);
     }
-    #[Route("addRDVJSON/new", name: "addRDVJSON")]
-    public function addRendezVousJSON(Request $req,NormalizerInterface $Normalizer)
-    {
 
-        $em = $this->getDoctrine()->getManager();
-        $rendezvous = new rendezVous();
-        $rendezvous->setDate($req->get('date'));
-        $rendezvous->setLieu($req->get('lieu'));
+    #[Route("/addRendezVousJSON", name:"add_rendezvousJSON")]
+    public function AddRdvJSON(Request $request,NormalizerInterface $Normalizer)
+    {
+        $em= $this->getDoctrine()->getManager();
+        $rendezvous = new RendezVous();
+        $rendezvous->setDate($request->get('date'));
+        $rendezvous->setLieu($request->get('lieu'));
+        $rendezvous-> setIdExpert($request->get('id_expert'));
         $em->persist($rendezvous);
         $em->flush();
-
-        $jsonContent = $Normalizer->normalize($rendezvous, 'json', ['groups' => 'rendezvous']);
-        return new Response(json_encode($jsonContent));
+        $jsonContent = $Normalizer->normalize($rendezvous,'json',['groups'=>'rendezvous']);
+         return new Response(json_encode($jsonContent));
     }
     #[Route("/deleteRDV/{id}", name: "deleteRDVJSON")]
     public function deleteRDVJSON(Request $req, $id, NormalizerInterface $Normalizer)
     {
 
+        
         $em = $this->getDoctrine()->getManager();
         $rendezvous = $em->getRepository(RendezVous::class)->find($id);
+        dd($rendezvous);
         $em->remove($rendezvous);
         $em->flush();
         $jsonContent = $Normalizer->normalize($rendezvous, 'json', ['groups' => 'rendezvous']);
         return new Response("Rendez vous deleted successfully " . json_encode($jsonContent));
     }
+
+    #[Route("/updateRDV/{id}", name: "updateRDVJSON")]
+    public function UpdateVoyageJSON($id,Request $request,NormalizerInterface $Normalizer)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rendezvous = $this->getDoctrine()->getRepository(RendezVous::class)->find($id);
+        $rendezvous->setLieu($request->get('lieu'));
+        $rendezvous->setIdExpert($request->get('id_expert'));
+        $rendezvous->setDate($request->get('date'));
+        //$Voyage->setDate($request->get('Date'));
+        $em->flush();
+        $jsonContent = $Normalizer->normalize($rendezvous,'json',['groups'=>'rendezvous']);
+        return new Response("Update successfully".json_encode($jsonContent));
+    }
+
+
+
+    
     #[Route("/stat", name: "statistique")]
     public function statistique(RendezVousRepository $repository) :Response 
     {
