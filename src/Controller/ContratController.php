@@ -37,11 +37,30 @@ class ContratController extends AbstractController
         ]);
     }
     #[Route('/front', name: 'app_contratfront_index', methods: ['GET'])]
-    public function index4(ContratRepository $contratRepository): Response
+    public function index4(Request $request,ContratRepository $contratRepository): Response
     {
-        return $this->render('contrat/index4.html.twig', [
-            'contrats' => $contratRepository->findAll(),
+        $contrat = new Contrat();
+        $form = $this->createForm(ContratType::class, $contrat);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('photo_cin')->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move('C:/xampp/htdocs/PiDEV_V06/PiDEV_V06/public/upload',$fileName);
+            
+            $contrat->setPhotoCin("/upload/".$fileName);
+            $contratRepository->save($contrat, true);
+            return $this->redirectToRoute('app_supcontrat_index', [], Response::HTTP_SEE_OTHER);
+        }
+        
+        return $this->renderForm('contrat/index4.html.twig', [
+            'contrat' => $contrat,
+            'form' => $form,
         ]);
+    $this->addFlash(
+        'success',
+        'Paiement réussi !'
+    );
     }
     #[Route('/new', name: 'app_contrat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ContratRepository $contratRepository): Response

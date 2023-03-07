@@ -19,12 +19,13 @@ class Contrat
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\GreaterThanOrEqual("today")]
+    // #[Assert\GreaterThanOrEqual("today")]
+    #[Assert\Range(min: 'today',max: "today")]
     private ?\DateTimeInterface $validitedu = null;
 
     
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\Range(min: '+1 year',max: "+3 year")]
+    #[Assert\Range(min: 'today',max: "+1 year")]
     private ?\DateTimeInterface $validiteau = null;
 
     #[ORM\OneToOne(inversedBy: 'id_contrat', cascade: ['persist', 'remove'])]

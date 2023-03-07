@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: OffreRepository::class)]
 class Offre
@@ -15,27 +16,37 @@ class Offre
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groupe("offres")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groupe("searchoffres")]
+    #[Groupe("offres")]
     #[Assert\NotNull(message:"La description est obligatoire")]
+    
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groupe("offres")]
+    #[Groupe("searchoffres")]
     #[Assert\NotNull(message:"Le prix est obligatoire")]
-    private ?string $prix = null;
+    
+    private ?int $prix = null;
 
     #[ORM\Column(length: 255)]
+    #[Groupe("searchoffres")]
+    #[Groupe("offres")]
     #[Assert\NotBlank(message:"Le titre est obligatoire")]
     #[Assert\Length([
-        'min' => 5,
-        'max' => 15,
+        'min' => 10,
+        'max' => 40,
         'minMessage' => 'le titre doit comporter au moins {{ limit }} caractères',
         'maxMessage' => 'Votre titre doit comporter au moins {{ limit }} caractères',
     ])]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
+    #[Groupe("offres")]
     #[Assert\NotNull(message:"La validite est obligatoire")]
     #[Assert\Length([
         'min' => 5,
@@ -88,12 +99,12 @@ class Offre
         return $this;
     }
 
-    public function getPrix(): ?string
+    public function getPrix(): ?int
     {
         return $this->prix;
     }
 
-    public function setPrix(string $prix): self
+    public function setPrix(int $prix): self
     {
         $this->prix = $prix;
 

@@ -1,0 +1,11 @@
+knp_paginator:
+    page_range: 5                      # Nombre de pages affichées dans la barre de pagination
+    default_options:
+        page_name: page                # Nom du paramètre de la page dans l'URL
+        sort_field_name: sort          # Nom du paramètre pour le champ de tri dans l'URL
+        sort_direction_name: direction # Nom du paramètre pour la direction de tri dans l'URL
+        distinct: true                 # Traiter les résultats comme DISTINCTs
+    template:
+        pagination: 'KnpPaginatorBundle:Pagination:sliding.html.twig' # Template utilisé pour la pagination
+        sortable: 'KnpPaginatorBundle:Pagination:sortable_link.html.twig' # Template utilisé pour le tri
+        filtration: 'KnpPaginatorBundle:Pagination:filtration.html.twig' # Template utilisé pour le filtrage
