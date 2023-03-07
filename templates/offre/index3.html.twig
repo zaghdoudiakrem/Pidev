@@ -1,0 +1,57 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}New Offre{% endblock %}
+
+{% block body %}
+   <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Supprimer Une Offre</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Accueil </li>
+          <li class="breadcrumb-item">Offres</li>
+          <li class="breadcrumb-item active">Supprimer Offre</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-7">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Bienvenue</h5>
+
+           <div class="alert alert-success " role="alert">
+                <h4 class="alert-heading">Formulaire Envoyé</h4>
+                <p>Cette offre est ajoutée au tableau des offres</p>
+                <hr>
+                <p class="mb-0">@4Roues Assurance </p> 
+                {# <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> #}
+                <br/>
+              </div>
+                <p>Voulez vous ajouter un autre offre ? <a class="btn btn-primary rounded-pill" href="{{ path('app_offre_new') }}">Ajouter</a> </p>  
+                  <a class="btn btn-primary  rounded-pill" href="{{ path('app_offre_index') }}">
+                  Terminer  <i class="bi bi-check-circle"></i>
+                  </a>
+    
+    {# <a href="{{ path('app_offre_new') }}">Create new</a> #}
+
+    {# <a href="{{ path('app_offre_index') }}"></a> #}
+  
+            </div>
+          </div>
+
+        </div>
+
+        
+      </div>
+    </section>
+
+  </main>
+{% endblock %}
+
+
+

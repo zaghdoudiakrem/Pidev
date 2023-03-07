@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Offre{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .pagetitle h1 {
+            text-align: center;
+            font-size: 32px;
+            font-family: "Arial", sans-serif;
+            color: #ff7f50;
+        }
+    </style>
+{% endblock %}
+
+{% block contenu %}
+</br>
+    <main id="main" class="main">
+       <div class="pagetitle text-center">
+    <h1 class="font-weight-bold" style="color: #ff5821;">Nos Offres</h1>
+</div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                {% for i in 0..offres|length-1 %}
+                    {% if i % 3 == 0 %}
+                        <div class="row">
+                    {% endif %}
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center font-weight-bold text-orange">{{ offres[i].titre }}</h5>
+                                <p class="card-text">{{ offres[i].description }}</p>
+                                <div class="read-more"><i class="bi bi-arrow-right"></i> {{ offres[i].prix }}</div>
+                                <div class="read-more"><i class="bi bi-arrow-right"></i> {{ offres[i].ValiditeOffre }}</div>
+                                <img src="{{ asset(offres[i].ImageOffre) }}" class="img-fluid" width="300" height="150">
+                            </div>
+                        </div>
+                    </div>
+                    {% if i % 3 == 2 or i == offres|length-1 %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

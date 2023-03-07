@@ -6,8 +6,11 @@ twig:
 when@test:
     twig:
         strict_variables: true
+<<<<<<< HEAD
     form_themes:
         - 'src\Form\DevisType.php'
 
 
 
+=======
+>>>>>>> a4f151410050ce02585d4c28b864e9bd07b58f42

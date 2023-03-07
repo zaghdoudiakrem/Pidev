@@ -1,0 +1,76 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}New Offre{% endblock %}
+
+{% block body %}
+   <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Table Des Offres</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Accueil</li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Table Des Offres</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-10">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Bienvenue</h5>
+
+            {# <h1>Table Des Offres</h1> #}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Validité</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+            
+                <th>{{ offre.id }}</th>
+                <td>{{ offre.titre }}</td>
+                <td>{{ offre.description }}</td>
+                <td>{{ offre.prix }}</td>
+                <td>{{ offre.ValiditeOffre }}</td>
+                <td>
+                     <a class="btn btn-primary mr-8" href="{{ path('app_offre_show', {'id': offre.id}) }}">Afficher</a>
+                    {# <a href="{{ path('app_offre_edit', {'id': offre.id}) }}">edit</a> #} 
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_offre_new') }}">Create new</a> #}
+
+    {# <a href="{{ path('app_offre_index') }}"></a> #}
+  
+            </div>
+          </div>
+
+        </div>
+
+        
+      </div>
+    </section>
+
+  </main>
+{% endblock %}
