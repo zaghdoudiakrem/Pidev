@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title> Constat  </title>
+ <style>
+ 	    body {
+			background-color: #F5F5F5;
+		}
+		
+		h2 {
+			color: #4CAF50;
+			text-align: center;
+			margin-top: 50px;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			max-width: 800px;
+			margin: auto;
+		}
+		th, td {
+			border: 1px solid #ddd;
+			padding: 8px;
+			text-align: left;
+		}
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+		tr:hover {
+			background-color: #ddd;
+		}
+	</style>
+</head>	
+<body>
+<h2> Constat  </h2>
+    <table border="1">
+    <thead>
+			<tr>
+				<th>Constat : </th>
+				<th>Coordonnées :</th>
+			</tr>
+		</thead>
+        <tbody>
+            <tr>
+                <th>Nom client : </th>
+                <td>{{ constat.nomclientE }}</td>
+            </tr>
+            <tr>
+                <th>Prenom client : </th>
+                <td>{{ constat.prenomclientE }}</td>
+            </tr>
+            <tr>
+                <th>Type vehicule : </th>
+                <td>{{ constat.typevehiculeE }}</td>
+            </tr>
+            <tr>
+                <th>Marque vehicule :</th>
+                <td>{{ constat.marquevehiculeE }}</td>
+            </tr>
+            <tr>
+                <th>Assurance client : </th>
+                <td>{{ constat.assuranceclientE }}</td>
+            </tr>
+            <tr>
+                <th>Adresse client : </th>
+                <td>{{ constat.adresseclientE }}</td>
+            </tr>
+            <tr>
+                <th>Emplacement accident : </th>
+                <td>{{ constat.emplacementaccid }}</td>
+            </tr>
+            <tr>
+                <th>Photo accident : </th>
+                <td><img src="{{ constat.getPhotoaccid() }}" alt={{ constat.photoaccid }}></td>
+            </tr>
+            <tr>
+                <th>Description degat : </th>
+                <td>{{ constat.descriptiondegat }}</td>
+            </tr>
+            <tr>
+                <th>Observations : </th>
+                <td>{{ constat.observations }}</td>
+            </tr>
+            <tr>
+                <th>Numéro contrat : </th>
+                <td>{{ constat.numcontratE }}</td>
+            </tr>
+              <tr>
+                <th>Email : </th>
+                <td>{{ constat.mail }}</td>
+            </tr>
+              <tr>
+                <th>Date Création : </th>
+                <td>{{ constat.Date_creation|date('Y-m-d H:i:s') }}</td>
+            </tr>
+           
+           
+        </tbody>
+    </table>
+        </body>
+</html>
+
+

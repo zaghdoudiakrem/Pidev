@@ -1,0 +1,21 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Modifier Constat{% endblock %}
+
+{% block body %}
+<div class="container">
+      <h2 style="color: #ff8521;" class="text-center mt-5 mb-3"> Modifier Constat </h2>
+      <div class="card">
+            <div class="card-header">
+                <a style="background-color: #ff8521; color: white; border-color: #ff8521;" class="btn btn-outline-primary" href="{{ path('app_constat_index') }}"><i class="bi bi-backspace me-2"></i>  Retour </a><br><br>
+
+
+    <table class="table table-bordered">
+    <tr>
+    <td> {{ include('constat/_form.html.twig') }}</td>
+    </tr>
+    </table>
+    </div>
+    </div>
+    </div>
+{% endblock %}

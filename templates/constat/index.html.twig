@@ -1,0 +1,147 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Nouveau Constat{% endblock %}
+{% block sidebar%}
+	<aside id="sidebar" class="sidebar">
+
+				<ul class="sidebar-nav" id="sidebar-nav">
+
+				
+					<!-- End Dashboard Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="{{ path ('app_constat_index') }}">
+							<i class="bi bi-newspaper"></i>
+							<span>Constat</span>
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link " href="{{ path ('app_vehicule_index') }}">
+							<i class="bi bi-person-workspace"></i>
+							<span>Vehicule</span>
+						</a>
+					</li>
+
+					<!-- End Components Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="index.html">
+							<i class="bi bi-people"></i>
+							<span>Client</span>
+						</a>
+					</li>
+
+					<!-- End Forms Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="index.html">
+							<i class="bi bi-person-workspace"></i>
+							<span>Expert</span>
+						</a>
+					</li>
+
+					<!-- End Tables Nav -->
+
+					<!-- End Icons Nav -->
+					<li class="nav-heading">
+						Pages</li>
+
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="users-profile.html">
+							<i class="bi bi-person"></i>
+							<span>Profile</span>
+						</a>
+					</li>
+					<!-- End Profile Page Nav -->
+
+
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="pages-login.html">
+							<i class="bi bi-box-arrow-in-right"></i>
+							<span>Logout</span>
+						</a>
+					</li>
+					<!-- End Login Page Nav -->
+
+
+				</ul>
+
+			</aside>
+			<!-- End Sidebar-->
+			{% endblock %}
+			{# templates/product/index.html.twig #}		
+{% block body %}  
+<div class="container">
+        <h2  style="color: #ff8521;" class="text-center mt-5 mb-3">Constat</h2>
+            <div class="card" style="text-align: center;">
+                <a  style="background-color: #ff8521; color: white; border-color: #ff8521;" class="btn btn-outline-primary" href="{{ path('app_constat_new') }}"> <i class="bi bi-plus-square"></i>      Ajouter un constat </a>
+				</div>
+	
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nomclient</th>
+                <th>Typevehicule</th>
+                <th>Assuranceclient</th>
+                <th>Numcontrat</th>
+                <th colspan ="4" width="240px" style="text-align: center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for constat in constats %}
+            <tr>
+                <td>{{ constat.id }}</td>
+                <td>{{ constat.nomclientE }}{{ constat.prenomclientE }}</td>
+                <td>{{ constat.typevehiculeE }}</td>
+                <td>{{ constat.assuranceclientE }}</td>
+                <td>{{ constat.numcontratE }}</td>
+                <td>
+                 <a class="btn btn-outline-info  d-inline-flex align-items-center" href="{{ path('app_constat_show', {'id': constat.id}) }}"><i class="bi bi-eye me-2"></i> Lister </a>
+                 <td><a class="btn btn-outline-success  d-inline-flex align-items-center" href="{{ path('app_constat_edit', {'id': constat.id}) }}"><i class="bi bi-pencil-fill me-2"></i> Modifier</a></td>
+				 <td>{{ include('constat/_delete_form.html.twig') }}</td>
+				 <td> <a   class="btn btn-outline-secondary  d-inline-flex align-items-center " href="{{ path('app_constat_pdf', {'id': constat.id}) }}"><i class="bi bi-filetype-pdf me-2"></i>  PDF  </a></td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">Table vide</td>
+            </tr>
+        {% endfor %}
+			{% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+             <div class="alert alert-{{ type }}">
+                  {{ message }}
+             </div>
+            {% endfor %}
+             {% endfor %}
+         </tbody>
+    </table>
+    <div class="card" style="text-align: center;">
+    <a href="{{ path('constat_sort_by_date') }}" class="btn btn-primary"> <i class="bi bi-caret-down-square-fill"></i> Trier par date de création </a>
+   </div>
+   </div>
+{% endblock %}
+{% block javascript %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+	<script>
+	function sortByDate() {
+    $.ajax({
+         url: '/sort-constat-by-date',
+         type: 'GET',
+         dataType: 'json',
+         success: function (data) {
+             // Vider la liste actuelle des constats
+             $('#constats-list').empty();
+             // Ajouter chaque constat trié à la liste
+             $.each(data, function (index, constat) {
+                 var li = '<li>' + constat.nomclient_e + ' - ' + constat.Date_creation + '</li>';
+                 $('#constats-list').append(li);
+             });
+         }
+     });
+    }
+ 
+    $('#sort-by-date-button').click(function () {
+         sortByDate();
+   });
+   </script>  
+{% endblock %}

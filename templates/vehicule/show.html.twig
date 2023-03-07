@@ -1,0 +1,107 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Vehicule{% endblock %}
+{% block sidebar %}
+	<aside id="sidebar" class="sidebar">
+
+				<ul class="sidebar-nav" id="sidebar-nav">
+
+				
+					<!-- End Dashboard Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="{{ path ('app_constat_index') }}">
+							<i class="bi bi-newspaper"></i>
+							<span>Constat</span>
+						</a>
+					</li>
+
+                    <li class="nav-item">
+						<a class="nav-link " href="{{ path ('app_vehicule_index') }}">
+							<i class="bi bi-newspaper"></i>
+							<span>Vehicule</span>
+						</a>
+					</li>
+
+					<!-- End Components Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="index.html">
+							<i class="bi bi-people"></i>
+							<span>Client</span>
+						</a>
+					</li>
+
+					<!-- End Forms Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="index.html">
+							<i class="bi bi-person-workspace"></i>
+							<span>Expert</span>
+						</a>
+					</li>
+
+					<!-- End Tables Nav -->
+					
+					<li class="nav-heading">Pages</li>
+
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="users-profile.html">
+							<i class="bi bi-person"></i>
+							<span>Profile</span>
+						</a>
+					</li>
+					<!-- End Profile Page Nav -->
+
+
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="pages-login.html">
+							<i class="bi bi-box-arrow-in-right"></i>
+							<span>Logout</span>
+						</a>
+					</li>
+					<!-- End Login Page Nav -->
+
+
+				</ul>
+
+			</aside>
+			<!-- End Sidebar-->
+			{% endblock %}
+{% block body %}
+    <div class="container">
+        <h2 style="color: #ff8521;" class="text-center mt-5 mb-3"> Liste Vehicule </h2>
+		  <div class="card">
+            <div class="card-header">
+                <a style="background-color: #ff8521; color: white; border-color: #ff8521;" class="btn btn-outline-info float-right" href="{{ path('app_vehicule_index') }}"><i class="bi bi-backspace me-2"></i> Retour </a> <br><br>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ vehicule.id }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ vehicule.matricule }}</td>
+            </tr>
+			 <tr>
+                <th>Type</th>
+                <td>{{ vehicule.type }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ vehicule.marque }}</td>
+            </tr>
+           
+            <tr>
+                <th>Nb_ch</th>
+                <td>{{ vehicule.nbCh }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+	<div class="card" style="text-align: center;">
+	            <a  class="btn btn-success" href="{{ path('app_vehicule_excel', {'id': vehicule.id}) }}"><i class="bi bi-file-earmark-spreadsheet-fill me-2"></i>        Excel  </a>
+    </div>
+	</div>
+    </div>
+    </div>
+{% endblock %}

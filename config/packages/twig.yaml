@@ -6,5 +6,8 @@ twig:
 when@test:
     twig:
         strict_variables: true
+<<<<<<< HEAD
     form_themes:
         - 'src\Form\DevisType.php'
+=======
+>>>>>>> origin/gestion-constat

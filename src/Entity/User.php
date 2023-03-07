@@ -24,8 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message:"Email '{{ value }}' est non valide")]
     private ?string $email = null;
 
-    #[ORM\Column]
-    private array $roles = [];
+    // #[ORM\Column]
+    // private array $roles = [];
 
     /**
      * @var string The hashed password
@@ -141,32 +141,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+//     /**
+//      * @see UserInterface
+//      */
+//     public function getRoles(): array
+//     {
+//         $roles = $this->roles;
+//         // guarantee every user at least has ROLE_USER
+//         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
-    }
+//         return array_unique($roles);
+//     }
 
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
+//     public function setRoles(array $roles): self
+//     {
+//         $this->roles = $roles;
 
-        return $this;
-    }
-    public function getResetToken()
-    {
-        return $this->reset_token; 
-    }
-   public function setResetToken($reset_token):void
-   {
-    $this->reset_token=$reset_token; 
-   } 
+//         return $this;
+//     }
+//     public function getResetToken()
+//     {
+//         return $this->reset_token; 
+//     }
+//    public function setResetToken($reset_token):void
+//    {
+//     $this->reset_token=$reset_token; 
+//    } 
  
 
 

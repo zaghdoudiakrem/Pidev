@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en" data-theme="dark">
 
 	<head>
 		<meta charset="utf-8">
@@ -30,6 +31,10 @@
 			<link href="{{ asset ('assets2/vendor/quill/quill.snow.css') }}" rel="stylesheet">
 			<link href="{{ asset ('assets2/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
 			<link href="{{ asset ('assets2/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+<<<<<<< HEAD
+=======
+		    <link rel="stylesheet" href="{{ asset('build/fontawesome/css/all.min.css') }}">
+>>>>>>> origin/gestion-constat
 			<link
 			href="{{ asset ('assets2/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
@@ -46,14 +51,24 @@
 
 	<body>
 
+<<<<<<< HEAD
 <!-- ======= Header ======= -->
+=======
+		<!-- ======= Header ======= -->
+>>>>>>> origin/gestion-constat
 		{% block header %}
 			<header id="header" class="header fixed-top d-flex align-items-center">
 
 				<div class="d-flex align-items-center justify-content-between">
+<<<<<<< HEAD
 					<a href="{{path ('app_front')}}" class="logo d-flex align-items-center">
 						<img src="{{ asset ('assets/img/logo_png.png') }}" alt="">
 				<span class="d-none d-lg-block" >4RouesAssurances</span>
+=======
+					<a href="index.html" class="logo d-flex align-items-center">
+						<img src="{{ asset ('assets/img/logo_png.png') }}" alt="">
+				<span class="d-none d-lg-block" ><a href="{{path ('app_front')}}">4RouesAssurances</a></span>
+>>>>>>> origin/gestion-constat
 					</a>
 					<i class="bi bi-list toggle-sidebar-btn"></i>
 				</div>
@@ -233,15 +248,25 @@
 						<li class="nav-item dropdown pe-3">
 
 							<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+<<<<<<< HEAD
 								<img src="{{ asset ('assets2/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
 								<span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+=======
+								<img src="{{ asset ('assets/img/testimonials/eya.png') }}" alt="Profile" class="rounded-circle">
+								<span class="d-none d-md-block dropdown-toggle ps-2">Eya Ben Khedher</span>
+>>>>>>> origin/gestion-constat
 							</a>
 							<!-- End Profile Iamge Icon -->
 
 							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 								<li class="dropdown-header">
+<<<<<<< HEAD
 									<h6>Kevin Anderson</h6>
 									<span>Web Designer</span>
+=======
+									<h6>Eya Ben Khedher</h6>
+									<span>Comptable</span>
+>>>>>>> origin/gestion-constat
 								</li>
 								<li>
 									<hr class="dropdown-divider">
@@ -295,9 +320,84 @@
 
 			</header>
 		{% endblock %}
+<<<<<<< HEAD
 		<!-- End Header -->	
 
 {% block body %}
+=======
+		<!-- End Header -->
+
+     {% block sidebar%}
+	    <aside id="sidebar" class="sidebar">
+
+				<ul class="sidebar-nav" id="sidebar-nav">
+		
+					<!-- End Dashboard Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="{{ path ('app_constat_index') }}">
+							<i class="bi bi-newspaper"></i>
+							<span>Constat</span>
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link " href="{{ path ('app_vehicule_index') }}">
+							<i class="bi bi-person-workspace"></i>
+							<span>Vehicule</span>
+						</a>
+					</li>
+
+					<!-- End Components Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="index.html">
+							<i class="bi bi-people"></i>
+							<span>Client</span>
+						</a>
+					</li>
+
+					<!-- End Forms Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="index.html">
+							<i class="bi bi-person-workspace"></i>
+							<span>Expert</span>
+						</a>
+					</li>
+
+					<!-- End Tables Nav -->
+
+					<!-- End Icons Nav -->
+					<li class="nav-heading">
+						Pages</li>
+
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="users-profile.html">
+							<i class="bi bi-person"></i>
+							<span>Profile</span>
+						</a>
+					</li>
+					<!-- End Profile Page Nav -->
+
+
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="pages-login.html">
+							<i class="bi bi-box-arrow-in-right"></i>
+							<span>Logout</span>
+						</a>
+					</li>
+					<!-- End Login Page Nav -->
+
+
+				</ul>
+
+			</aside>
+			<!-- End Sidebar-->
+			{% endblock %}
+
+		<!-- ======= Sidebar ======= -->
+		{% block contenu %}
+		
+
+>>>>>>> origin/gestion-constat
 			<main id="main" class="main">
 
 				<div class="pagetitle">
@@ -468,7 +568,11 @@
 								
 
 								<!-- Recent Sales -->
+<<<<<<< HEAD
 								<div class="col-12">
+=======
+								<div class="col-12" >
+>>>>>>> origin/gestion-constat
 									<div class="card recent-sales overflow-auto">
 
 										<div class="filter">
@@ -491,6 +595,24 @@
 												</li>
 											</ul>
 										</div>
+<<<<<<< HEAD
+=======
+										
+									{% for message in app.session.flashBag.get('info') %}
+
+									<div class="alert alert-info">{{ message }}</div>
+									{% endfor %}
+									{% for message in app.session.flashBag.get('success') %}
+
+										<div class="alert alert-success">{{ message }}</div>
+									{% endfor %}
+
+									{% for message in app.session.flashBag.get('error') %}
+
+										<div class="alert alert-danger">{{ message }}</div>
+									{% endfor %}
+									{% block body%}
+>>>>>>> origin/gestion-constat
 
 										<div class="card-body">
 											<h5 class="card-title">Client Recent
@@ -865,6 +987,12 @@ name: 'Video Ads'
 							<!-- End Website Traffic -->
 
 
+							
+								{% endblock %}
+							
+							</div>
+							<!-- End Recent Activity -->
+
 						</div>
 						<!-- End Right side columns -->
 
@@ -971,6 +1099,7 @@ name: 'Video Ads'
 					<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
 					Designed by
 						<a href="https://bootstrapmade.com/"> BootstrapMade</a>
+						<a href="https://codingsquad.com/"> CodingSquad</a>
 				</div>
 			</footer>
 			<!-- End Footer -->

@@ -1,0 +1,158 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Constat{% endblock %}
+{% block sidebar%}
+	<aside id="sidebar" class="sidebar">
+
+				<ul class="sidebar-nav" id="sidebar-nav">
+
+				
+					<!-- End Dashboard Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="{{ path ('app_constat_index') }}">
+							<i class="bi bi-newspaper"></i>
+							<span>Constat</span>
+						</a>
+					</li>
+
+                    <li class="nav-item">
+						<a class="nav-link " href="{{ path ('app_vehicule_index') }}">
+							<i class="bi bi-newspaper"></i>
+							<span>Vehicule</span>
+						</a>
+					</li>
+
+					<!-- End Components Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="index.html">
+							<i class="bi bi-people"></i>
+							<span>Client</span>
+						</a>
+					</li>
+
+					<!-- End Forms Nav -->
+					<li class="nav-item">
+						<a class="nav-link " href="index.html">
+							<i class="bi bi-person-workspace"></i>
+							<span>Expert</span>
+						</a>
+					</li>
+
+					<!-- End Tables Nav -->
+					
+					<li class="nav-heading">Pages</li>
+
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="users-profile.html">
+							<i class="bi bi-person"></i>
+							<span>Profile</span>
+						</a>
+					</li>
+					<!-- End Profile Page Nav -->
+
+
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="pages-login.html">
+							<i class="bi bi-box-arrow-in-right"></i>
+							<span>Logout</span>
+						</a>
+					</li>
+					<!-- End Login Page Nav -->
+
+
+				</ul>
+
+			</aside>
+			<!-- End Sidebar-->
+			{% endblock %}
+{% block body %}
+<div class="container">
+        <h2 style="color: #ff8521;" class="text-center mt-5 mb-3">Liste Constat</h2>
+        <div class="card">
+            <div class="card-header">
+                <a style="background-color: #ff8521; color: white; border-color: #ff8521;" class="btn btn-outline-primary" href="{{ path('app_constat_index') }}"><i class="bi bi-backspace me-2"></i>  Retour </a><br><br>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ constat.id }}</td>
+            </tr>
+            <tr>
+                <th>Nomclient_e</th>
+                <td>{{ constat.nomclientE }}</td>
+            </tr>
+            <tr>
+                <th>Prenomclient_e</th>
+                <td>{{ constat.prenomclientE }}</td>
+            </tr>
+            <tr>
+                <th>Typevehicule_e</th>
+                <td>{{ constat.typevehiculeE }}</td>
+            </tr>
+            <tr>
+                <th>Marquevehicule_e</th>
+                <td>{{ constat.marquevehiculeE }}</td>
+            </tr>
+            <tr>
+                <th>Assuranceclient_e</th>
+                <td>{{ constat.assuranceclientE }}</td>
+            </tr>
+            <tr>
+                <th>Adresseclient_e</th>
+                <td>{{ constat.adresseclientE }}</td>
+            </tr>
+            <tr>
+                <th>Emplacementaccid</th>
+                <td>{{ constat.emplacementaccid }}</td>
+            </tr>
+            <tr>
+                <th>Photoaccid</th>
+                <td><img src="{{ asset( constat.photoaccid) }}"></td>
+            </tr>
+            <tr>
+                <th>Descriptiondegat</th>
+                <td>{{ constat.descriptiondegat }}</td>
+            </tr>
+            <tr>
+                <th>Observations</th>
+                <td>{{ constat.observations }}</td>
+            </tr>
+            <tr>
+                <th>Numcontrat_e</th>
+                <td>{{ constat.numcontratE }}</td>
+            </tr>
+              <tr>
+                <th>Email</th>
+                <td>{{ constat.mail }}</td>
+            </tr>
+              <tr>
+                <th>Date_Création</th>
+                <td>{{ constat.Date_creation|date('Y-m-d H:i:s') }}</td>
+            </tr>
+              <tr>
+                <th>Signature Id</th>
+                <td>{{ constat.signatureId }}</td>
+            </tr>
+              <tr>
+                <th>Document Id</th>
+                <td>{{ constat.documentId }}</td>
+            </tr>
+              <tr>
+                <th>Signer Id</th>
+                <td>{{ constat.signerId }}</td>
+            </tr>
+             <tr>
+                <th> Pdf Sans Signature</th>
+                <td>{{ constat.PdfSansSignature }}</td>
+            </tr>    
+        </tbody>
+    </table>
+    <div>
+            <a  style="background-color: #ff8521; color: white;  border-color: #ff8521; margin-right: 70px;" class="btn btn-outline-info float-left" href="{{ path('app_constat_signature', {'id': constat.id}) }}"> <i class="bi bi-send-check-fill me-2"></i> Envoyer à la signature</a>
+            <a  class="btn btn-success d-inline-flex align-items-center justify-content-center" style="width: 210px; text-align: center; margin-left: 150px;" href="{{ path('app_constat_excel', {'id': constat.id}) }}"><i class="bi bi-file-earmark-spreadsheet-fill me-2"></i>        Excel  </a>
+    </div>
+        </div>
+        </div>
+        </div>
+{% endblock %}
+

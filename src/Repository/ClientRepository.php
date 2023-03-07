@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Constat;
+use App\Entity\Client;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Constat>
+ * @extends ServiceEntityRepository<Client>
  *
- * @method Constat|null find($id, $lockMode = null, $lockVersion = null)
- * @method Constat|null findOneBy(array $criteria, array $orderBy = null)
- * @method Constat[]    findAll()
- * @method Constat[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Client|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Client|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Client[]    findAll()
+ * @method Client[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ConstatRepository extends ServiceEntityRepository
+class ClientRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Constat::class);
+        parent::__construct($registry, Client::class);
     }
 
-    public function save(Constat $entity, bool $flush = false): void
+    public function save(Client $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ConstatRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Constat $entity, bool $flush = false): void
+    public function remove(Client $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -39,9 +39,8 @@ class ConstatRepository extends ServiceEntityRepository
         }
     }
 
-
 //    /**
-//     * @return Constat[] Returns an array of Constat objects
+//     * @return Client[] Returns an array of Client objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -55,7 +54,7 @@ class ConstatRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Constat
+//    public function findOneBySomeField($value): ?Client
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')
