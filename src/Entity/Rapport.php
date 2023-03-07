@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\RapportRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: RapportRepository::class)]
 class Rapport
@@ -15,13 +17,21 @@ class Rapport
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+
+    #[Groups("post:read")]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $rapport_preliminaire = null;
+    #[Assert\Length(min: 4,minMessage: "veuillez avoir au minimum 4 caractere" )]
+    #[Assert\NotBlank(message: 'Ce champ ne doit pas être vide.')]
+    #[Groups("post:read")]
+    private ?string $rapportpreliminaire = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $rapport_expertise = null;
+    #[Assert\Length(min: 4,minMessage: "veuillez avoir au minimum 4 caractere" )]
+    #[Assert\NotBlank(message: 'Ce champ ne doit pas être vide.')]
+    #[Groups("post:read")]
+    private ?string $rapportexpertise = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
@@ -30,6 +40,13 @@ class Rapport
     #[ORM\ManyToOne(inversedBy: 'rapports')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $id_expert = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups("post:read")]
+    private ?string $image = null;
+
+    #[ORM\OneToOne(mappedBy: 'type', cascade: ['persist', 'remove'])]
+    private ?RendezVous $rendezVous = null;
 
     public function getId(): ?int
     {
@@ -50,24 +67,24 @@ class Rapport
 
     public function getRapportPreliminaire(): ?string
     {
-        return $this->rapport_preliminaire;
+        return $this->rapportpreliminaire;
     }
 
-    public function setRapportPreliminaire(string $rapport_preliminaire): self
+    public function setRapportPreliminaire(string $rapportpreliminaire): self
     {
-        $this->rapport_preliminaire = $rapport_preliminaire;
+        $this->rapportpreliminaire = $rapportpreliminaire;
 
         return $this;
     }
 
     public function getRapportExpertise(): ?string
     {
-        return $this->rapport_expertise;
+        return $this->rapportexpertise;
     }
 
-    public function setRapportExpertise(string $rapport_expertise): self
+    public function setRapportExpertise(string $rapportexpertise): self
     {
-        $this->rapport_expertise = $rapport_expertise;
+        $this->rapportexpertise = $rapportexpertise;
 
         return $this;
     }
@@ -95,4 +112,43 @@ class Rapport
 
         return $this;
     }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getRendezVous(): ?RendezVous
+    {
+        return $this->rendezVous;
+    }
+
+    public function setRendezVous(?RendezVous $rendezVous): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($rendezVous === null && $this->rendezVous !== null) {
+            $this->rendezVous->setType(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($rendezVous !== null && $rendezVous->getType() !== $this) {
+            $rendezVous->setType($this);
+        }
+
+        $this->rendezVous = $rendezVous;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+    
 }

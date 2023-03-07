@@ -3,8 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\OffreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: OffreRepository::class)]
 class Offre
@@ -12,20 +16,71 @@ class Offre
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groupe("offres")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groupe("searchoffres")]
+    #[Groupe("offres")]
+    #[Assert\NotNull(message:"La description est obligatoire")]
+    
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?float $prix = null;
+    #[Groupe("offres")]
+    #[Groupe("searchoffres")]
+    #[Assert\NotNull(message:"Le prix est obligatoire")]
+    
+    private ?int $prix = null;
 
     #[ORM\Column(length: 255)]
+    #[Groupe("searchoffres")]
+    #[Groupe("offres")]
+    #[Assert\NotBlank(message:"Le titre est obligatoire")]
+    #[Assert\Length([
+        'min' => 10,
+        'max' => 40,
+        'minMessage' => 'le titre doit comporter au moins {{ limit }} caractères',
+        'maxMessage' => 'Votre titre doit comporter au moins {{ limit }} caractères',
+    ])]
     private ?string $titre = null;
 
-    #[ORM\ManyToOne(inversedBy: 'id_offre')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Facture $facture = null;
+    #[ORM\Column(length: 255)]
+    #[Groupe("offres")]
+    #[Assert\NotNull(message:"La validite est obligatoire")]
+    #[Assert\Length([
+        'min' => 5,
+        'max' => 50,
+        'minMessage' => 'La validité doit comporter au moins {{ limit }} caractères',
+        'maxMessage' => 'La validité  doit comporter au moins {{ limit }} caractères',
+    ])]
+    private ?string $Validite_offre = null;
+
+    #[ORM\ManyToMany(targetEntity: Contrat::class, mappedBy: 'id_offre')]
+    private Collection $contrats;
+
+    #[ORM\Column(length: 255)]
+    
+    private ?string $image_offre = null;
+
+    public function __construct()
+    {
+        $this->contrats = new ArrayCollection();
+    }
+
+    // #[ORM\Column(length: 255)]
+    // private ?string $photo_offre = null;
+
+    
+
+    
+
+   
+    
+
+    
+
+   
 
     public function getId(): ?int
     {
@@ -44,12 +99,12 @@ class Offre
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrix(): ?int
     {
         return $this->prix;
     }
 
-    public function setPrix(float $prix): self
+    public function setPrix(int $prix): self
     {
         $this->prix = $prix;
 
@@ -68,15 +123,85 @@ class Offre
         return $this;
     }
 
-    public function getFacture(): ?Facture
+    public function getValiditeOffre(): ?string
     {
-        return $this->facture;
+        return $this->Validite_offre;
     }
 
-    public function setFacture(?Facture $facture): self
+    public function setValiditeOffre(string $Validite_offre): self
     {
-        $this->facture = $facture;
+        $this->Validite_offre = $Validite_offre;
 
         return $this;
     }
+
+    public function __toString(){
+        return (string) $this->titre;
+    }
+
+    // public function getPhotoOffre(): ?string
+    // {
+    //     return $this->photo_offre;
+    // }
+
+    // public function setPhotoOffre(string $photo_offre): self
+    // {
+    //     $this->photo_offre = $photo_offre;
+
+    //     return $this;
+    // }
+
+    /**
+     * @return Collection<int, Contrat>
+     */
+    public function getContrats(): Collection
+    {
+        return $this->contrats;
+    }
+
+    public function addContrat(Contrat $contrat): self
+    {
+        if (!$this->contrats->contains($contrat)) {
+            $this->contrats->add($contrat);
+            $contrat->addIdOffre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContrat(Contrat $contrat): self
+    {
+        if ($this->contrats->removeElement($contrat)) {
+            $contrat->removeIdOffre($this);
+        }
+
+        return $this;
+    }
+
+    public function getImageOffre(): ?string
+    {
+        return $this->image_offre;
+    }
+
+    public function setImageOffre(string $image_offre): self
+    {
+        $this->image_offre = $image_offre;
+
+        return $this;
+    }
+
+    
+     
+
+    
+
+    
+
+   
+
+  
+
+   
+
+   
 }

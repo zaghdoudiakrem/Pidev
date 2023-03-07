@@ -7,6 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+
 
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
@@ -14,25 +19,76 @@ class Reclamation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("reclamation")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message:"Le champ description est obligatoire.")]
+    #[Assert\Length([
+        'min' => 5,
+        'max' => 50,
+        'minMessage' => 'Votre description doit comporter au moins {{ limit }} caractères',
+        'maxMessage' => 'Votre description doit comporter au moins {{ limit }} caractères',
+    ])]
+    #[Groups("reclamation")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le champ objet est obligatoire.")]
+    #[Assert\Length([
+        'min' => 5,
+        'max' => 50,
+        'minMessage' => 'Votre Objet doit comporter au moins {{ limit }} caractères',
+        'maxMessage' => 'Votre objet doit comporter au moins {{ limit }} caractères',
+    ])]
+    #[Groups("reclamation")]
     private ?string $objet = null;
 
     #[ORM\OneToMany(mappedBy: 'id_reclamation', targetEntity: Reponse::class)]
+    #[Groups("reclamation")]
     private Collection $id_reponse;
 
     #[ORM\ManyToOne(inversedBy: 'reclamations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups("reclamation")]
     private ?User $id_client = null;
 
+    #[ORM\OneToMany(mappedBy: 'reclamation', targetEntity: Evaluation::class)]
+    private Collection $evaluations;
+
+    #[ORM\Column(type:"integer")]
+    #[Groups("reclamation")]
+    private $note;
+
+  
+
+
+
+
+    
     public function __construct()
     {
         $this->id_reponse = new ArrayCollection();
+        $this->evaluations = new ArrayCollection();
+        $this->note = 0; // initialiser la note à 0 par défaut
+
     }
+
+   
+  
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(int $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+    
 
     public function getId(): ?int
     {
@@ -104,4 +160,56 @@ class Reclamation
 
         return $this;
     }
+
+    public ?String $nom_client="";
+    public function setClientNom(String $nom_client): self
+    {
+        $this->nom_client = $nom_client;
+
+        return $this;
+    }
+    public ?String $prenom_client="";
+    public function setClientPrenom(String $prenom_client): self
+    {
+        $this->prenom_client = $prenom_client;
+
+        return $this;
+    }
+
+    public function __toString() {
+        return (string) $this->getId();
+    }
+
+    /**
+     * @return Collection<int, Evaluation>
+     */
+    public function getEvaluations(): Collection
+    {
+        return $this->evaluations;
+    }
+
+    public function addEvaluation(Evaluation $evaluation): self
+    {
+        if (!$this->evaluations->contains($evaluation)) {
+            $this->evaluations->add($evaluation);
+            $evaluation->setReclamation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvaluation(Evaluation $evaluation): self
+    {
+        if ($this->evaluations->removeElement($evaluation)) {
+            // set the owning side to null (unless already changed)
+            if ($evaluation->getReclamation() === $this) {
+                $evaluation->setReclamation(null);
+            }
+        }
+
+        return $this;
+    }
+   
+
+
 }

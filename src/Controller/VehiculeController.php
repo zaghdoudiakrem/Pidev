@@ -140,7 +140,7 @@ class VehiculeController extends AbstractController
 
      
     //Tri
-    #[Route('/tt/trier-par-nb', name:'vehicule_sort_by_nb')]
+    #[Route('/tt/trier-par-nb', name: 'vehicule_sort_by_nb')]
     public function sortByNb(VehiculeRepository $vehiculeRepository, EntityManagerInterface $entityManager): Response
   {
       $vehicules = $vehiculeRepository->findAll();
@@ -149,7 +149,7 @@ class VehiculeController extends AbstractController
       $queryBuilder = $entityManager->createQueryBuilder();
       $queryBuilder->select('v')
                ->from('App\Entity\Vehicule', 'v')
-               ->orderBy('v.nb_ch', 'DESC');
+               ->orderBy('v.nb_ch', 'ASC');
 
     // Exécuter la requête et récupérer les résultats triés
      $vehicules = $queryBuilder->getQuery()->getResult();
@@ -158,7 +158,7 @@ class VehiculeController extends AbstractController
       'vehicules' => $vehicules,
       ]);
   }
- 
+
 
     //partie JSON
     #[Route('/AllVehicule', name: 'list')]

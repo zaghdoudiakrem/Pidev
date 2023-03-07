@@ -5,6 +5,10 @@ namespace App\Entity;
 use App\Repository\ReponseRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: ReponseRepository::class)]
 class Reponse
@@ -12,9 +16,18 @@ class Reponse
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("reclamation")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message:"Le champ reponse est obligatoire.")]
+    #[Assert\Length([
+        'min' => 5,
+        'max' => 50,
+        'minMessage' => 'Votre reponse doit comporter au moins {{ limit }} caractères',
+        'maxMessage' => 'Votre reponse doit comporter au moins {{ limit }} caractères',
+    ])]
+    #[Groups("reclamation")]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'id_reponse')]
@@ -64,5 +77,9 @@ class Reponse
         $this->id_assureur = $id_assureur;
 
         return $this;
+    }
+
+    public function __toString() {
+        return (string) $this->getId();
     }
 }
