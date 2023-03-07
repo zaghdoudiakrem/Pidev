@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LocaleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LocaleRepository::class)]
 class Locale
@@ -11,13 +12,16 @@ class Locale
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("locale")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("locale")]
     private ?string $adresse = null;
 
     #[ORM\ManyToOne(inversedBy: 'locales')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups("locale")]
     private ?User $id_mecanicien = null;
 
     public function getId(): ?int
