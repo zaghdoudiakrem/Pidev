@@ -1,4 +1,4 @@
-
+{
     "doctrine/annotations": {
         "version": "1.14",
         "recipe": {
@@ -51,7 +51,7 @@
         ]
     },
     "knplabs/knp-paginator-bundle": {
-        "version": "v5.4.0"
+        "version": "v5.4.0"},
     "endroid/qr-code-bundle": {
         "version": "4.3.1"
     },

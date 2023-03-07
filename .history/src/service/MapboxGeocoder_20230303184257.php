@@ -1,14 +1,11 @@
 <?php
-namespace App\service;
+namespace App\Service;
 
 use Geocoder\Geocoder;
 use Geocoder\Provider\Mapbox\Mapbox;
 use Geocoder\Query\GeocodeQuery;
 use Psr\Http\Client\ClientInterface;
 use GuzzleHttp\Client;
-
-
-string $mapboxApiKey = 'sk.eyJ1IjoieGVuMjIiLCJhIjoiY2xlc3RiNDg2MTlwcTNzbzVmZWg2bG5xMCJ9._GeubKQnxgS7dMkVdtRv_A';
 
 
 class MapboxGeocoder

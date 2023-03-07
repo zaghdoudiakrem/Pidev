@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <html lang="en" data-theme="dark">
 
 	<head>
@@ -31,10 +30,7 @@
 			<link href="{{ asset ('assets2/vendor/quill/quill.snow.css') }}" rel="stylesheet">
 			<link href="{{ asset ('assets2/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
 			<link href="{{ asset ('assets2/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-<<<<<<< HEAD
-=======
 		    <link rel="stylesheet" href="{{ asset('build/fontawesome/css/all.min.css') }}">
->>>>>>> origin/gestion-constat
 			<link
 			href="{{ asset ('assets2/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
@@ -51,24 +47,14 @@
 
 	<body>
 
-<<<<<<< HEAD
-<!-- ======= Header ======= -->
-=======
 		<!-- ======= Header ======= -->
->>>>>>> origin/gestion-constat
 		{% block header %}
 			<header id="header" class="header fixed-top d-flex align-items-center">
 
 				<div class="d-flex align-items-center justify-content-between">
-<<<<<<< HEAD
-					<a href="{{path ('app_front')}}" class="logo d-flex align-items-center">
-						<img src="{{ asset ('assets/img/logo_png.png') }}" alt="">
-				<span class="d-none d-lg-block" >4RouesAssurances</span>
-=======
 					<a href="index.html" class="logo d-flex align-items-center">
 						<img src="{{ asset ('assets/img/logo_png.png') }}" alt="">
 				<span class="d-none d-lg-block" ><a href="{{path ('app_front')}}">4RouesAssurances</a></span>
->>>>>>> origin/gestion-constat
 					</a>
 					<i class="bi bi-list toggle-sidebar-btn"></i>
 				</div>
@@ -248,25 +234,15 @@
 						<li class="nav-item dropdown pe-3">
 
 							<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-<<<<<<< HEAD
-								<img src="{{ asset ('assets2/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-								<span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-=======
 								<img src="{{ asset ('assets/img/testimonials/eya.png') }}" alt="Profile" class="rounded-circle">
 								<span class="d-none d-md-block dropdown-toggle ps-2">Eya Ben Khedher</span>
->>>>>>> origin/gestion-constat
 							</a>
 							<!-- End Profile Iamge Icon -->
 
 							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 								<li class="dropdown-header">
-<<<<<<< HEAD
-									<h6>Kevin Anderson</h6>
-									<span>Web Designer</span>
-=======
 									<h6>Eya Ben Khedher</h6>
 									<span>Comptable</span>
->>>>>>> origin/gestion-constat
 								</li>
 								<li>
 									<hr class="dropdown-divider">
@@ -320,11 +296,6 @@
 
 			</header>
 		{% endblock %}
-<<<<<<< HEAD
-		<!-- End Header -->	
-
-{% block body %}
-=======
 		<!-- End Header -->
 
      {% block sidebar%}
@@ -397,7 +368,6 @@
 		{% block contenu %}
 		
 
->>>>>>> origin/gestion-constat
 			<main id="main" class="main">
 
 				<div class="pagetitle">
@@ -568,11 +538,7 @@
 								
 
 								<!-- Recent Sales -->
-<<<<<<< HEAD
-								<div class="col-12">
-=======
 								<div class="col-12" >
->>>>>>> origin/gestion-constat
 									<div class="card recent-sales overflow-auto">
 
 										<div class="filter">
@@ -595,8 +561,6 @@
 												</li>
 											</ul>
 										</div>
-<<<<<<< HEAD
-=======
 										
 									{% for message in app.session.flashBag.get('info') %}
 
@@ -612,7 +576,6 @@
 										<div class="alert alert-danger">{{ message }}</div>
 									{% endfor %}
 									{% block body%}
->>>>>>> origin/gestion-constat
 
 										<div class="card-body">
 											<h5 class="card-title">Client Recent
@@ -812,181 +775,6 @@
 							</div>
 						</div>
 						<!-- End Left side columns -->
-
-						<!-- Right side columns -->
-						<div
-							class="col-lg-4">
-
-							<!-- Recent Activity -->
-							<div class="card">
-								<div class="filter">
-									<a class="icon" href="#" data-bs-toggle="dropdown">
-										<i class="bi bi-three-dots"></i>
-									</a>
-									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-										<li class="dropdown-header text-start">
-											<h6>Filter</h6>
-										</li>
-
-										<li>
-											<a class="dropdown-item" href="#">Today</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="#">This Month</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="#">This Year</a>
-										</li>
-									</ul>
-								</div>
-
-								<div class="card-body">
-									<h5 class="card-title">Recent Activity
-										<span>| Today</span>
-									</h5>
-
-									<div class="activity">
-
-										<div class="activity-item d-flex">
-											<div class="activite-label">32 min</div>
-											<i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-											<div class="activity-content">
-												une voiture a été récemment réparée
-
-
-											</div>
-										</div>
-										<!-- End activity item-->
-
-										<div class="activity-item d-flex">
-											<div class="activite-label">56 min</div>
-											<i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-											<div class="activity-content">
-												Un constat a été affecté à l'expert x
-											</div>
-										</div>
-										<!-- End activity item-->
-
-										<div class="activity-item d-flex">
-											<div class="activite-label">2 hrs</div>
-											<i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-											<div class="activity-content">
-												Un nouveau client a récement sginé un contrat
-											</div>
-										</div>
-										<!-- End activity item-->
-
-
-										<div class="activity-item d-flex">
-											<div class="activite-label">4 weeks</div>
-											<i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-											<div class="activity-content">
-												Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-											</div>
-										</div>
-										<!-- End activity item-->
-
-									</div>
-
-								</div>
-							</div>
-							<!-- End Recent Activity -->
-
-
-							<!-- Website Traffic -->
-							<div class="card">
-								<div class="filter">
-									<a class="icon" href="#" data-bs-toggle="dropdown">
-										<i class="bi bi-three-dots"></i>
-									</a>
-									<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-										<li class="dropdown-header text-start">
-											<h6>Filter</h6>
-										</li>
-
-										<li>
-											<a class="dropdown-item" href="#">Today</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="#">This Month</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="#">This Year</a>
-										</li>
-									</ul>
-								</div>
-
-								<div class="card-body pb-0">
-									<h5 class="card-title">Website Traffic
-										<span>| Today</span>
-									</h5>
-
-									<div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-									<script>
-										document.addEventListener("DOMContentLoaded", () => {
-echarts.init(document.querySelector("#trafficChart")).setOption({
-tooltip: {
-trigger: 'item'
-},
-legend: {
-top: '5%',
-left: 'center'
-},
-series: [
-{
-name: 'Access From',
-type: 'pie',
-radius: [
-'40%', '70%'
-],
-avoidLabelOverlap: false,
-label: {
-show: false,
-position: 'center'
-},
-emphasis: {
-label: {
-show: true,
-fontSize: '18',
-fontWeight: 'bold'
-}
-},
-labelLine: {
-show: false
-},
-data: [
-{
-value: 1048,
-name: 'Search Engine'
-},
-{
-value: 735,
-name: 'Direct'
-},
-{
-value: 580,
-name: 'Email'
-},
-{
-value: 484,
-name: 'Union Ads'
-}, {
-value: 300,
-name: 'Video Ads'
-}
-]
-}
-]
-});
-});
-									</script>
-
-								</div>
-							</div>
-							<!-- End Website Traffic -->
-
-
 							
 								{% endblock %}
 							
@@ -1002,86 +790,6 @@ name: 'Video Ads'
 			</main>
 		{% endblock %}
 		<!-- End #main -->
-{% block Sidebar %} 
-<!-- ======= Sidebar ======= -->
-		
-			<aside id="sidebar" class="sidebar">
-
-				<ul class="sidebar-nav" id="sidebar-nav">
-
-					<li class="nav-item">
-						<a class="nav-link " href="index.html">
-							<i class="bi bi-grid"></i>
-							<span>Utilisateurs</span>
-						</a>
-					</li>
-					<!-- End Dashboard Nav -->
-					<li class="nav-item">
-						<a class="nav-link " href="index.html">
-							<i class="bi bi-newspaper"></i>
-							<span>Constat</span>
-						</a>
-					</li>
-
-					<!-- End Components Nav -->
-					<li class="nav-item">
-						<a class="nav-link " href="index.html">
-							<i class="bi bi-people"></i>
-							<span>Client</span>
-						</a>
-					</li>
-
-					<!-- End Forms Nav -->
-					<li class="nav-item">
-						<a class="nav-link " href="index.html">
-							<i class="bi bi-person-workspace"></i>
-							<span>Expert</span>
-						</a>
-					</li>
-
-					<!-- End Tables Nav -->
-
-					<li class="nav-item">
-						<a class="nav-link " href="index.html">
-							<i class="bi bi-calendar2-date"></i>
-							<span>Rendez-vous</span>
-						</a>
-					</li>
-					<!-- End Icons Nav -->
-					<li class="nav-item">
-						<a class="nav-link " href="index.html">
-							<i class="bi bi-chat-left-text"></i>
-							<span>Réclamations</span>
-						</a>
-					</li>
-					<!-- End Icons Nav -->
-					<li class="nav-heading">
-						Pages</li>
-
-					<li class="nav-item">
-						<a class="nav-link collapsed" href="users-profile.html">
-							<i class="bi bi-person"></i>
-							<span>Profile</span>
-						</a>
-					</li>
-					<!-- End Profile Page Nav -->
-
-
-					<li class="nav-item">
-						<a class="nav-link collapsed" href="pages-login.html">
-							<i class="bi bi-box-arrow-in-right"></i>
-							<span>Logout</span>
-						</a>
-					</li>
-					<!-- End Login Page Nav -->
-
-
-				</ul>
-
-			</aside>
-			<!-- End Sidebar-->
-{% endblock %}
-		
 
 		<!-- ======= Footer ======= -->
 		{% block footer %}
@@ -1098,7 +806,6 @@ name: 'Video Ads'
 					<!-- Licensing information: https://bootstrapmade.com/license/ -->
 					<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
 					Designed by
-						<a href="https://bootstrapmade.com/"> BootstrapMade</a>
 						<a href="https://codingsquad.com/"> CodingSquad</a>
 				</div>
 			</footer>
@@ -1123,8 +830,6 @@ name: 'Video Ads'
 			<!-- Template Main JS File -->
 			<script src="{{ asset ('assets2/js/main.js') }}"></script>
 		{% endblock %}
-
-			{% block script %}{% endblock %}
 
 	</body>
 

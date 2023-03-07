@@ -1,7 +1,7 @@
 <?php
 // src/Service/LocaleManager.php
 
-namespace App\service;
+namespace App\Service;
 use Geocoder\Geocoder;
 use App\service\MapboxGeocoder;
 use App\Entity\Locale;

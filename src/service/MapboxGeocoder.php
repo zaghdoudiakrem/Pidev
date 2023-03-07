@@ -1,5 +1,5 @@
 <?php
-namespace App\service;
+namespace App\Service;
 
 use Geocoder\Geocoder;
 use Geocoder\Provider\Mapbox\Mapbox;
