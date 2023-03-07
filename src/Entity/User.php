@@ -3,44 +3,67 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert ; 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(message:"Email '{{ value }}' est non valide")]
+    private ?string $email = null;
+
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
+
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:'Ce champ est Obligatoire !')]
+    #[Assert\Length(min:3)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:'Ce champ est Obligatoire !')]
+    #[Assert\Length(min:3)]
     private ?string $prenom = null;
 
-    #[ORM\Column]
-    private ?int $num_tel = null;
-
     #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $mdp = null;
-
-    #[ORM\Column]
-    private ?int $cin = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $role = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:'Ce champ est Obligatoire !')]
     private ?string $adresse = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Reponse::class)]
-    private Collection $reponses;
+   
+    #[ORM\Column]
+    #[Assert\NotBlank(message:'Ce champ est Obligatoire !')]
+    #[Assert\Length(
+    min:8,
+    max:8)]
+    private ?int $cin = null;
+
+    #[ORM\Column]
+    #[Assert\NotBlank(message:'Ce champ est Obligatoire !')]
+    #[Assert\Length(8)]
+    private ?int $num_tel = null;
+    #[ORM\Column]
+    private ?string $reset_token; 
+
+   // #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Reponse::class)]
+    //private Collection $reponses;
 
     #[ORM\OneToMany(mappedBy: 'id_client', targetEntity: Reclamation::class)]
     private Collection $reclamations;
@@ -66,9 +89,13 @@ class User
     #[ORM\OneToMany(mappedBy: 'id_expert', targetEntity: Rapport::class)]
     private Collection $rapports;
 
+    #[ORM\Column(length: 100)]
+    private ?string $activation_token = null;
+
+
     public function __construct()
     {
-        $this->reponses = new ArrayCollection();
+       // $this->reponses = new ArrayCollection();
         $this->reclamations = new ArrayCollection();
         $this->vehicules = new ArrayCollection();
         $this->contrats = new ArrayCollection();
@@ -82,6 +109,100 @@ class User
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+    public function getResetToken()
+    {
+        return $this->reset_token; 
+    }
+   public function setResetToken($reset_token):void
+   {
+    $this->reset_token=$reset_token; 
+   } 
+ 
+
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getNom(): ?string
@@ -108,41 +229,19 @@ class User
         return $this;
     }
 
-    public function getNumTel(): ?int
+    public function getAdresse(): ?string
     {
-        return $this->num_tel;
+        return $this->adresse;
     }
 
-    public function setNumTel(int $num_tel): self
+    public function setAdresse(string $adresse): self
     {
-        $this->num_tel = $num_tel;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getMdp(): ?string
-    {
-        return $this->mdp;
-    }
-
-    public function setMdp(string $mdp): self
-    {
-        $this->mdp = $mdp;
-
-        return $this;
-    }
+   
 
     public function getCin(): ?int
     {
@@ -156,59 +255,27 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getNumTel(): ?int
     {
-        return $this->role;
+        return $this->num_tel;
     }
 
-    public function setRole(string $role): self
+    public function setNumTel(int $num_tel): self
     {
-        $this->role = $role;
+        $this->num_tel = $num_tel;
 
         return $this;
     }
 
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
+/**
+     *//// @return Collection<int, Reponse>
+     ////
+    //public function getReponses(): Collection
+    //{
+      //  return $this->reponses;
+    //}
 
-    public function setAdresse(?string $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Reponse>
-     */
-    public function getReponses(): Collection
-    {
-        return $this->reponses;
-    }
-
-    public function addReponse(Reponse $reponse): self
-    {
-        if (!$this->reponses->contains($reponse)) {
-            $this->reponses->add($reponse);
-            $reponse->setIdUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReponse(Reponse $reponse): self
-    {
-        if ($this->reponses->removeElement($reponse)) {
-            // set the owning side to null (unless already changed)
-            if ($reponse->getIdUser() === $this) {
-                $reponse->setIdUser(null);
-            }
-        }
-
-        return $this;
-    }
+  
 
     /**
      * @return Collection<int, Reclamation>
@@ -450,8 +517,16 @@ class User
         return $this;
     }
 
-    public function __toString(): string
+    public function getActivationToken(): ?string
     {
-        return $this->id;
+        return $this->activation_token;
     }
+
+    public function setActivationToken(string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
+
+        return $this;
+    }
+
 }

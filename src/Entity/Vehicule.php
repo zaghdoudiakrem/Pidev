@@ -6,6 +6,10 @@ use App\Repository\VehiculeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+
 
 #[ORM\Entity(repositoryClass: VehiculeRepository::class)]
 class Vehicule
@@ -13,18 +17,39 @@ class Vehicule
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("vehicules")]
+
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("vehicules")]
+    #[Assert\NotBlank(message:"le champ Matricule est obligatoire")]
+    #[Assert\Length([
+        'max' => 10,
+        'maxMessage' => 'Le champ matricule doit contenir moins de {{ limit }} caractères.',
+    ])]
+
     private ?string $matricule = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("vehicules")]
+    #[Assert\NotBlank(message:"le champ Marque est obligatoire")]
+
+
     private ?string $marque = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("vehicules")]
+    #[Assert\NotBlank(message:"le champ Type est obligatoire")]
+   
+
     private ?string $type = null;
 
     #[ORM\Column]
+    #[Groups("vehicules")]
+    #[Assert\NotBlank(message:"le champ Nombre de chevaux est obligatoire")]
+    #[Assert\Positive(message:"le champ Nombre de chevaux doit etre positive")]
+
     private ?int $nb_ch = null;
 
     #[ORM\ManyToOne(inversedBy: 'vehicules')]
@@ -116,8 +141,9 @@ class Vehicule
     public function setIdContrat(Contrat $id_contrat): self
     {
         // set the owning side of the relation if necessary
-        if ($id_contrat->getIdVehicule() !== $this) {
-            $id_contrat->setIdVehicule($this);
+        if ($id_contrat->getId() !== $this) {
+            $id_contrat->getId($this);
+            //a retenir
         }
 
         $this->id_contrat = $id_contrat;
@@ -154,5 +180,9 @@ class Vehicule
 
         return $this;
     }
+    public function __toString()
+  {       
+    return (string) $this->getId();
+  }
 
 }
