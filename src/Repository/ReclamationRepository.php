@@ -72,12 +72,15 @@ class ReclamationRepository extends ServiceEntityRepository
     }
 
 
-    public function sortByObjet() {
-        $qb=  $this->createQueryBuilder('s')
-            ->orderBy('s.objet','DESC');
-        return $qb ->getQuery()
-            ->getResult();
-    }
+    /** 
+    *public function sortByObjet() {
+       * $qb=  $this->createQueryBuilder('s')
+          *  ->orderBy('s.objet','ASC');
+       * return $qb ->getQuery()
+         
+       *->getResult();
+    *}
+    */
 
 //    /**
 //     * @return Reclamation[] Returns an array of Reclamation objects

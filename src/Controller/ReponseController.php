@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/reponse')]
 class ReponseController extends AbstractController
@@ -118,6 +119,25 @@ class ReponseController extends AbstractController
     {
         return $this->render('reponse/show.html.twig', [
             'reponse' => $reponse,
+        ]);
+    }
+
+    
+    #[Route('/tt/trier-par-description', name:'reponse_sort_by_description')]
+     public function sort(ReponseRepository $reponseRepository, EntityManagerInterface $entityManager): Response
+    {
+        $reponses = $reponseRepository->findAll();
+      // Obtenir le QueryBuilder pour l'entité Constat
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('c')
+                 ->from('App\Entity\Reponse', 'c')
+                 ->orderBy('c.description', 'DESC');
+
+      // Exécuter la requête et récupérer les résultats triés
+      $reponses = $queryBuilder->getQuery()->getResult();
+
+    return $this->render('reponse/index.html.twig', [
+        'reponses' => $reponses,
         ]);
     }
 

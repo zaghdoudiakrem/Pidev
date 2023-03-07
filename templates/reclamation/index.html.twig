@@ -1,3 +1,18 @@
+{% block style %}
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+th {
+  background-color: #d63384;
+  color: white;
+  text-align: center;
+}
+</style>
+{%endblock%}
 {% extends 'base2.html.twig' %}
 
 {% block title %}Reclamation{% endblock %}
@@ -13,6 +28,8 @@
                 <i class="bi bi-align-middle"></i>
                     Créer une nouvelle réclamation
                 </a>
+                
+
             </div>
             </div>
             <br>
@@ -28,16 +45,21 @@
                         <th>Id</th>
                         <th>Objet</th>
                         <th>Description</th>    
+                       <th><ul class="list-group list-group-flush">
+                        <li class="list-group-item">Note</li>
+                    
+                        </ul></th>
                         <th colspan ="4" width="1100px" style="position: relative; left: 100px; top: 0px;*">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="all">
                  {% for reclamation in reclamations %}
-                  
                     <tr>
                         <td>{{ reclamation.id }}</td>
                         <td>{{ reclamation.objet }}</td>
-                        <td>{{ reclamation.description }}</td>                     
+                        <td>{{ reclamation.description }}</td>  
+                        <td>{{ reclamation.note }}</td> 
+                                     
                         <td>
                             <form method="post" action="{{ path('app_reclamation_delete', {'id': reclamation.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
                             
@@ -67,10 +89,12 @@
                    <tr>
                       <td colspan="6">no records found</td>
                 </tr>
+                
                     {% endfor %}
                     </tbody>
                  <tbody id="searchtab">
                  </tbody>
+                 
                 </table>         
             </div>
         </div>
@@ -78,6 +102,8 @@
          <div class="pagination justify-content-center">
         {{ knp_pagination_render(reclamations) }}
         </div>
+
+        
 {% endblock %}
 {% block script %}
 <h1>Hi</h1>
@@ -127,5 +153,22 @@ return false;
 });
 });
 </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/jquery.raty.min.js"></script>
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.raty.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#rating').raty({
+                readOnly: true,
+                score: $('#rating input[name="score"]').val(),
+                path: "{{ asset('assets2/img') }}",
+                starOn: 'star-on.png',
+                starOff: 'star-off.png',
+                starHalf: 'star-half.png'
+            });
+        });
+    </script>
 {% endblock %}
 

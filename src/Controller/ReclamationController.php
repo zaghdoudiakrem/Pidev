@@ -23,6 +23,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\Component\Notifier\Recipient\Recipient;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 #[Route('/reclamation')]
@@ -39,7 +40,7 @@ class ReclamationController extends AbstractController
             $request->query->getInt('page', 1),
             3
         );
-        $reclamationsByObjet= $repository->sortByObjet();
+       
 
         $formSearch= $this->createForm(SearchReclamationType::class);
         $formSearch->handleRequest($request);
@@ -50,13 +51,11 @@ class ReclamationController extends AbstractController
             $result= $repository->searchReclamation($objet);
             return $this->renderForm("reclamation/index.html.twig",
                 array("reclamations"=>$result,
-                    "searchForm"=>$formSearch,
-                    'reclamationsByObjet'=>$reclamationsByObjet,));
+                    "searchForm"=>$formSearch,));
         }
           return $this->renderForm("reclamation/index.html.twig",
             array('reclamations' => $pagination,
-                 "searchForm"=>$formSearch,
-                 'reclamationsByObjet'=>$reclamationsByObjet,));
+                 "searchForm"=>$formSearch,));
     }
 
 
@@ -65,13 +64,13 @@ class ReclamationController extends AbstractController
     {
      $repository = $this->getDoctrine()->getRepository(Reclamation::class);
      $requestString=$request->get('searchValue');
-     // Appeler la fonction tri "sortByObjet"
-     $reclamation = $sr->sortByObjet();
      $reclamation = $sr->searchReclamation($requestString);
      $jsonContent = $Normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
      $retour=json_encode($jsonContent);
     return new Response($retour);
     }
+
+
 
   
     #[Route('/liste', name:'liste')]
@@ -92,13 +91,14 @@ class ReclamationController extends AbstractController
 
     #[Route('/addReclamationJSON/new', name:'addReclamationJSON')]
     public function addReclamationJSON(Request $request, NormalizerInterface $normalizer){
-        $em=$this->getDoctrine()->getManager();
+        
         $reclamation=new Reclamation();
         $user = $this->getDoctrine()->getRepository(User::class)->find(1);
         $reclamation -> setIdClient($user);
         $reclamation->setDescription($request->get('description'));
         $reclamation->setObjet($request->get('objet'));
         $reclamation->setNote($request->get('note'));
+        $em=$this->getDoctrine()->getManager();
         $em->persist($reclamation);
         $em->flush();
         $jsonContent=$normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
@@ -131,6 +131,7 @@ class ReclamationController extends AbstractController
         $jsonContent=$normalizer->normalize($reclamation,'json',['groups'=>'reclamation']);
         return new Response('Reclamation delete succefuly'.json_encode($jsonContent));
     }
+
 
 
 
