@@ -1,0 +1,21 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Modifier Reponse{% endblock %}
+
+{% block body %}
+ <div class="container">
+    <h2 class="text-center mt-5 mb-3" style="color: #FFA500">Modifier votre Réponse</h2>
+
+     <a class="btn btn-outline-secondary" href="{{ path('app_reponse_index') }}"> 
+     <i class="bi bi-arrow-counterclockwise"></i>
+
+         Retour à la liste
+    </a>
+
+ <br>
+ <br>
+    {{ include('reponse/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+  
+    </div>
+{% endblock %}

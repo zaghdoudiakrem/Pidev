@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Reclamation{% endblock %}
+ 
+{% block body %}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3"fst-italic style="color: #FFA500">Nouvelle Reclamation</h2>
+        <div class="card">
+            <div class="card-body">
+                 {{ include('reclamation/_form.html.twig') }}
+            </div>
+        </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+  <script src="{{ asset('assets/js/jquery.raty.js') }}"></script>
+  <script>
+    $(function() {
+        var note = {{ form.vars.value.note|default(0) }};
+        if (note) {
+            $('#reclamation_note').raty({
+                path: '{{ asset('assets/img') }}',
+                score: note,
+                click: function(score, evt) {
+                    $('#reclamation_note').val(score);
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}
+
+
+

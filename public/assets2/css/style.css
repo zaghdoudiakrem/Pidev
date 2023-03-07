@@ -16,6 +16,10 @@ body {
   font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
   color: #444444;
+  font-size: 24px;
+  padding: 1px 1px;
+  
+ 
 }
 
 a {
@@ -49,6 +53,7 @@ h6 {
 @media (max-width: 1199px) {
   #main {
     padding: 20px;
+    padding: 2s0px;
   }
 }
 
@@ -1271,4 +1276,5 @@ h6 {
   
   
   
+
 

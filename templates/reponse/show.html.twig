@@ -1,0 +1,27 @@
+
+{% extends 'base2.html.twig' %}
+
+{% block title %}Reponse{% endblock %}
+{% block body %}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Détails de Réponse</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-secondary" href="{{ path('app_reponse_index') }}"> 
+                <i class="bi bi-arrow-counterclockwise"></i>
+
+                    Retour à la liste de réponse
+                </a>
+            </div>
+            <div class="card-body" style="color: #008000">
+                <b class="text-muted">Id:</b>
+                <p>{{ reponse.id }}</p>
+                <b class="text-muted">Description:</b>
+                <p>{{ reponse.description }}</p>
+
+            </div>
+            
+        </div>
+    </div>
+{% endblock %}
+

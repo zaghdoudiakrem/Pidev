@@ -39,6 +39,49 @@ class ReclamationRepository extends ServiceEntityRepository
         }
     }
 
+ 
+
+
+    public function getReclamationsByReponse($id)  {
+        $qb= $this->createQueryBuilder('s')
+            ->join('s.reponse','c')
+            ->addSelect('c')
+            ->where('c.id=:id')
+            ->setParameter('id',$id);
+        return $qb->getQuery()
+            ->getResult();
+    }
+
+
+    public function searchReclamation($objet) {
+        return $this->createQueryBuilder('reclamation')
+        ->andWhere('reclamation.objet LIKE :objet')
+        ->setParameter('objet', '%'.$objet.'%')
+        ->getQuery()
+        ->execute();
+    }
+
+    public function getPaginatedAnnonces($page, $limit){
+        $query = $this->createQueryBuilder('a')
+            ->where('a.active = 1')
+            ->orderBy('a.created_at')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+
+    /** 
+    *public function sortByObjet() {
+       * $qb=  $this->createQueryBuilder('s')
+          *  ->orderBy('s.objet','ASC');
+       * return $qb ->getQuery()
+         
+       *->getResult();
+    *}
+    */
+
 //    /**
 //     * @return Reclamation[] Returns an array of Reclamation objects
 //     */

@@ -1,0 +1,74 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3" style="color: #FFA500"> Détail de Reclamation</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-secondary" href="{{ path('app_reclamation_index') }}"> 
+                <i class="bi bi-arrow-counterclockwise"></i>
+
+                    Retour à la liste de réclamation
+                </a>
+            </div>
+            <div class="card-body" style="color: #008000">
+                <b class="text-muted">Id:</b>
+                <p>{{ reclamation.id }}</p>
+                <b class="text-muted">Description:</b>
+                <p>{{ reclamation.description }}</p>
+                <b class="text-muted">Objet:</b>
+                <p>{{ reclamation.objet }}</p>
+                 
+                   <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Note : {{ reclamation.note }}</li>
+                    
+                   </ul>
+
+
+               
+
+  <div id="rating">
+        <input type="hidden" name="score" value="{{ reclamation.getNote() }}">
+    </div>
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/jquery.raty.min.js"></script>
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.raty.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#rating').raty({
+                readOnly: true,
+                score: $('#rating input[name="score"]').val(),
+                path: "{{ asset('assets2/img') }}",
+                starOn: 'star-on.png',
+                starOff: 'star-off.png',
+                starHalf: 'star-half.png'
+            });
+        });
+    </script>
+
+ <br>
+ <div class="d-grid gap-2 col-6 mx-auto">
+     <a class="btn btn-outline-primary" href="{{ path('app_reponse_new') }}"> 
+     <i class="bi bi-chat-dots"></i>
+                 Répondre
+     </a>
+
+    <a href="{{ path('app_reclamation_pdf', {'id': reclamation.id}) }}" class="btn btn-outline-danger float-right mr-2" target="_blank"><i class="bi bi-file-earmark-arrow-down"></i>Print</a>
+
+
+     
+ </div>
+
+ 
+     </div>
+    </div>
+
+{% endblock %}
+
+
+
+ 

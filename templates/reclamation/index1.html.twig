@@ -1,0 +1,31 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Reponse{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Reponse</h2>
+        <div class="card">
+          
+            <div class="card-body">
+                 </br>
+             <div class="alert alert-success " role="alert">
+                <h4 class="alert-heading">Formulaire Envoyé</h4>
+                <p>Cher client, votre réclamation a été envoyé avec succès. Il sera traité prochainement.</p>
+                <hr>
+                <p class="mb-0">Merci pour choisir 4Roues Assurance</p>
+                {# <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> #}
+              </div>
+              {# <img src="{{asset ('assets/img/clients/client-9.png')}}" class="img-fluid" alt=""> #}
+            {# <h1>Table Des Offres</h1> #}
+
+
+                  <a class="btn btn-primary  rounded-pill" href="{{ path('app_reclamation_index') }}">
+                  Terminer  <i class="bi bi-check-circle"></i>
+                  </a>
+
+            </div>
+        </div>
+    </div>
+ 
+{% endblock %}

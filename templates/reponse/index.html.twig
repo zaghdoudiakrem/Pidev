@@ -1,0 +1,114 @@
+
+{% extends 'base2.html.twig' %}
+
+{% block title %}Reponse{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3" style="color: #FFA500">Liste des Réponses</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-secondary" href="{{ path('app_reponse_new') }}"> 
+                <i class="bi bi-align-middle"></i>
+                    Créer une nouvelle réponse
+                </a>
+                                            <a href="{{ path('reponse_sort_by_description') }}" class="btn btn-primary"> <i class="bi bi-caret-down-square-fill"></i> Trier par objet </a>
+
+            </div>
+             <input type="text" id="search" class="form-control" placeholder="Search">
+           
+            <br>
+            <br>
+            <div class="card-body">
+                <table class="table table-bordered">
+                  <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Description</th>
+                        <th colspan ="3" width="240px" style="position: relative; left: 80px; top: 0px;*" >Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="all">
+                    {% for reponse in reponses %}
+                    <tr>
+                        <td>{{ reponse.id }}</td>
+                        <td>{{ reponse.description }}</td>
+                        <td>
+                            <form method="post" action="{{ path('app_reponse_delete', {'id': reponse.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
+                                <a
+                                    class="btn btn-outline-info"
+                                    href="{{ path('app_reponse_show', {'id': reponse.id}) }}">
+                                    <i class="bi bi-eye-fill"></i>
+                                    Lister
+                                </a>
+                                <a
+                                    class="btn btn-outline-success"
+                                    href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Modifier
+                                </a>
+ 
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reponse.id) }}">
+                                <button class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i>Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                      </tbody>
+                 <tbody id="searchtab">
+                 </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+{% block script %}
+<h1>Hi</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+$( document ).ready(function() {
+    console.log("tesr")
+  $("#search").keyup(function(e){
+    console.log("tesr")
+/* La variable value va prendre la valeur insérer dans le champ de texte
+afin d’effectuer la recherche */
+var value = $(this).val();
+/* Ajax est lancé lors du remplissage du champ texte dont l’id est
+« search » pour faire la recherche */
+$.ajax({
+/* l’url est une chaine de caractères contenant l’adresse où la requête est
+envoyée */
+url : "{{ path('searchReponsex') }}",
+/* La méthode utilisée pour transférer les données est GET */
+type :'GET',
+/*Ici search value va prendre la chaine entrée par un utilisateur dans la
+zone de recherche et sera placée après l’url */
+data: {
+ 'searchValue' : value
+},
+/*Cette fonction permet de vider le contenu du tableau pour recevoir le
+nouveau contenu*/
+success : function(retour){
+if(retour){
+$('#t tbody#searchtab').empty();
+$.each(JSON.parse(retour), function(i, obj) {
+$('#t tbody#all').hide();
+$('#t tbody#searchtab').append('<tr><td> '+obj.id+ '</td><td> '+obj.description+' </td><td>  '+
+"<a href='app_reponse_edit/" +obj.id+"'>modifier</a></br>"+
+"<a href='app_reponse_delete/"+obj.id+"'>supprimer</a></td></tr>"); 
+});
+} 
+else
+{
+$('#t tbody#all').show();
+$('#t tbody#searchtab').empty();
+$('#t tbody#searchtab').fadeIn('fast');
+}
+},
+});
+return false;
+});
+});
+</script>
+{% endblock %}

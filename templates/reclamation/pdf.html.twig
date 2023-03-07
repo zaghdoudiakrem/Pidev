@@ -1,0 +1,67 @@
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+body {
+	background-color: #F5F5F5;
+    text-align: center;
+}
+h1{
+    text-align: center;
+    font-style:  italic normal;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+p{
+    text-align: center;
+}
+th {
+  background-color: #d63384;
+  color: white;
+  text-align: center;
+}
+thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.text-right {
+  text-align: center!important;
+}
+.font-weight-bold {
+  font-weight: bold!important;
+}
+</style>
+<h1 class="display-4"  style="color:#0dcaf0">Reclamation</h1>
+  <p><strong>ID:</strong> {{ reclamation.id }}</p>
+  <p><strong>Objet:</strong> {{ reclamation.objet }}</p>
+  <p><strong>Description:</strong>{{ reclamation.description}}</p>
+  <p><strong>Note:</strong> {{ reclamation.note}}</p>
+  <p><strong>Client:</strong> {{ reclamation.nom_client ~ " " ~ reclamation.prenom_client }}</p>
+
+  <table border="1" >
+    <thead>
+      <tr>
+        <th>Objet</th>
+        <th>Description</th>  
+        <th>Note</th> 
+        <th>Client</th> 
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>{{ reclamation.objet }}</td>
+          <td>{{ reclamation.description }}</td>
+          <td>{{ reclamation.note }}</td>
+          <td>{{ reclamation.nom_client ~ " " ~ reclamation.prenom_client }}</td>
+        </tr>
+    </tbody>
+  </table>

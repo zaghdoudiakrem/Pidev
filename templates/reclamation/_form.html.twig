@@ -1,0 +1,28 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+ <div class="form-label" style="color: #008000">
+        {{ form_row(form.objet, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    
+    <div class="text-break"  style="color: #008000">  
+     {{ form_row(form.description, {'attr': {'class': 'form-control'}})  }}
+    </div>
+
+   <div class="form-label" style="color: #008000">
+        {{ form_row(form.note, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+   
+ 
+    <div class="form-label" style="color: #008000">
+        {{ form_row(form.id_client, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+ <div class="vstack gap-2 col-md-5 mx-auto">
+     <button class="btn {{ button_color|default('btn btn-secondary') }}  mt-3">{{ button_label|default('Envoyer') }}</button>
+     <button type="reset" class="btn btn-outline-secondary">Annuler</button>
+</div>
+{{ form_end(form) }}
+
+
