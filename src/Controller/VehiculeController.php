@@ -14,6 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 #[Route('/vehicule')]
 class VehiculeController extends AbstractController
@@ -92,7 +96,71 @@ class VehiculeController extends AbstractController
         return $this->redirectToRoute('app_vehicule_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    //bundle Excel  
+    #[Route('/{id}/excel', name: 'app_vehicule_excel', methods:['GET'])]
+    public function exportExcelAction()
+    {
+    // get the data from your constat
+    $vehiculeData = $this->getDoctrine()->getRepository(Vehicule::class)->findAll();
 
+    // sort the data by name
+    usort($vehiculeData, function($a, $b) {
+        return strcmp($a->getNbCh(), $b->getNbCh());
+    });
+
+    // create new spreadsheet
+    $spreadsheet = new Spreadsheet();
+
+    // set the worksheet title
+    $spreadsheet->getActiveSheet()->setTitle('vehicule');
+
+    // add data to the worksheet
+    $spreadsheet->getActiveSheet()->setCellValue('A1', 'Matricule : ');
+    $spreadsheet->getActiveSheet()->setCellValue('B1', 'Type Vehicule :');
+    $spreadsheet->getActiveSheet()->setCellValue('C1', 'Marque Vehicule : ');
+    $spreadsheet->getActiveSheet()->setCellValue('D1', 'Nombre de chevaux : ');
+
+    $row = 2;
+    foreach($vehiculeData as $vehicule) {
+        $spreadsheet->getActiveSheet()->setCellValue('A'.$row, $vehicule->getMatricule());
+        $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $vehicule->getType());
+        $spreadsheet->getActiveSheet()->setCellValue('C'.$row, $vehicule->getMarque());
+        $spreadsheet->getActiveSheet()->setCellValue('D'.$row, $vehicule->getNbCh());
+        $row++;
+    }
+
+    // save the spreadsheet as a file
+    $writer = new Xlsx($spreadsheet);
+    $filename = 'vehicule.xlsx';
+    $writer->save($filename);
+
+    // return the file as a response
+    return $this->file($filename);
+}
+
+     
+    //Tri
+    #[Route('/tt/trier-par-nb', name:'vehicule_sort_by_nb')]
+    public function sortByNb(VehiculeRepository $vehiculeRepository, EntityManagerInterface $entityManager): Response
+  {
+      $vehicules = $vehiculeRepository->findAll();
+
+    // Obtenir le QueryBuilder pour l'entité vehicule
+      $queryBuilder = $entityManager->createQueryBuilder();
+      $queryBuilder->select('v')
+               ->from('App\Entity\Vehicule', 'v')
+               ->orderBy('v.nb_ch', 'DESC');
+
+    // Exécuter la requête et récupérer les résultats triés
+     $vehicules = $queryBuilder->getQuery()->getResult();
+
+  return $this->render('vehicule/index.html.twig', [
+      'vehicules' => $vehicules,
+      ]);
+  }
+ 
+
+    //partie JSON
     #[Route('/AllVehicule', name: 'list')]
     public function index_JSON(VehiculeRepository $vehiculeRepository,SerializerInterface $serializer)
     {

@@ -19,7 +19,10 @@ use Symfony\Component\Serializer\SerializerInterface;
 use DateTime;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 
@@ -35,6 +38,66 @@ class ConstatController extends AbstractController
             'constats' => $constatRepository->findAll(),
         ]);
     }
+
+    // Tri
+    #[Route('/trier-par-date', name:'constat_sort_by_date')]
+     public function sortByDate(ConstatRepository $constatRepository, EntityManagerInterface $entityManager): Response
+    {
+        $constats = $constatRepository->findAll();
+      // Obtenir le QueryBuilder pour l'entité Constat
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('c')
+                 ->from('App\Entity\Constat', 'c')
+                 ->orderBy('c.Date_creation', 'DESC');
+
+      // Exécuter la requête et récupérer les résultats triés
+       $constats = $queryBuilder->getQuery()->getResult();
+
+    return $this->render('constat/index.html.twig', [
+        'constats' => $constats,
+        ]);
+    }
+
+    /*#[Route('/filtrer-par-mois/{month}', name: 'constat_filter_by_month')]
+    public function filterByMonth(Request $request, ConstatRepository $constatRepository): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('month', ChoiceType::class, [
+                'choices' => [
+                    'Janvier' => 1,
+                    'Février' => 2,
+                    'Mars' => 3,
+                    // Ajouter les autres mois ici
+                ],
+                'placeholder' => 'Sélectionner un mois',
+                'required' => true,
+            ])
+            ->getForm();
+    
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+    
+            $constats = $constatRepository->createQueryBuilder('c')
+                ->where('MONTH(c.Date_creation) = :month')
+                ->setParameter('month', $data['month'])
+                ->getQuery()
+                ->getResult();
+        } 
+        else 
+        {
+            $constats = [];
+        }
+    
+        return $this->render('constat/index.html.twig', [
+            'form' => $form->createView(),
+            'constats' => $constats,
+        ]);
+    }*/
+    
+
+
 
     #[Route('/new', name: 'app_constat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ConstatRepository $constatRepository,FlashBagInterface $flashBag): Response
@@ -248,7 +311,8 @@ class ConstatController extends AbstractController
     // return the file as a response
     return $this->file($filename);
 }
-    
+
+ 
    
 
 
@@ -298,7 +362,7 @@ class ConstatController extends AbstractController
         return new Response(json_encode($jsonContent));
     }
 
-    #[Route('/{id}', name: 'constat')]
+    #[Route('/show/{id}', name: 'constat')]
     public function show_JSON($id,NormalizerInterface $normalizer,ConstatRepository $repo): Response
     {
         $constat = $repo->find($id);

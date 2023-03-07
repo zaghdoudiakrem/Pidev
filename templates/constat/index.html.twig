@@ -67,13 +67,14 @@
 			</aside>
 			<!-- End Sidebar-->
 			{% endblock %}
-			
-{% block body %}
+			{# templates/product/index.html.twig #}		
+{% block body %}  
 <div class="container">
         <h2  style="color: #ff8521;" class="text-center mt-5 mb-3">Constat</h2>
             <div class="card" style="text-align: center;">
                 <a  style="background-color: #ff8521; color: white; border-color: #ff8521;" class="btn btn-outline-primary" href="{{ path('app_constat_new') }}"> <i class="bi bi-plus-square"></i>      Ajouter un constat </a>
 				</div>
+	
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -89,7 +90,7 @@
         {% for constat in constats %}
             <tr>
                 <td>{{ constat.id }}</td>
-                <td>{{ constat.nomclientE }} {{ constat.prenomclientE }}</td>
+                <td>{{ constat.nomclientE }}{{ constat.prenomclientE }}</td>
                 <td>{{ constat.typevehiculeE }}</td>
                 <td>{{ constat.assuranceclientE }}</td>
                 <td>{{ constat.numcontratE }}</td>
@@ -114,5 +115,33 @@
              {% endfor %}
          </tbody>
     </table>
+    <div class="card" style="text-align: center;">
+    <a href="{{ path('constat_sort_by_date') }}" class="btn btn-primary"> <i class="bi bi-caret-down-square-fill"></i> Trier par date de création </a>
    </div>
+   </div>
+{% endblock %}
+{% block javascript %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+	<script>
+	function sortByDate() {
+    $.ajax({
+         url: '/sort-constat-by-date',
+         type: 'GET',
+         dataType: 'json',
+         success: function (data) {
+             // Vider la liste actuelle des constats
+             $('#constats-list').empty();
+             // Ajouter chaque constat trié à la liste
+             $.each(data, function (index, constat) {
+                 var li = '<li>' + constat.nomclient_e + ' - ' + constat.Date_creation + '</li>';
+                 $('#constats-list').append(li);
+             });
+         }
+     });
+    }
+ 
+    $('#sort-by-date-button').click(function () {
+         sortByDate();
+   });
+   </script>  
 {% endblock %}

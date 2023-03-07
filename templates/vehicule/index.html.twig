@@ -6,7 +6,7 @@
 <div class="container">
      <h2 style="color: #ff8521;" class="text-center mt-5 mb-3">Vehicule</h2>
       <div class="card" style="text-align: center;">
-                <a style="background-color: #ff8521; color: white;" class="btn btn-outline-primary" href="{{ path('app_vehicule_new') }}"> Ajouter une vehicule </a>
+                <a style="background-color: #ff8521; color: white; border-color: #ff8521;" class="btn btn-outline-primary" href="{{ path('app_vehicule_new') }}"> <i class="bi bi-plus-square"></i> Ajouter une vehicule </a>
                 </div>
     <table class="table table-bordered">
         <thead>
@@ -28,8 +28,9 @@
                 <td>{{ vehicule.marque }}</td>
                 <td>{{ vehicule.nbCh }}</td>
                 <td>
-                    <a class="btn btn-outline-info" href="{{ path('app_vehicule_show', {'id': vehicule.id}) }}">Lister</a>
-                    <td><a  class="btn btn-outline-success" href="{{ path('app_vehicule_edit', {'id': vehicule.id}) }}">Modifier</a</td>
+                    <a class="btn btn-outline-info  d-inline-flex align-items-center" href="{{ path('app_vehicule_show', {'id': vehicule.id}) }}"> <i class="bi bi-eye me-2"></i> Lister</a>
+                    <td>
+                    <a  class="btn btn-outline-success" href="{{ path('app_vehicule_edit', {'id': vehicule.id}) }}"> <i class="bi bi-pencil-fill me-2"></i> Modifier</a></td>
                     <td>{{ include('vehicule/_delete_form.html.twig') }}</td>
 
                 </td>
@@ -48,6 +49,9 @@
              {% endfor %}
         </tbody>
     </table>
+    <div class="card" style="text-align: center;">
+    <a href="{{ path('vehicule_sort_by_nb') }}" class="btn btn-primary"> <i class="bi bi-caret-down-square-fill"></i> Trier par Nombre de Chevaux </a>
+   </div>
      </div>
 
 {% endblock %}

@@ -1,3 +1,11 @@
 #index:
 #    path: /
-#    controller: App\Controller\DefaultController::index
+#    controller: App\Controller\DefaultController::index 
+#app_constat_filter:
+    #path: /constat/constats/filter
+    #methods: [POST]
+    #controller: App\Controller\ConstatController::filter
+app_sort_constat_by_date:
+    path: /constat/sort-constat-by-date
+    controller: App\Controller\ConstatController::sortByDate
+
