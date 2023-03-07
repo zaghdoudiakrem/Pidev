@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+ <div class="container">
+        <section class="section register ">
+            {% for message  in app.flashes('message') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </section>
+        <section class="section register ">
+            {% for danger  in app.flashes('danger') %}
+                <div class="alert alert-info">
+                    {{ danger }}
+                </div>
+            {% endfor %}
+       <!DOCTYPE html>
+         <html lang="fr">
+         <head>
+         <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Bienvenu </title>
+        </head>
+  <body>
+     <center>
+        <br>
+        <h1>Bienvenu dans notre site4 Roues Assurances </h1>
+        <p>Votre adhesion est effectuer avec succés , j'espère vous trouvez ce que vous chercher, nous vous souhaitons nos chèrs salutation</p>
+        <button class="btn btn-primary success "> </button>
+        <p><a href="{{ absolute_url (path ('app_verify_email', {'token': token})) }}">Activer mon compte</a></p>
+        <p>Pour toute autre information veuillez nous contacter sur notre email 4.roues.assurances@gmail.com </p>
+     </center>
+    </body>
+   </html>
+{% endblock %}
