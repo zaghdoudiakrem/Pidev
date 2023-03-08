@@ -1,16 +1,30 @@
 {% extends 'base2.html.twig'%}
 
+             {% block search  %}  
+			 <input id="myInput" type="text" value="" name="Search" class="form-control" placeholder=" search" autofocus>
+
+			 {% endblock  %}   
+		 
+
 {% block body %}
-	<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+ 
 
 
-		<table class="table table-borderless datatable">
+
+	
+	
+
+		<table id="myTable" class="table table-striped">
+		 
+		 
+		
+
 			<thead>
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Date</th>
 					<th scope="col">Lieux</th>
-					
 					<th scope="col">EXpert</th>
 					<th scope="col">Mecanicien</th>
 					<th scope="col">rapport</th>
@@ -50,4 +64,19 @@
 <div class="row">
 	<a class="btn btn-primary rounded-pill" href="{{path ('app_addrendez_vous')}}">
 		Ajouter</a>
-</div></div>{% endblock %}
+</div></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+
+{% endblock %}

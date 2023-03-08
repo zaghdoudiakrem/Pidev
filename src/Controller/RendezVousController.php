@@ -63,7 +63,7 @@ class RendezVousController extends AbstractController
             $entityManager->persist($rendezvous);
             $entityManager->flush();
             $accountSid='ACeb4f42e01aed761f46989f2f9ddbdc08';
-            $authToken='37948b8c86ecfbf02717a21840542bd7';
+            $authToken='02e7513394c1c4e5f44e0f3765892a8f';
             $twilio= new Client($accountSid,$authToken);
             $message = $twilio->messages->create('+21654207503',array( 'from'=>'+15674302677','body'=>'Votre rendez-vous aura lieu'.$rendezvous->getLieu().'à :'.$rendezvous->getDate()->format('Y-m-d H:i:s'),));
              
@@ -214,4 +214,34 @@ class RendezVousController extends AbstractController
     }
 
 
+    #[Route('/calendar', name: 'calendar_events')]
+    public function eventsrendezvous(RendezVousRepository $repo): Response
+    {    $events=[];
+         $rendezvouss=$repo->findAll();
+         //dd($rendezvouss);
+        foreach($rendezvouss as $rendezvous)
+        {
+            $events[] = 
+                [
+                    'title' => $rendezvous->getLieu(),
+                    'start' => $rendezvous->getDate()->format('Y-m-d H:i:s'),
+                    
+                ];
+                
+
+        }
+
+
+
+
+        
+      
+
+        //return new JsonResponse($events);
+        return $this->render('rendez_vous/calendar.html.twig',
+        ['events'=>json_encode($events)
+        ]);
+    }
+
+    
 }
