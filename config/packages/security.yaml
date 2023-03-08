@@ -20,7 +20,6 @@ security:
             security: false
         main:
             lazy: true
-<<<<<<< HEAD
 
             provider: app_user_provider
             custom_authenticator: App\Security\AppUserAuthentificatorAuthenticator
@@ -31,9 +30,6 @@ security:
 
             
 
-=======
-            provider: users_in_memory
->>>>>>> origin/gestion_rendezvous
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
