@@ -44,7 +44,7 @@
 
                 <li class="page-item disabled">
 
-                    <span class="page-link">&laquo;&nbsp;{{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}</span>
+                    <span style="color:#ff5821;" class="page-link">&laquo;&nbsp;{{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}</span>
 
                 </li>
 
@@ -56,7 +56,7 @@
 
                 <li class="page-item">
 
-                    <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): 1})) }}">1</a>
+                    <a style="color:#ff5821;" class="page-link" href="{{ path(route, query|merge({(pageParameterName): 1})) }}">1</a>
 
                 </li>
 
@@ -64,7 +64,7 @@
 
                     <li class="page-item">
 
-                        <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): 2})) }}">2</a>
+                        <a style="color:#ff5821;" class="page-link" href="{{ path(route, query|merge({(pageParameterName): 2})) }}">2</a>
 
                     </li>
 
@@ -88,7 +88,7 @@
 
                     <li class="page-item">
 
-                        <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+                        <a style="color:#ff5821;"class="page-link" href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
 
                     </li>
 
@@ -96,7 +96,7 @@
 
                     <li class="page-item active">
 
-                        <span class="page-link">{{ page }}</span>
+                        <span style="color:#ff5821;" class="page-link">{{ page }}</span>
 
                     </li>
 
@@ -114,17 +114,17 @@
 
                     {% if pageCount > (endPage + 2) %}
 
-                        <li class="page-item disabled">
+                        <li style="color:#ff5821;"class="page-item disabled">
 
-                            <span class="page-link">&hellip;</span>
+                            <span style="color:#ff5821;" class="page-link">&hellip;</span>
 
                         </li>
 
                     {% else %}
 
-                        <li class="page-item">
+                        <li style="color:#ff5821;" class="page-item">
 
-                            <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}">{{ pageCount -1 }}</a>
+                            <a style="color:#ff5821;" class="page-link" href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}">{{ pageCount -1 }}</a>
 
                         </li>
 
@@ -132,9 +132,9 @@
 
                 {% endif %}
 
-                <li class="page-item">
+                <li style="color:#ff5821;" class="page-item">
 
-                    <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): pageCount})) }}">{{ pageCount }}</a>
+                    <a style="color:#ff5821;" class="page-link" href="{{ path(route, query|merge({(pageParameterName): pageCount})) }}">{{ pageCount }}</a>
 
                 </li>
 
@@ -142,17 +142,17 @@
 
 {% if next is defined %}
  
-                <li class="page-item">
+                <li style="color:#ff5821;" class="page-item">
 
-                    <a class="page-link" rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</a>
+                    <a class="page-link" style="color:#ff5821;" rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</a>
 
                 </li>
 
             {% else %}
 
-                <li  class="page-item disabled">
+                <li style="color:#ff5821;" class="page-item disabled">
 
-                    <span class="page-link">{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</span>
+                    <span style="color:#ff5821;" class="page-link">{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</span>
 
                 </li>
 

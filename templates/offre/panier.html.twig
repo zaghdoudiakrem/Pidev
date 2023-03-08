@@ -5,6 +5,8 @@
 {% block contenu %}
 <main id="main" class="main">
       <section class="section container">
+      
+<a  class="btn btn-primary " style="float:right;" href="{{path("cart_delete_all")}}">Se Déconnecter</a>
    <div class="d-flex center">
     <div class="row">
         <div class="col-lg-13">
@@ -41,15 +43,14 @@
                 <td colspan="3">Total</td>
                 <td class="text-end">{{ total }} DT</td>
                 <td>
-                    <a href="{{path("cart_delete_all")}}" class="btn btn-danger">
-                        <i class="bi bi-cart-x"></i>
-                    </a>
+                    
+                    
                 </td>
             </tr>
         </tfoot>
     </table>
     <a  class="btn btn-primary mr-2" href="{{ path('app_offrefront_index') }}">Choisir Des Offres</a>
-    <a  class="btn btn-primary mr-2" href="{{ path('app_contratfront_index') }}">Passer au Contrat</a>
+    <a  class="btn btn-primary mr-2" href="{{ path('cart_pay_all') }}">Passer au Paiement</a>
             </div>
           </div>
 

@@ -40,23 +40,33 @@ class CartController extends AbstractController
      
      #[Route('/add/{id}', name: 'cart_add', methods: ['GET'])]
      
-    public function add(Offre $offre, SessionInterface $session)
-    {
-        // On récupère le panier actuel
-        $panier = $session->get("panier", []);
-        $id = $offre->getId();
-
-        if(!empty($panier[$id])){
-            $panier[$id]++;
-        }else{
-            $panier[$id] = 1;
-        }
-
-        // On sauvegarde dans la session
-        $session->set("panier", $panier);
-
-        return $this->redirectToRoute("cart_index");
-    }
+     public function add(Offre $offre, SessionInterface $session)
+     {
+         // On récupère le panier actuel
+         $panier = $session->get("panier", []);
+         $id = $offre->getId();
+     
+         if(!empty($panier[$id])){
+             $panier[$id]++;
+         }else{
+             $panier[$id] = 1;
+         }
+     
+         // On calcule le total du panier
+         $total = 0;
+         foreach($panier as $id => $quantite){
+             $offre = $this->getDoctrine()
+                           ->getRepository(Offre::class)
+                           ->find($id);
+             $total += $offre->getPrix() * $quantite;
+         }
+     
+         // On sauvegarde le total dans la session
+         $session->set("panier", $panier);
+         $session->set("total", $total);
+     
+         return $this->redirectToRoute("cart_index");
+     }
 
     
     // #[Route('/remove/{id}', name: 'cart_remove', methods: ['GET'])]
@@ -105,7 +115,15 @@ class CartController extends AbstractController
     {
         $session->remove("panier");
 
-        return $this->redirectToRoute("cart_index");
+        return $this->redirectToRoute("app_offrefront_index");
+    }
+
+    #[Route('/pay', name: 'cart_pay_all', methods: ['GET'])]
+    public function payAll(SessionInterface $session)
+    {
+        $session->remove("panier");
+
+        return $this->redirectToRoute("app_stripe");
     }
 
 }

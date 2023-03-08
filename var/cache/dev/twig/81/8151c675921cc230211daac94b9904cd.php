@@ -88,7 +88,7 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
                 echo "
                 <li class=\"page-item disabled\">
 
-                    <span class=\"page-link\">&laquo;&nbsp;";
+                    <span style=\"color:#ff5821;\" class=\"page-link\">&laquo;&nbsp;";
                 // line 47
                 echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("label_previous", [], "KnpPaginatorBundle"), "html", null, true);
                 echo "</span>
@@ -108,7 +108,7 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
                 echo "
                 <li class=\"page-item\">
 
-                    <a class=\"page-link\" href=\"";
+                    <a style=\"color:#ff5821;\" class=\"page-link\" href=\"";
                 // line 59
                 echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath((isset($context["route"]) || array_key_exists("route", $context) ? $context["route"] : (function () { throw new RuntimeError('Variable "route" does not exist.', 59, $this->source); })()), twig_array_merge((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 59, $this->source); })()), [(isset($context["pageParameterName"]) || array_key_exists("pageParameterName", $context) ? $context["pageParameterName"] : (function () { throw new RuntimeError('Variable "pageParameterName" does not exist.', 59, $this->source); })()) => 1])), "html", null, true);
                 echo "\">1</a>
@@ -122,7 +122,7 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
                     echo "
                     <li class=\"page-item\">
 
-                        <a class=\"page-link\" href=\"";
+                        <a style=\"color:#ff5821;\" class=\"page-link\" href=\"";
                     // line 67
                     echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath((isset($context["route"]) || array_key_exists("route", $context) ? $context["route"] : (function () { throw new RuntimeError('Variable "route" does not exist.', 67, $this->source); })()), twig_array_merge((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 67, $this->source); })()), [(isset($context["pageParameterName"]) || array_key_exists("pageParameterName", $context) ? $context["pageParameterName"] : (function () { throw new RuntimeError('Variable "pageParameterName" does not exist.', 67, $this->source); })()) => 2])), "html", null, true);
                     echo "\">2</a>
@@ -164,7 +164,7 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
                     echo "
                     <li class=\"page-item\">
 
-                        <a class=\"page-link\" href=\"";
+                        <a style=\"color:#ff5821;\"class=\"page-link\" href=\"";
                     // line 91
                     echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath((isset($context["route"]) || array_key_exists("route", $context) ? $context["route"] : (function () { throw new RuntimeError('Variable "route" does not exist.', 91, $this->source); })()), twig_array_merge((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 91, $this->source); })()), [(isset($context["pageParameterName"]) || array_key_exists("pageParameterName", $context) ? $context["pageParameterName"] : (function () { throw new RuntimeError('Variable "pageParameterName" does not exist.', 91, $this->source); })()) => $context["page"]])), "html", null, true);
                     echo "\">";
@@ -179,7 +179,7 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
                     echo "
                     <li class=\"page-item active\">
 
-                        <span class=\"page-link\">";
+                        <span style=\"color:#ff5821;\" class=\"page-link\">";
                     // line 99
                     echo twig_escape_filter($this->env, $context["page"], "html", null, true);
                     echo "</span>
@@ -216,9 +216,9 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
                     if (((isset($context["pageCount"]) || array_key_exists("pageCount", $context) ? $context["pageCount"] : (function () { throw new RuntimeError('Variable "pageCount" does not exist.', 115, $this->source); })()) > ((isset($context["endPage"]) || array_key_exists("endPage", $context) ? $context["endPage"] : (function () { throw new RuntimeError('Variable "endPage" does not exist.', 115, $this->source); })()) + 2))) {
                         // line 116
                         echo "
-                        <li class=\"page-item disabled\">
+                        <li style=\"color:#ff5821;\"class=\"page-item disabled\">
 
-                            <span class=\"page-link\">&hellip;</span>
+                            <span style=\"color:#ff5821;\" class=\"page-link\">&hellip;</span>
 
                         </li>
 
@@ -226,9 +226,9 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
                     } else {
                         // line 124
                         echo "
-                        <li class=\"page-item\">
+                        <li style=\"color:#ff5821;\" class=\"page-item\">
 
-                            <a class=\"page-link\" href=\"";
+                            <a style=\"color:#ff5821;\" class=\"page-link\" href=\"";
                         // line 127
                         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath((isset($context["route"]) || array_key_exists("route", $context) ? $context["route"] : (function () { throw new RuntimeError('Variable "route" does not exist.', 127, $this->source); })()), twig_array_merge((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 127, $this->source); })()), [(isset($context["pageParameterName"]) || array_key_exists("pageParameterName", $context) ? $context["pageParameterName"] : (function () { throw new RuntimeError('Variable "pageParameterName" does not exist.', 127, $this->source); })()) => ((isset($context["pageCount"]) || array_key_exists("pageCount", $context) ? $context["pageCount"] : (function () { throw new RuntimeError('Variable "pageCount" does not exist.', 127, $this->source); })()) - 1)])), "html", null, true);
                         echo "\">";
@@ -245,9 +245,9 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
                 }
                 // line 134
                 echo "
-                <li class=\"page-item\">
+                <li style=\"color:#ff5821;\" class=\"page-item\">
 
-                    <a class=\"page-link\" href=\"";
+                    <a style=\"color:#ff5821;\" class=\"page-link\" href=\"";
                 // line 137
                 echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath((isset($context["route"]) || array_key_exists("route", $context) ? $context["route"] : (function () { throw new RuntimeError('Variable "route" does not exist.', 137, $this->source); })()), twig_array_merge((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 137, $this->source); })()), [(isset($context["pageParameterName"]) || array_key_exists("pageParameterName", $context) ? $context["pageParameterName"] : (function () { throw new RuntimeError('Variable "pageParameterName" does not exist.', 137, $this->source); })()) => (isset($context["pageCount"]) || array_key_exists("pageCount", $context) ? $context["pageCount"] : (function () { throw new RuntimeError('Variable "pageCount" does not exist.', 137, $this->source); })())])), "html", null, true);
                 echo "\">";
@@ -265,9 +265,9 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
             if (array_key_exists("next", $context)) {
                 // line 144
                 echo " 
-                <li class=\"page-item\">
+                <li style=\"color:#ff5821;\" class=\"page-item\">
 
-                    <a class=\"page-link\" rel=\"next\" href=\"";
+                    <a class=\"page-link\" style=\"color:#ff5821;\" rel=\"next\" href=\"";
                 // line 147
                 echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath((isset($context["route"]) || array_key_exists("route", $context) ? $context["route"] : (function () { throw new RuntimeError('Variable "route" does not exist.', 147, $this->source); })()), twig_array_merge((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 147, $this->source); })()), [(isset($context["pageParameterName"]) || array_key_exists("pageParameterName", $context) ? $context["pageParameterName"] : (function () { throw new RuntimeError('Variable "pageParameterName" does not exist.', 147, $this->source); })()) => (isset($context["next"]) || array_key_exists("next", $context) ? $context["next"] : (function () { throw new RuntimeError('Variable "next" does not exist.', 147, $this->source); })())])), "html", null, true);
                 echo "\">";
@@ -280,9 +280,9 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
             } else {
                 // line 152
                 echo "
-                <li  class=\"page-item disabled\">
+                <li style=\"color:#ff5821;\" class=\"page-item disabled\">
 
-                    <span class=\"page-link\">";
+                    <span style=\"color:#ff5821;\" class=\"page-link\">";
                 // line 155
                 echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("label_next", [], "KnpPaginatorBundle"), "html", null, true);
                 echo "&nbsp;&raquo;</span>
@@ -370,7 +370,7 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
 
                 <li class=\"page-item disabled\">
 
-                    <span class=\"page-link\">&laquo;&nbsp;{{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}</span>
+                    <span style=\"color:#ff5821;\" class=\"page-link\">&laquo;&nbsp;{{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}</span>
 
                 </li>
 
@@ -382,7 +382,7 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
 
                 <li class=\"page-item\">
 
-                    <a class=\"page-link\" href=\"{{ path(route, query|merge({(pageParameterName): 1})) }}\">1</a>
+                    <a style=\"color:#ff5821;\" class=\"page-link\" href=\"{{ path(route, query|merge({(pageParameterName): 1})) }}\">1</a>
 
                 </li>
 
@@ -390,7 +390,7 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
 
                     <li class=\"page-item\">
 
-                        <a class=\"page-link\" href=\"{{ path(route, query|merge({(pageParameterName): 2})) }}\">2</a>
+                        <a style=\"color:#ff5821;\" class=\"page-link\" href=\"{{ path(route, query|merge({(pageParameterName): 2})) }}\">2</a>
 
                     </li>
 
@@ -414,7 +414,7 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
 
                     <li class=\"page-item\">
 
-                        <a class=\"page-link\" href=\"{{ path(route, query|merge({(pageParameterName): page})) }}\">{{ page }}</a>
+                        <a style=\"color:#ff5821;\"class=\"page-link\" href=\"{{ path(route, query|merge({(pageParameterName): page})) }}\">{{ page }}</a>
 
                     </li>
 
@@ -422,7 +422,7 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
 
                     <li class=\"page-item active\">
 
-                        <span class=\"page-link\">{{ page }}</span>
+                        <span style=\"color:#ff5821;\" class=\"page-link\">{{ page }}</span>
 
                     </li>
 
@@ -440,17 +440,17 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
 
                     {% if pageCount > (endPage + 2) %}
 
-                        <li class=\"page-item disabled\">
+                        <li style=\"color:#ff5821;\"class=\"page-item disabled\">
 
-                            <span class=\"page-link\">&hellip;</span>
+                            <span style=\"color:#ff5821;\" class=\"page-link\">&hellip;</span>
 
                         </li>
 
                     {% else %}
 
-                        <li class=\"page-item\">
+                        <li style=\"color:#ff5821;\" class=\"page-item\">
 
-                            <a class=\"page-link\" href=\"{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}\">{{ pageCount -1 }}</a>
+                            <a style=\"color:#ff5821;\" class=\"page-link\" href=\"{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}\">{{ pageCount -1 }}</a>
 
                         </li>
 
@@ -458,9 +458,9 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
 
                 {% endif %}
 
-                <li class=\"page-item\">
+                <li style=\"color:#ff5821;\" class=\"page-item\">
 
-                    <a class=\"page-link\" href=\"{{ path(route, query|merge({(pageParameterName): pageCount})) }}\">{{ pageCount }}</a>
+                    <a style=\"color:#ff5821;\" class=\"page-link\" href=\"{{ path(route, query|merge({(pageParameterName): pageCount})) }}\">{{ pageCount }}</a>
 
                 </li>
 
@@ -468,17 +468,17 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
 
 {% if next is defined %}
  
-                <li class=\"page-item\">
+                <li style=\"color:#ff5821;\" class=\"page-item\">
 
-                    <a class=\"page-link\" rel=\"next\" href=\"{{ path(route, query|merge({(pageParameterName): next})) }}\">{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</a>
+                    <a class=\"page-link\" style=\"color:#ff5821;\" rel=\"next\" href=\"{{ path(route, query|merge({(pageParameterName): next})) }}\">{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</a>
 
                 </li>
 
             {% else %}
 
-                <li  class=\"page-item disabled\">
+                <li style=\"color:#ff5821;\" class=\"page-item disabled\">
 
-                    <span class=\"page-link\">{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</span>
+                    <span style=\"color:#ff5821;\" class=\"page-link\">{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</span>
 
                 </li>
 
@@ -488,6 +488,6 @@ class __TwigTemplate_5bf6eee8bef9c7902f0bc05727bb3eff extends Template
 
     </nav>
 
-{% endif %}", "offre/pagination.html.twig", "C:\\xampp\\htdocs\\PiDEV_V06\\PiDEV_V06\\templates\\offre\\pagination.html.twig");
+{% endif %}", "offre/pagination.html.twig", "C:\\xampp\\htdocs\\PiDEV_V12\\PiDEV_V06\\PiDEV_V06\\templates\\offre\\pagination.html.twig");
     }
 }

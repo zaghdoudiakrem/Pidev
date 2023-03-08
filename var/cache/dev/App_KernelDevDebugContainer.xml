@@ -6800,7 +6800,7 @@
         <argument key="offreRepository" type="service_closure" id="App\Repository\OffreRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.kjnb7U0" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.0xlczJO" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CartController::add" type="service_closure" id=".service_locator.6rKICIw"/>
@@ -6811,7 +6811,6 @@
         <argument key="App\Controller\ContratController::index" type="service_closure" id=".service_locator.3E5uZtb"/>
         <argument key="App\Controller\ContratController::index2" type="service_closure" id=".service_locator.3E5uZtb"/>
         <argument key="App\Controller\ContratController::index3" type="service_closure" id=".service_locator.3E5uZtb"/>
-        <argument key="App\Controller\ContratController::index4" type="service_closure" id=".service_locator.3E5uZtb"/>
         <argument key="App\Controller\ContratController::new" type="service_closure" id=".service_locator.3E5uZtb"/>
         <argument key="App\Controller\ContratController::show" type="service_closure" id=".service_locator.eS08S_J"/>
         <argument key="App\Controller\OffreController::delete" type="service_closure" id=".service_locator.uQRUBkf"/>
@@ -6839,7 +6838,6 @@
         <argument key="App\Controller\ContratController:index" type="service_closure" id=".service_locator.3E5uZtb"/>
         <argument key="App\Controller\ContratController:index2" type="service_closure" id=".service_locator.3E5uZtb"/>
         <argument key="App\Controller\ContratController:index3" type="service_closure" id=".service_locator.3E5uZtb"/>
-        <argument key="App\Controller\ContratController:index4" type="service_closure" id=".service_locator.3E5uZtb"/>
         <argument key="App\Controller\ContratController:new" type="service_closure" id=".service_locator.3E5uZtb"/>
         <argument key="App\Controller\ContratController:show" type="service_closure" id=".service_locator.eS08S_J"/>
         <argument key="App\Controller\OffreController:delete" type="service_closure" id=".service_locator.uQRUBkf"/>
@@ -7515,12 +7513,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.kjnb7U0"/>
+      <argument type="service" id=".service_locator.0xlczJO"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.kjnb7U0"/>
+      <argument type="service" id=".service_locator.0xlczJO"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8490,7 +8488,7 @@
     <service id="Knp\Component\Pager\PaginatorInterface" alias="knp_paginator"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.kjnb7U0"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.0xlczJO"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8515,7 +8513,7 @@
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.UsPl4aq" alias=".service_locator.4iAZlC5"/>
-    <service id=".service_locator.GbbA5eP" alias=".service_locator.kjnb7U0"/>
+    <service id=".service_locator.lGc7gtl" alias=".service_locator.0xlczJO"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.sV361_n" alias=".service_locator.wthr4rF"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>

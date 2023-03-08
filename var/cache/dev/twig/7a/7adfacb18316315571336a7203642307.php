@@ -87,6 +87,11 @@ class __TwigTemplate_eca31c1213c594ecafa73d2396dc9ecb extends Template
         // line 6
         echo "<main id=\"main\" class=\"main\">
       <section class=\"section container\">
+      
+<a  class=\"btn btn-primary \" style=\"float:right;\" href=\"";
+        // line 9
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("cart_delete_all");
+        echo "\">Se Déconnecter</a>
    <div class=\"d-flex center\">
     <div class=\"row\">
         <div class=\"col-lg-13\">
@@ -104,25 +109,25 @@ class __TwigTemplate_eca31c1213c594ecafa73d2396dc9ecb extends Template
         </thead>
         <tbody>
             ";
-        // line 24
+        // line 26
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["dataPanier"]) || array_key_exists("dataPanier", $context) ? $context["dataPanier"] : (function () { throw new RuntimeError('Variable "dataPanier" does not exist.', 24, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["dataPanier"]) || array_key_exists("dataPanier", $context) ? $context["dataPanier"] : (function () { throw new RuntimeError('Variable "dataPanier" does not exist.', 26, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["offre"]) {
-            // line 25
+            // line 27
             echo "                <tr>
                     <th>";
-            // line 26
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["offre"], "produit", [], "any", false, false, false, 26), "titre", [], "any", false, false, false, 26), "html", null, true);
+            // line 28
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["offre"], "produit", [], "any", false, false, false, 28), "titre", [], "any", false, false, false, 28), "html", null, true);
             echo "</th>
                     <td class=\"text-end\">";
-            // line 27
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["offre"], "produit", [], "any", false, false, false, 27), "prix", [], "any", false, false, false, 27), "html", null, true);
+            // line 29
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["offre"], "produit", [], "any", false, false, false, 29), "prix", [], "any", false, false, false, 29), "html", null, true);
             echo " DT</td>
                     <td>
                         <a href=\"";
-            // line 29
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("cart_remove", ["id" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["offre"], "produit", [], "any", false, false, false, 29), "id", [], "any", false, false, false, 29)]), "html", null, true);
+            // line 31
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("cart_remove", ["id" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["offre"], "produit", [], "any", false, false, false, 31), "id", [], "any", false, false, false, 31)]), "html", null, true);
             echo "\" class=\"btn btn-danger\">
                             <i class=\"bi bi-cart-dash\"></i>
                     </td>
@@ -131,7 +136,7 @@ class __TwigTemplate_eca31c1213c594ecafa73d2396dc9ecb extends Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 34
+            // line 36
             echo "                <tr>
                     <td colspan=\"5\" class=\"text-center\">Votre panier est vide</td>
                 </tr>
@@ -140,34 +145,30 @@ class __TwigTemplate_eca31c1213c594ecafa73d2396dc9ecb extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['offre'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 38
+        // line 40
         echo "        </tbody>
         <tfoot>
             <tr>
                 <td colspan=\"3\">Total</td>
                 <td class=\"text-end\">";
-        // line 42
-        echo twig_escape_filter($this->env, (isset($context["total"]) || array_key_exists("total", $context) ? $context["total"] : (function () { throw new RuntimeError('Variable "total" does not exist.', 42, $this->source); })()), "html", null, true);
+        // line 44
+        echo twig_escape_filter($this->env, (isset($context["total"]) || array_key_exists("total", $context) ? $context["total"] : (function () { throw new RuntimeError('Variable "total" does not exist.', 44, $this->source); })()), "html", null, true);
         echo " DT</td>
                 <td>
-                    <a href=\"";
-        // line 44
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("cart_delete_all");
-        echo "\" class=\"btn btn-danger\">
-                        <i class=\"bi bi-cart-x\"></i>
-                    </a>
+                    
+                    
                 </td>
             </tr>
         </tfoot>
     </table>
     <a  class=\"btn btn-primary mr-2\" href=\"";
-        // line 51
+        // line 52
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_offrefront_index");
         echo "\">Choisir Des Offres</a>
     <a  class=\"btn btn-primary mr-2\" href=\"";
-        // line 52
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_contratfront_index");
-        echo "\">Passer au Contrat</a>
+        // line 53
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("cart_pay_all");
+        echo "\">Passer au Paiement</a>
             </div>
           </div>
 
@@ -199,7 +200,7 @@ class __TwigTemplate_eca31c1213c594ecafa73d2396dc9ecb extends Template
 
     public function getDebugInfo()
     {
-        return array (  169 => 52,  165 => 51,  155 => 44,  150 => 42,  144 => 38,  135 => 34,  125 => 29,  120 => 27,  116 => 26,  113 => 25,  108 => 24,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  170 => 53,  166 => 52,  155 => 44,  149 => 40,  140 => 36,  130 => 31,  125 => 29,  121 => 28,  118 => 27,  113 => 26,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -211,6 +212,8 @@ class __TwigTemplate_eca31c1213c594ecafa73d2396dc9ecb extends Template
 {% block contenu %}
 <main id=\"main\" class=\"main\">
       <section class=\"section container\">
+      
+<a  class=\"btn btn-primary \" style=\"float:right;\" href=\"{{path(\"cart_delete_all\")}}\">Se Déconnecter</a>
    <div class=\"d-flex center\">
     <div class=\"row\">
         <div class=\"col-lg-13\">
@@ -247,15 +250,14 @@ class __TwigTemplate_eca31c1213c594ecafa73d2396dc9ecb extends Template
                 <td colspan=\"3\">Total</td>
                 <td class=\"text-end\">{{ total }} DT</td>
                 <td>
-                    <a href=\"{{path(\"cart_delete_all\")}}\" class=\"btn btn-danger\">
-                        <i class=\"bi bi-cart-x\"></i>
-                    </a>
+                    
+                    
                 </td>
             </tr>
         </tfoot>
     </table>
     <a  class=\"btn btn-primary mr-2\" href=\"{{ path('app_offrefront_index') }}\">Choisir Des Offres</a>
-    <a  class=\"btn btn-primary mr-2\" href=\"{{ path('app_contratfront_index') }}\">Passer au Contrat</a>
+    <a  class=\"btn btn-primary mr-2\" href=\"{{ path('cart_pay_all') }}\">Passer au Paiement</a>
             </div>
           </div>
 
@@ -267,6 +269,6 @@ class __TwigTemplate_eca31c1213c594ecafa73d2396dc9ecb extends Template
     </div>
    </main> 
 {% endblock %}
-", "offre/panier.html.twig", "C:\\xampp\\htdocs\\PiDEV_V06\\PiDEV_V06\\templates\\offre\\panier.html.twig");
+", "offre/panier.html.twig", "C:\\xampp\\htdocs\\PiDEV_V12\\PiDEV_V06\\PiDEV_V06\\templates\\offre\\panier.html.twig");
     }
 }
