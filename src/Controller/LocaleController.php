@@ -20,8 +20,8 @@ class LocaleController extends AbstractController
     #[Route('/', name: 'app_locale_index', methods: ['GET'])]
     public function index(LocaleRepository $localeRepository): Response
     {
-        $user = $this->getUser(); // get the currently logged in user object
-        $locales = $this->getDoctrine()->getRepository(Locale::class)->findBy(['user' => $user]);
+        //$user = $this->getUser(); // get the currently logged in user object
+        $locales = $this->getDoctrine()->getRepository(Locale::class)->findBy(['id_mecanicien' => 2]);
     
         return $this->render('locale/index.html.twig', [
             'locales' => $locales,

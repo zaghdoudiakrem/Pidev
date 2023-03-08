@@ -88,7 +88,7 @@
         </thead>
 		<tbody id="all">
         {% for locale in locales %}
-         {% if locale.user.id == app.user.id %}
+        {#  {% if locale.user.id == app.user.id %}  #}
             <tr>
                 <td>{{ locale.id }}</td>
                 <td>{{ locale.adresse }}</td>
@@ -111,7 +111,7 @@
             <tr>
                 <td colspan="3">no records found</td>
             </tr>
-        {% endif %}
+        {# {% endif %} #}
         {% endfor %}
         </tbody>
 		<tbody id="searchtab">
