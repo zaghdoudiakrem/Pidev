@@ -8,7 +8,8 @@
       <div class="row">
        
     <h1 style="color: #012970;font-family: "Nunito", sans-serif; margin-top:40px;"> Liste des  Utilisateurs </h1>
-       
+         <a href="{{ path('app_user_new') }}"> <button  class="btn btn-outline-info float-left mb-3 " width="40%">Ajouter un utilisateur </button></a>
+     <a href="{{ path('app_user_search') }}"> <button  class="btn btn-outline-success float-right mb-3 " width="40%">Rechercher utilisateur  </button></a>
     <table class="table table-striped">
          <thead>
             <tr>
@@ -61,8 +62,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}"> <button  class="btn btn-outline-info float-right " width="40%">Ajouter un utilisateur </button></a>
-     <a href="{{ path('app_user_search') }}"> <button  class="btn btn-outline-success float-right " width="40%">Rechercher utilisateur  </button></a>
+  
     </div>
     
     <span><a href="{{ path('app_back')}}" >Dashboard</a></span>

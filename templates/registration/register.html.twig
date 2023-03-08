@@ -27,7 +27,7 @@
         {{ form_row(registrationForm.num_tel,{label:'Numéro de télephone '}) }}
          {{ form_row(registrationForm.adresse) }}
 
-        {{ form_row(registrationForm.plainPassword, {
+        {{ form_row(registrationForm.plainPassword,{attr:{'class':'form-control'}}, {
             label: 'Mot De Passe '
          })}}
           {{ form_row(registrationForm.agreeTerms) }}

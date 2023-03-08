@@ -81,7 +81,7 @@ class SecurityController extends AbstractController
    }
 
   #[Route( '/forgot', name: 'app_forgotpass')]
-  public function forgotPassword (Request $request , UserRepository $userRepository , Mailer $mailer , TokenGeneratorInterface $tokenGenerator)
+  public function forgotPassword (Request $request , UserRepository $userRepository , \Swift_Mailer $mailer , TokenGeneratorInterface $tokenGenerator)
   {
      $form=$this->createForm(ForgetPasswordType::class); 
      $form->handleRequest($request); 

@@ -62,8 +62,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $reset_token; 
 
-    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Reponse::class)]
-    private Collection $reponses;
+   // #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Reponse::class)]
+    //private Collection $reponses;
 
     #[ORM\OneToMany(mappedBy: 'id_client', targetEntity: Reclamation::class)]
     private Collection $reclamations;
@@ -95,7 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->reponses = new ArrayCollection();
+       // $this->reponses = new ArrayCollection();
         $this->reclamations = new ArrayCollection();
         $this->vehicules = new ArrayCollection();
         $this->contrats = new ArrayCollection();
@@ -268,12 +268,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 /**
-     * @return Collection<int, Reponse>
-     */
-    public function getReponses(): Collection
-    {
-        return $this->reponses;
-    }
+     *//// @return Collection<int, Reponse>
+     ////
+    //public function getReponses(): Collection
+    //{
+      //  return $this->reponses;
+    //}
 
   
 

@@ -108,7 +108,7 @@ class RegistrationController extends AbstractController
         $entityManager->flush();
 
         // On envoie un message flash
-        $this->addFlash('message', 'Vous avez bien activé votre compte');
+        $this->addFlash('message', 'Vous avez bien activé votre compte , Connectez vous s\'il vous plait ');
 
         // On retoure à login
         return $this->redirectToRoute('app_login');

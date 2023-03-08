@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -49,6 +50,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+                'label'=>'Mot de Passe '
             ])
             ->add('nom',TextType::class,
             ['attr'=>['class'=>'form-control']])
@@ -58,7 +60,7 @@ class RegistrationFormType extends AbstractType
             ->add('cin',TextareaType::class,['attr'=>['class'=>'form-control']])
             ->add('num_tel',TextareaType::class,['attr'=>['class'=>'form-control']
             ])
-        ;
+            ->add('recaptch3', Recaptcha3Type::class)        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

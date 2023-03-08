@@ -44,9 +44,19 @@
         <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">4rouesassurances@gmail.com</a></i>
         <i class="bi bi-phone d-flex align-items-center ms-4"><span>+216 70 300 300</span></i>
       </div>
-
+      {% for user in app.user %}
+       {% if app.user %}
       <div class="cta d-none d-md-flex align-items-center">
         <a href="{{ path ('app_login')}}" class="scrollto">Se Connecter</a>
+        </div>
+         {% elseif app.user !=null  %}
+                  <div class=" cta d-none d-md-flex align-items-center">
+                <a href="{{ path('app_logout') }}" class="scrollto">Deconnexion</a>
+                 </div>
+    {% endif %}
+    {% endfor %}
+  
+
       </div>
     </div>
   </section>

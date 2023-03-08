@@ -8,14 +8,10 @@
 
 
 	<h1>
-		Recherche dynamique AJAX selon Email:</h1>
+		Recherche :</h1>
 </br>
-
-
 <input type="text" id="searchxx" class="form-control" placeholder="recherche selon Email">
 <br/>
-
-
 <div>
 	<table id="t" class="table table-hover ">
 		<thead class="thead-dark">
@@ -76,7 +72,7 @@ if (resultats) {
 $('#t tbody#searchtab').empty();
 $.each(resultats, function (i, obj) {
 $('#t tbody#all').hide();
-$('#t tbody#searchtab').append('<tr><td> ' + obj.id + '</td><td> ' + obj.email + '</td><td> ' + obj.role + '</td><td> ' + obj.prenom + '</td><td> ' + obj.nom + '</td><td><img src="/uploads/user/' + obj.id + '/edit">update</a><a href="' + obj.id + '/show">show</a>     </td></tr>');
+$('#t tbody#searchtab').append('<tr><td> ' + obj.id + '</td><td> ' + obj.email + '</td><td> ' + obj.roles + '</td><td> ' + obj.prenom + '</td><td> ' + obj.nom + '</td><td><img src="/uploads/user/' + obj.id + '/edit">Modifier </a><a href="');
 });
 } else {
 $('#t tbody#all').show();
