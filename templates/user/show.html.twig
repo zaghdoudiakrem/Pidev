@@ -3,8 +3,12 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
 <div class="container" style="width:40%;">
     <h1 style="color: #012970;font-family: "Nunito", sans-serif;} text-align:center;" >Liste des Utlisateurs </h1>
+=======
+    <h1>User</h1>
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 
     <table class="table">
         <tbody>
@@ -33,23 +37,41 @@
                 <td>{{ user.prenom }}</td>
             </tr>
             <tr>
+<<<<<<< HEAD
                 <th>Adresse</th>
                 <td>{{ user.adresse }}</td>
+=======
+                <th>Num_tel</th>
+                <td>{{ user.numTel }}</td>
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
             </tr>
             <tr>
                 <th>Cin</th>
                 <td>{{ user.cin }}</td>
             </tr>
             <tr>
+<<<<<<< HEAD
                 <th>Num_tel</th>
                 <td>{{ user.numTel }}</td>
+=======
+                <th>Adresse</th>
+                <td>{{ user.adresse }}</td>
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
             </tr>
         </tbody>
     </table>
 
+<<<<<<< HEAD
     <a href="{{ path('app_user_index') }}"> <button  class="btn btn-outline-info float-right my-3">retour </button></a>
 
     <a href="{{ path('app_user_edit', {'id': user.id}) }}"><button  class="btn btn-outline-success my-3">Modifier</button></a>
 
     {{ include('user/_delete_form.html.twig') }}</div>
+=======
+    <a href="{{ path('app_user_index') }}">back to list</a>
+
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 {% endblock %}

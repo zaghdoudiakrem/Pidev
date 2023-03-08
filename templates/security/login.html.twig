@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+<<<<<<< HEAD
 {% block title %}Connexion!{% endblock %}
 
 {% block  contenu %}
@@ -10,6 +11,12 @@
                     {{ message }}
                 </div>
             {% endfor %}
+=======
+{% block title %}Log in!{% endblock %}
+
+{% block contenu %}
+<
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +24,11 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+<<<<<<< HEAD
   <title>Connexion ! </title>
+=======
+  <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -52,7 +63,11 @@
 <body>
 
   <main>
+<<<<<<< HEAD
     <div class="container" style="margin-top:10px;">
+=======
+    <div class="container" style="padding-top:20px;">
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
@@ -75,6 +90,7 @@
                     <p class="text-center small">Entrer votre email & votre Mot de passe </p>
                   </div>
 
+<<<<<<< HEAD
                 <form method="post">
                 {% if error %}
                  <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -101,6 +117,25 @@
     <div>
     
     </div>
+=======
+<form method="post" >
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
@@ -115,6 +150,7 @@
             </label>
         </div>
     #}
+<<<<<<< HEAD
    
      <button  class="btn btn-outline-success my-3" type="submit">Connecter </button>
    
@@ -131,6 +167,16 @@
 
                 </div>
               </div>
+=======
+
+    <button class="btn btn-outline-success my-3" type="submit">
+        Sign in
+    </button>
+    <p> Vous n'avez pas un Compte ?<a href ="{{path ('app_register')}}"> Créer Un ! </a></p>
+</form>
+</div>
+                  
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 
               
 

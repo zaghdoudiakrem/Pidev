@@ -3,25 +3,48 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+<<<<<<< HEAD
 use Symfony\Component\Validator\Constraints as Assert ; 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+=======
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
+<<<<<<< HEAD
+=======
+=======
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+class User
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+<<<<<<< HEAD
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Email(message:"Email '{{ value }}' est non valide")]
+=======
+<<<<<<< HEAD
+    #[ORM\Column(length: 180, unique: true)]
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
     private ?string $email = null;
 
     #[ORM\Column]
@@ -33,6 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+<<<<<<< HEAD
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:'Ce champ est Obligatoire !')]
     #[Assert\Length(min:3)]
@@ -64,6 +88,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
    // #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Reponse::class)]
     //private Collection $reponses;
+=======
+=======
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
+
+<<<<<<< HEAD
+    #[ORM\Column(length: 255)]
+    private ?string $num_tel = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $cin = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $adresse = null;
+
+=======
+    #[ORM\Column]
+    private ?int $num_tel = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $mdp = null;
+
+    #[ORM\Column]
+    private ?int $cin = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $role = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adresse = null;
+
+    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Reponse::class)]
+    private Collection $reponses;
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 
     #[ORM\OneToMany(mappedBy: 'id_client', targetEntity: Reclamation::class)]
     private Collection $reclamations;
@@ -89,6 +154,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'id_expert', targetEntity: Rapport::class)]
     private Collection $rapports;
 
+<<<<<<< HEAD
     #[ORM\Column(length: 100)]
     private ?string $activation_token = null;
 
@@ -96,6 +162,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
        // $this->reponses = new ArrayCollection();
+=======
+    public function __construct()
+    {
+        $this->reponses = new ArrayCollection();
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
         $this->reclamations = new ArrayCollection();
         $this->vehicules = new ArrayCollection();
         $this->contrats = new ArrayCollection();
@@ -106,11 +177,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->rapports = new ArrayCollection();
     }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
     public function getId(): ?int
     {
         return $this->id;
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
     public function getEmail(): ?string
     {
         return $this->email;
@@ -159,6 +238,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+<<<<<<< HEAD
     public function getResetToken()
     {
         return $this->reset_token; 
@@ -169,6 +249,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
    } 
  
 
+=======
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 
     /**
      * @see PasswordAuthenticatedUserInterface
@@ -205,6 +287,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
     public function getNom(): ?string
     {
         return $this->nom;
@@ -229,6 +316,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+<<<<<<< HEAD
     public function getAdresse(): ?string
     {
         return $this->adresse;
@@ -256,17 +344,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function getNumTel(): ?int
+=======
+<<<<<<< HEAD
+    public function getNumTel(): ?string
+=======
+    public function getNumTel(): ?int
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
     {
         return $this->num_tel;
     }
 
+<<<<<<< HEAD
     public function setNumTel(int $num_tel): self
+=======
+<<<<<<< HEAD
+    public function setNumTel(string $num_tel): self
+=======
+    public function setNumTel(int $num_tel): self
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
     {
         $this->num_tel = $num_tel;
 
         return $this;
     }
 
+<<<<<<< HEAD
 /**
      *//// @return Collection<int, Reponse>
      ////
@@ -276,6 +380,114 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     //}
 
   
+=======
+<<<<<<< HEAD
+    public function getCin(): ?string
+=======
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getMdp(): ?string
+    {
+        return $this->mdp;
+    }
+
+    public function setMdp(string $mdp): self
+    {
+        $this->mdp = $mdp;
+
+        return $this;
+    }
+
+    public function getCin(): ?int
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+    {
+        return $this->cin;
+    }
+
+<<<<<<< HEAD
+    public function setCin(string $cin): self
+=======
+    public function setCin(int $cin): self
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+    {
+        $this->cin = $cin;
+
+        return $this;
+    }
+
+<<<<<<< HEAD
+=======
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+<<<<<<< HEAD
+    public function setAdresse(string $adresse): self
+=======
+    public function setAdresse(?string $adresse): self
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+<<<<<<< HEAD
+=======
+
+    /**
+     * @return Collection<int, Reponse>
+     */
+    public function getReponses(): Collection
+    {
+        return $this->reponses;
+    }
+
+    public function addReponse(Reponse $reponse): self
+    {
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses->add($reponse);
+            $reponse->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): self
+    {
+        if ($this->reponses->removeElement($reponse)) {
+            // set the owning side to null (unless already changed)
+            if ($reponse->getIdUser() === $this) {
+                $reponse->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 
     /**
      * @return Collection<int, Reclamation>
@@ -516,6 +728,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+<<<<<<< HEAD
 
     public function getActivationToken(): ?string
     {
@@ -529,4 +742,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+=======
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 }

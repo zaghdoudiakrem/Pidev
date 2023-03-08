@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+<<<<<<< HEAD
 use App\Repository\UserRepository;
 use Symfony\Component\Mailer\MailerInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
@@ -28,6 +29,14 @@ class RegistrationController extends AbstractController
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request,TokenGeneratorInterface $tokenGenerator, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppUserAuthentificatorAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+=======
+use Symfony\Contracts\Translation\TranslatorInterface;
+
+class RegistrationController extends AbstractController
+{
+    #[Route('/register', name: 'app_register')]
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppUserAuthentificatorAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -35,6 +44,7 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
+<<<<<<< HEAD
             $user->setPassword($userPasswordHasher->hashPassword($user,$form->get('plainPassword')->getData()));
             
             if(!$user)//user mech maoujoud 
@@ -74,6 +84,19 @@ class RegistrationController extends AbstractController
             ['token' => $user->getActivationToken(),'form'=> $form->createView()] ); 
             //return $this->redirectToRoute('app_login'); 
      
+=======
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
+
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
@@ -84,6 +107,7 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+<<<<<<< HEAD
         return $this->redirectToRoute('app_login'); 
     }
 
@@ -157,3 +181,7 @@ class RegistrationController extends AbstractController
         //return $this->redirectToRoute('app_front');
     //}
 
+=======
+    }
+}
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481

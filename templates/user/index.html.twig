@@ -1,5 +1,6 @@
 {% extends 'base2.html.twig' %}
 
+<<<<<<< HEAD
 {% block titre %} {{parent()}}Utlisateurs{% endblock %}
 
 {% block contenu %}
@@ -21,6 +22,25 @@
                 <th scope="row">Adresse</th>
                 <th scope="row">Cin</th>
                 <th scope="row">Numéro Telephone </th>
+=======
+{% block title %} Les Utlisateurs {% endblock %}
+
+{% block contenu %}
+    <h1 class="text-center mt-5 mb-3">Liste des Utlisateurs </h1>
+
+    <table class="table table-bordred ">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Numéro Télephone </th>
+                <th>CIN</th>
+                <th>Adresse</th>
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
                 <th width="240px">actions</th>
             </tr>
         </thead>
@@ -29,6 +49,7 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
+<<<<<<< HEAD
                 <td>{% for role in user.roles %}
                             {% if role == "ROLE_USER" %}
                                 Utilisateur
@@ -52,16 +73,33 @@
                     
                     <a href="{{ path('app_user_edit', {'id': user.id}) }}"><button  class="btn btn-outline-success"> Modifier</button> </a>
                     <a href="{{ path('app_user_delete', {'id': user.id}) }}"> <button class="btn btn-outline-danger">Supprimer </button></a>
+=======
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.numTel }}</td>
+                <td>{{ user.cin }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}"> <button  class="btn btn-outline-success">Modifier </button> </a>
+                    <a href="{{ path('app_user_delete', {'id': user.id}) }}"> <button class="btn btn-outline-danger">Supprimer</button> </a>
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
                 </td>
             </tr>
         {% else %}
             <tr>
+<<<<<<< HEAD
                 <td colspan="10">Pas d'utilisateurs </td>
+=======
+                <td colspan="10">Pas d'utlisateurs </td>
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
+<<<<<<< HEAD
   
     </div>
     
@@ -72,3 +110,7 @@
     </section>
     </main>  
 {% endblock %}
+=======
+    <a href="{{ path('app_user_new') }}"><button class="btn btn-outline-primary"> Ajouter un nouveau Utilisateur</button> </a>
+{% endblock %}
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481

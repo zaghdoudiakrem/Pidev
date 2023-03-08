@@ -1,4 +1,12 @@
+<<<<<<< HEAD
  {{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
     {{ form_widget(form) }}
     <button class="btn btn-outline-success my-3 mb-4" style="width:40%;">{{ button_label|default('Save') }}</button>
+=======
+{{ form_start(form) }}
+<div class="container" style="width:40%;">
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    </div>
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 {{ form_end(form) }}

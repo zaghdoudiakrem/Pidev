@@ -28,9 +28,15 @@ class AppUserAuthentificatorAuthenticator extends AbstractLoginFormAuthenticator
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
+<<<<<<< HEAD
         
         $request->getSession()->set(Security::LAST_USERNAME, $email);
         
+=======
+
+        $request->getSession()->set(Security::LAST_USERNAME, $email);
+
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
@@ -45,12 +51,19 @@ class AppUserAuthentificatorAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+<<<<<<< HEAD
          $user=$token->getUser(); 
          if (in_array('ROLE_ADMIN',$user->getRoles(),true)); 
          return new RedirectResponse($this->urlGenerator->generate('app_user_index'));
         // For example:
          return new RedirectResponse($this->urlGenerator->generate('app_front'));
          //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+=======
+
+        // For example:
+         return new RedirectResponse($this->urlGenerator->generate('app_front'));
+       // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
     }
 
     protected function getLoginUrl(Request $request): string

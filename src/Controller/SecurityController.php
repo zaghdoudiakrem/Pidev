@@ -1,11 +1,16 @@
 <?php
 
+<<<<<<< HEAD
 namespace App\Controller; 
+=======
+namespace App\Controller;
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+<<<<<<< HEAD
 use App\Entity\User;
 use App\Form\ForgetPasswordType;
 use App\Form\ResetPasswordType;
@@ -21,6 +26,8 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mime\Email;
+=======
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 
 class SecurityController extends AbstractController
 {
@@ -44,6 +51,7 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+<<<<<<< HEAD
     #[Route ('/resetPass/{token}',name:'app_reset_password')]
    
     public function resetPassword ( string $token, Request $request, EntityManagerInterface $manager,UserRepository $userRepository ,UserPasswordHasherInterface $passwordHacher )
@@ -129,4 +137,6 @@ class SecurityController extends AbstractController
      return $this->render('security/forgotPassword.html.twig', ['form' => $form->createView()]);
    }
   
+=======
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 }

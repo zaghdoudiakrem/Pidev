@@ -1,0 +1,79 @@
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+{# ////////////////////////////////////////////////////////// #}
+ <!-- General Form Elements -->
+              <!DOCTYPE html>
+<html lang="fr">
+ {% block css %}
+  <!-- bouton CSS  -->
+  <link href="{{ asset ('assets2/css/btn.css') }}" rel="stylesheet">
+  {% endblock %}
+               {{ form_start(form) }}
+                <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Validité du</label>
+                  <div class="col-sm-10">
+                     {{form_widget(form.validitedu,{'attr':{'class':'form-control'}})}}
+                    {% if form_errors(form.validitedu) is not empty %}
+                        <p type="date" class="form-text text-muted">{{ form_errors(form.validitedu) }}</p>
+                    {% endif %}
+                  </div>
+             </div> 
+             <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Validité au</label>
+                  <div class="col-sm-10">
+                     {{form_widget(form.validiteau,{'attr':{'class':'form-control'}})}}
+                    {% if form_errors(form.validiteau) is not empty %}
+                        <p type="date" class="form-text text-muted">{{ form_errors(form.validiteau) }}</p>
+                    {% endif %}
+                  </div>
+             </div> 
+             <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Photo Cin</label>
+                  <div class="col-sm-10">
+                     {{form_widget(form.photo_cin,{'attr':{'class':'form-control'}})}}
+                    {% if form_errors(form.photo_cin) is not empty %}
+                        <p type="date" class="form-text text-muted">{{ form_errors(form.photo_cin) }}</p>
+                    {% endif %}
+                  </div>
+             </div> 
+             <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Id Client</label>
+                  <div class="col-sm-10">
+                     {{form_widget(form.id_client,{'attr':{'class':'form-control'}})}}
+                    {% if form_errors(form.id_client) is not empty %}
+                        <p type="date" class="form-text text-muted">{{ form_errors(form.id_client) }}</p>
+                    {% endif %}
+                  </div>
+             </div> 
+             <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Id Vehicule</label>
+                  <div class="col-sm-10">
+                     {{form_widget(form.id_vehicule,{'attr':{'class':'form-control'}})}}
+                    {% if form_errors(form.id_vehicule) is not empty %}
+                        <p type="date" class="form-text text-muted">{{ form_errors(form.id_vehicule) }}</p>
+                    {% endif %}
+                  </div>
+             </div> 
+             <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Nom Offre</label>
+                  <div class="col-sm-10">
+                     {{form_widget(form.id_offre,{'attr':{'class':'form-control'}})}}
+                    {% if form_errors(form.id_offre) is not empty %}
+                        <p type="date" class="form-text text-muted">{{ form_errors(form.id_offre) }}</p>
+                    {% endif %}
+                  </div>
+             </div> 
+                 <div class="col-sm-10">
+                  <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+                    {# <button class="btn btn-primary mr-2">{{ button_label|default('Save') }}</button> #}
+                    {# <button type="submit" class="btn btn-primary">Sauvgarder</button> #}
+                     {# <button class="btn btn-primary mr-2"><a href="{{ path('app_offre_index') }}">Retour</a></button> #}
+                  </div>
+                </div>
+
+              {{ form_end(form) }}
+              <!-- End General Form Elements -->
+              </html>
+              

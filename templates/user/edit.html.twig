@@ -1,5 +1,6 @@
 {% extends 'base2.html.twig' %}
 
+<<<<<<< HEAD
 {% block titre %}Modifier  Utilisateur {% endblock %}
 
 {% block contenu %}
@@ -12,4 +13,18 @@
 
     {{ include('user/_delete_form.html.twig') }}
     </div>
+=======
+{% block title %}Modifier Utlisateur {% endblock %}
+
+{% block contenu %}
+<div class="container" sytle="width:40%;">
+
+    <h1 class="text-center mt-5 mb-3"> Modifier Utlisateur </h1>
+
+    {{ include('user/_form.html.twig', {'button_label': 'Modifier '}) }}
+
+    <a href="{{ path('app_user_index') }}"> <button  class="btn btn-outline-info"> Retour</button> </a>
+
+   
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 {% endblock %}

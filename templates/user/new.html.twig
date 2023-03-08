@@ -1,5 +1,6 @@
 {% extends 'base2.html.twig' %}
 
+<<<<<<< HEAD
 {% block title %}Ajouter Utlisateur {% endblock %}
 
 {% block contenu %}
@@ -9,4 +10,17 @@
     {{ include('user/_form.html.twig') }}
 
     <a href="{{ path('app_user_index') }}">  <button  class="btn btn-outline-info float-right" style="width:40%;">retour</button></a></div>
+=======
+{% block title %}Nouveau utlisateur {% endblock %}
+
+{% block contenu %}
+<div class="container" sytle="width:40%;">
+    
+    <h1 class="text-center mt-5 mb-3">Ajouter un nouveau utilisateur </h1>
+
+    {{ include('user/_form.html.twig') }}
+
+    <a href="{{ path('app_user_index') }}"><button  class="btn btn-outline-info" >Retour</button> </a>
+    </div>
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 {% endblock %}

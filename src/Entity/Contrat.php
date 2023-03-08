@@ -5,6 +5,15 @@ namespace App\Entity;
 use App\Repository\ContratRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
 
 #[ORM\Entity(repositoryClass: ContratRepository::class)]
 class Contrat
@@ -28,6 +37,27 @@ class Contrat
     #[ORM\JoinColumn(nullable: false)]
     private ?User $id_client = null;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    #[ORM\Column(length: 255)]
+    private ?string $photo_cin = null;
+
+    #[ORM\ManyToMany(targetEntity: Offre::class, inversedBy: 'contrats')]
+    private Collection $id_offre;
+
+    public function __construct()
+    {
+        $this->id_offre = new ArrayCollection();
+    }
+
+   
+
+    
+
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
   
 
   
@@ -85,6 +115,52 @@ class Contrat
         return $this;
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    public function getPhotoCin(): ?string
+    {
+        return $this->photo_cin;
+    }
+
+    public function setPhotoCin(string $photo_cin): self
+    {
+        $this->photo_cin = $photo_cin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Offre>
+     */
+    public function getIdOffre(): Collection
+    {
+        return $this->id_offre;
+    }
+
+    public function addIdOffre(Offre $idOffre): self
+    {
+        if (!$this->id_offre->contains($idOffre)) {
+            $this->id_offre->add($idOffre);
+        }
+
+        return $this;
+    }
+
+    public function removeIdOffre(Offre $idOffre): self
+    {
+        $this->id_offre->removeElement($idOffre);
+
+        return $this;
+    }
+
+    
+
+ 
+
+>>>>>>> 38628a194bbbcdc751d7d39588e264ee1ca95b0f
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
  
 
 }

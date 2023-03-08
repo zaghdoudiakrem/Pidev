@@ -7,11 +7,18 @@
         "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+<<<<<<< HEAD
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
         "karser/karser-recaptcha3-bundle": "^0.1.23",
+=======
+        "doctrine/annotations": "^1.0",
+        "doctrine/doctrine-bundle": "^2.8",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.14",
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.16",
         "sensio/framework-extra-bundle": "^6.1",
@@ -36,7 +43,10 @@
         "symfony/security-bundle": "5.4.*",
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",
+<<<<<<< HEAD
         "symfony/swiftmailer-bundle": "^3.5",
+=======
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
         "symfony/translation": "5.4.*",
         "symfony/twig-bundle": "5.4.*",
         "symfony/validator": "5.4.*",
@@ -48,7 +58,10 @@
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
+<<<<<<< HEAD
             "php-http/discovery": true,
+=======
+>>>>>>> 5a7565d83818f1db89ef814a2b2e450ef201f481
             "symfony/flex": true,
             "symfony/runtime": true
         },
