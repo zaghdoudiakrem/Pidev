@@ -4,45 +4,176 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style>
-        .pagetitle h1 {
-            text-align: center;
-            font-size: 32px;
-            font-family: "Arial", sans-serif;
-            color: #ff7f50;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('bundles/knppaginatorbundle/css/pagination.css') }}" />
+    <link href="{{ asset ('assets2/css/btn.css') }}" rel="stylesheet">
 {% endblock %}
+
+{# {% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/knppaginatorbundle/js/pagination.js') }}"></script>
+{% endblock %} #}
+{# {% block css %}
+  <!-- bouton CSS  -->
+  
+  {% endblock %} #}
 
 {% block contenu %}
 </br>
     <main id="main" class="main">
        <div class="pagetitle text-center">
-    <h1 class="font-weight-bold" style="color: #ff5821;">Nos Offres</h1>
-</div><!-- End Page Title -->
+            <h1 class="font-weight-bold" style="font-size: 80px;color: #ff5821;">Nos Offres </h1>
+        </div><!-- End Page Title -->
 
-        <section class="section">
-            <div class="row">
-                {% for i in 0..offres|length-1 %}
-                    {% if i % 3 == 0 %}
-                        <div class="row">
-                    {% endif %}
-                    <div class="col-lg-4">
+   <div class="mt-5">
+    
+        <div class="input-group">
+            <input id="search" type="text" placeholder="Rechercher votre offre par titre"  class="form-control" name="search-input"  style="left:110px; max-width: 625px;">
+
+            {# <div class="input-group-append">
+                <div class="btn btn-primary" style="left:110px;"><i class="fa fa-search"></i></div>
+            </div> #}
+       </div>
+    
+</div>
+
+
+
+        <section class="section container">
+   <div class="d-flex justify-content-end">
+    <a class="btn btn-primary mb-4 mr-2" href="{{ path('cart_index') }}">Panier <i class="bi bi-cart-x"></i></a>
+</div>
+            <div class="row" id="offres-container">
+                {% for offre in offres %}
+                    <div class="col mb-4">
                         <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title text-center font-weight-bold text-orange">{{ offres[i].titre }}</h5>
-                                <p class="card-text">{{ offres[i].description }}</p>
-                                <div class="read-more"><i class="bi bi-arrow-right"></i> {{ offres[i].prix }}</div>
-                                <div class="read-more"><i class="bi bi-arrow-right"></i> {{ offres[i].ValiditeOffre }}</div>
-                                <img src="{{ asset(offres[i].ImageOffre) }}" class="img-fluid" width="300" height="150">
+                            <div class="card-body" style="min-width: 350px;min-height: 320px;background-repeat: no-repeat;background-size: cover;background-position: center; background-image: url('{{ asset(offre.ImageOffre) }}');">
+                               <div class="portfolio-info" style="position:absolute;left:20px;right:20px;transition:all ease-in-out 0.3s;background:rgba(255, 255, 255, 0.9);margin-top: 85px;width: 370px;height: 210px;">
+  <div class="card-body">
+    <h5 class="card-title " style="color:#ff5821">{{ offre.titre }} <a href="{{path("cart_add", {id: offre.id})}}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Ajouter au panier" ><i class="bx bx-plus" class="float-left"></i></a></i></h5> 
+   
+    <p class="card-text">{{ offre.description }}</p>
+            <div class="card-text d-flex align-items-center" style="margin-bottom: 200px;">
+    <div class="float-left">{{ offre.ValiditeOffre }}</div>
+    <div class="float-right" style="margin-left: auto;">{{ offre.prix }}DT</div>
+    
+</div>
+<div>
+    {# <a href="{{path("cart_add", {id: offre.id})}}" class="btn btn-success">
+                            <i class="bi bi-cart-plus"></i> Ajouter
+                        </a> #}
+  </div>
+  </div>
+</div>
                             </div>
                         </div>
                     </div>
-                    {% if i % 3 == 2 or i == offres|length-1 %}
-                        </div>
+                    {% if loop.index % 3 == 0 %}
+                        </div><div class="row">
                     {% endif %}
                 {% endfor %}
+
+                {% if offres|length % 3 != 0 %}
+                    {% for i in 0..2-(offres|length % 3) %}
+                        <div class="col mb-3"></div>
+                    {% endfor %}
+                {% endif %}
+
             </div>
         </section>
+
     </main>
+    </div>
+
+        {#------search div----------#}
+        <div class="row " id="searchDivMain" style="display:none">
+        </div>
+        {#------end search div-------#}
+    </div>
+    <div class="d-flex justify-content-center">
+  {% do offres.SetPageRange(2) %}
+  {{ knp_pagination_render(offres, "offre/pagination.html.twig") }}
+</div>
+    {% endblock %}
+
+    {% block js %}
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+    
+    $(document).ready(function(){
+        $("#search").keyup(function(e){
+            var value = $(this).val();
+            console.log(value);
+
+            $.ajax({
+                type: "GET",
+                url: "{{path('searchOffre')}}",
+                data: {
+                    'searchValue' : value
+                },
+
+                success: function(retour){
+                    console.log(value)
+                    if(retour){
+                        console.log(retour);
+
+                        $(".row").empty();
+                        $(".row").hide();
+                        $("#searchDivMain").empty();
+                        $("#searchDivMain").show();
+
+                        $.each(JSON.parse(retour), function (i, offre) {
+                            console.log(offre);
+
+                            var $newDiv1 = $("<div></div>").addClass("col mb-4");
+                            var $newDiv2 = $("<div></div>").addClass("card ");
+                            var $newDiv3 = $("<div></div>").addClass("card-body");
+                            var $newDiv4 = $("<div></div>").addClass("section container");
+
+                            var $newH5 = $("<div>"+offre.titre+"</div>").addClass("card-title");
+                            var $newH3 = $("<div>"+offre.description+"</div>").addClass("card-text");
+                            var $newH4 = $("<div>"+offre.Validite_offre+"</div>").addClass("float-left");
+                            var $newH6 = $("<div>"+offre.prix+"</div>").addClass("float-right");
+                            var $newH7 = $("<div>"+offre.image_offre+"</div>").addClass("card-body");
+                            
+
+                           
+
+                            
+
+                            
+
+                            $("#searchDivMain").append($newDiv1);
+                            $newDiv1.append($newDiv2);
+                            $newDiv2.append($newDiv3);
+                            $newDiv3.append($newDiv3);
+                            $newDiv3.append($newH5);
+                            $newDiv3.append($newH4)
+                            $newDiv3.append($newH6);
+                            $newDiv3.append($newH3);
+                            $newDiv3.append($newH7);
+
+                            
+
+                            
+                            
+
+
+                        });
+                    }
+                },
+
+                error: function (xhr, status, error) {
+                    console.log("Error: " + error);
+                },
+            });
+        });
+    });
+    
+    </script>
+
 {% endblock %}
+   
+

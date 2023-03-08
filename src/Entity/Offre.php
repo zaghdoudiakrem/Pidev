@@ -43,9 +43,42 @@ class Offre
     ])]
     private ?string $titre = null;
 
-    #[ORM\ManyToOne(inversedBy: 'id_offre')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Facture $facture = null;
+    #[ORM\Column(length: 255)]
+    #[Groupe("offres")]
+    #[Assert\NotNull(message:"La validite est obligatoire")]
+    #[Assert\Length([
+        'min' => 5,
+        'max' => 50,
+        'minMessage' => 'La validité doit comporter au moins {{ limit }} caractères',
+        'maxMessage' => 'La validité  doit comporter au moins {{ limit }} caractères',
+    ])]
+    private ?string $Validite_offre = null;
+
+    #[ORM\ManyToMany(targetEntity: Contrat::class, mappedBy: 'id_offre')]
+    private Collection $contrats;
+
+    #[ORM\Column(length: 255)]
+    
+    private ?string $image_offre = null;
+
+    public function __construct()
+    {
+        $this->contrats = new ArrayCollection();
+    }
+
+    // #[ORM\Column(length: 255)]
+    // private ?string $photo_offre = null;
+
+    
+
+    
+
+   
+    
+
+    
+
+   
 
     public function getId(): ?int
     {

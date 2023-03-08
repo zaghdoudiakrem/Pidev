@@ -8,3 +8,6 @@ knp_paginator:
     template:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig' # Utiliser un template de pagination personnalisé
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'           
+        filtration: 'KnpPaginatorBundle:Pagination:filtration.html.twig' # Template utilisé pour le filtrage
+        
+        

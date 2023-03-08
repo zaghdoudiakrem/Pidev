@@ -39,6 +39,7 @@ class OffreRepository extends ServiceEntityRepository
         }
     }
 
+    
 //    /**
 //     * @return Offre[] Returns an array of Offre objects
 //     */
@@ -63,4 +64,10 @@ class OffreRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function searchOffre($data){
+    $entityManager = $this->getEntityManager();
+    $query = $entityManager->createQuery('SELECT offre from App\Entity\Offre offre where offre.titre like :data OR offre.description like :data OR offre.prix like :data ')->setParameter('data', '%'. $data.'%');
+   
+    return $query->getArrayResult();
+}
 }
