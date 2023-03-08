@@ -31,12 +31,15 @@ public function index(Request $request, DevisRepository $devisRepository): Respo
     $devis = $devisRepository->findAllWithSorting($sortOrder);
 
     $devisWithExpert = array_map(function ($devi) {
-        $expert = $this->getDoctrine()->getRepository('App\Entity\User')->findOneBy(['id' => $devi->getIdExpert()]);
+        $expert = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id' => $devi->getIdExpert(),'roles'=>"Expert"]);
         $devi->setIdMecanicien($this->getUser());
-        $devi->setExpertNom($expert ? $expert->getNom() : null);
-        $devi->setExpertPrenom($expert ? $expert->getPrenom() : null);
+        if ($expert) {
+            $devi->setExpertNom($expert->getNom());
+            $devi->setExpertPrenom($expert->getPrenom());
+        }
         return $devi;
     }, $devis);
+    
 
     $sortOptions = [
         'asc' => 'Ascending',
@@ -203,10 +206,10 @@ public function index(Request $request, DevisRepository $devisRepository): Respo
     public function generatePdfAction($id)
 {
     $devis = $this->getDoctrine()->getRepository(Devis::class)->find($id);
-    $expert = $this->getDoctrine()->getRepository('App\Entity\User')->findOneBy(['id' => $devis->getIdExpert()]);
+    $expert = $this->getDoctrine()->getRepository('App\Entity\User')->findOneBy(['id' => $devis->getIdExpert(),'roles'=>"expert"]);
     
-    $devis->setExpertNom($expert ? $expert->getNom() : null);
-    $devis->setExpertPrenom($expert ? $expert->getPrenom() : null);
+    $devis->setExpertNom($expert ? $expert->getNom() :" null");
+    $devis->setExpertPrenom($expert ? $expert->getPrenom() : "null");
     
     $html = $this->renderView('devis/pdf.html.twig', [
         'devi' => $devis,

@@ -104,6 +104,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->devis = new ArrayCollection();
         $this->constats = new ArrayCollection();
         $this->rapports = new ArrayCollection();
+        $this->roles = [];
     }
 
     public function getId(): ?int
@@ -155,7 +156,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setRoles(array $roles): self
     {
-        $this->roles = $roles;
+        $this->roles = $roles ;
 
         return $this;
     }
@@ -527,6 +528,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->activation_token = $activation_token;
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->email;
     }
 
 }
