@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}User{% endblock %}
 
@@ -10,6 +10,18 @@
             <tr>
                 <th>Id</th>
                 <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
             </tr>
             <tr>
                 <th>Nom</th>
@@ -24,20 +36,8 @@
                 <td>{{ user.numTel }}</td>
             </tr>
             <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Mdp</th>
-                <td>{{ user.mdp }}</td>
-            </tr>
-            <tr>
                 <th>Cin</th>
                 <td>{{ user.cin }}</td>
-            </tr>
-            <tr>
-                <th>Role</th>
-                <td>{{ user.role }}</td>
             </tr>
             <tr>
                 <th>Adresse</th>

@@ -24,8 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message:"Email '{{ value }}' est non valide")]
     private ?string $email = null;
 
-    // #[ORM\Column]
-    // private array $roles = [];
+    #[ORM\Column]
+    private array $roles = [];
 
     /**
      * @var string The hashed password
@@ -528,10 +528,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function __toString(): string
-{
-    return (string) $this->getEmail();
-}
 
 }

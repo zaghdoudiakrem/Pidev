@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\OffreRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -45,42 +43,9 @@ class Offre
     ])]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255)]
-    #[Groupe("offres")]
-    #[Assert\NotNull(message:"La validite est obligatoire")]
-    #[Assert\Length([
-        'min' => 5,
-        'max' => 50,
-        'minMessage' => 'La validité doit comporter au moins {{ limit }} caractères',
-        'maxMessage' => 'La validité  doit comporter au moins {{ limit }} caractères',
-    ])]
-    private ?string $Validite_offre = null;
-
-    #[ORM\ManyToMany(targetEntity: Contrat::class, mappedBy: 'id_offre')]
-    private Collection $contrats;
-
-    #[ORM\Column(length: 255)]
-    
-    private ?string $image_offre = null;
-
-    public function __construct()
-    {
-        $this->contrats = new ArrayCollection();
-    }
-
-    // #[ORM\Column(length: 255)]
-    // private ?string $photo_offre = null;
-
-    
-
-    
-
-   
-    
-
-    
-
-   
+    #[ORM\ManyToOne(inversedBy: 'id_offre')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Facture $facture = null;
 
     public function getId(): ?int
     {
@@ -123,85 +88,15 @@ class Offre
         return $this;
     }
 
-    public function getValiditeOffre(): ?string
+    public function getFacture(): ?Facture
     {
-        return $this->Validite_offre;
+        return $this->facture;
     }
 
-    public function setValiditeOffre(string $Validite_offre): self
+    public function setFacture(?Facture $facture): self
     {
-        $this->Validite_offre = $Validite_offre;
+        $this->facture = $facture;
 
         return $this;
     }
-
-    public function __toString(){
-        return (string) $this->titre;
-    }
-
-    // public function getPhotoOffre(): ?string
-    // {
-    //     return $this->photo_offre;
-    // }
-
-    // public function setPhotoOffre(string $photo_offre): self
-    // {
-    //     $this->photo_offre = $photo_offre;
-
-    //     return $this;
-    // }
-
-    /**
-     * @return Collection<int, Contrat>
-     */
-    public function getContrats(): Collection
-    {
-        return $this->contrats;
-    }
-
-    public function addContrat(Contrat $contrat): self
-    {
-        if (!$this->contrats->contains($contrat)) {
-            $this->contrats->add($contrat);
-            $contrat->addIdOffre($this);
-        }
-
-        return $this;
-    }
-
-    public function removeContrat(Contrat $contrat): self
-    {
-        if ($this->contrats->removeElement($contrat)) {
-            $contrat->removeIdOffre($this);
-        }
-
-        return $this;
-    }
-
-    public function getImageOffre(): ?string
-    {
-        return $this->image_offre;
-    }
-
-    public function setImageOffre(string $image_offre): self
-    {
-        $this->image_offre = $image_offre;
-
-        return $this;
-    }
-
-    
-     
-
-    
-
-    
-
-   
-
-  
-
-   
-
-   
 }

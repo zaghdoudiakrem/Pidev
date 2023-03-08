@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  
+  {% block css %}
   <link href="{{asset ('assets/vendor/aos/aos.css')}}" rel="stylesheet">
   <link href="{{asset ('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset ('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
@@ -24,25 +24,8 @@
   <link href="{{asset ('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
-  
-
-  
- <link href="{{ asset ('assets2/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-			<link href="{{ asset ('assets2/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-			<link href="{{ asset ('assets2/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-			<link href="{{ asset ('assets2/vendor/quill/quill.snow.css') }}" rel="stylesheet">
-			<link href="{{ asset ('assets2/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
-			<link href="{{ asset ('assets2/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-			<link
-			href="{{ asset ('assets2/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
- 
-
-   <!-- bouton CSS  -->
- <link href="{{ asset ('assets2/css/btn.css') }}" rel="stylesheet">
- 
+  <link href="{{asset ('assets/css/style.css')}}" rel="stylesheet">
+  {% endblock %}
   <!-- =======================================================
   * Template Name: Flexor - v4.10.0
   * Template URL: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/
@@ -52,6 +35,7 @@
 </head>
 
 <body>
+{% block body %}
 
   <!-- ======= Top Bar ======= -->
   <section id="topbar" class="d-flex align-items-center">
@@ -60,14 +44,23 @@
         <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">4rouesassurances@gmail.com</a></i>
         <i class="bi bi-phone d-flex align-items-center ms-4"><span>+216 70 300 300</span></i>
       </div>
-
+      {% for user in app.user %}
+       {% if app.user %}
       <div class="cta d-none d-md-flex align-items-center">
-        <a href="#about" class="scrollto">Se Connecter</a>
+        <a href="{{ path ('app_login')}}" class="scrollto">Se Connecter</a>
+        </div>
+         {% elseif app.user !=null  %}
+                  <div class=" cta d-none d-md-flex align-items-center">
+                <a href="{{ path('app_logout') }}" class="scrollto">Deconnexion</a>
+                 </div>
+    {% endif %}
+    {% endfor %}
+  
+
       </div>
     </div>
   </section>
-
-  <!-- ======= Header ======= -->
+ <!-- ======= Header ======= -->
   {% block header %}
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
@@ -75,7 +68,7 @@
       <div class="logo">
       <img src="{{ asset ('assets/img/logo_png.png') }}" alt="" class="img-fluid">
        <div class="title">
-        <h1 ><a href="index.html">4Roues Assurances </a></h1>
+        <h1 ><a href="{{ path ('app_front')}}">4 Roues Assurances </a></h1>
         </div>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -86,18 +79,11 @@
           <li><a class="nav-link scrollto active" href="#hero">Acceuil</a></li>
           <li><a class="nav-link scrollto" href="#about">A propos</a></li>
           <li><a class="nav-link scrollto" href="#services">Nos conseils</a></li>
-<<<<<<< HEAD
           <li><a class="nav-link scrollto " href="#portfolio">Nos agences</a></li>
           <li><a class="nav-link scrollto" href="#team">Notre équipe</a></li>
           <li><a class="nav-link scrollto" href="#">Nos offres</a></li>
-          <li><a class="nav-link scrollto" href="/reclamation/new">Réclamation</a></li>
-=======
-          <li><a class="nav-link scrollto " href="#portfolio">Nos offres</a></li>
-          <li><a class="nav-link scrollto" href="#team">Notre équipe</a></li>
-          <li><a class="nav-link scrollto" href="/offre/front">Nos offres</a></li>
->>>>>>> a4f151410050ce02585d4c28b864e9bd07b58f42
           <li><a class="nav-link scrollto" href="#contact">Contactez nous</a></li>
-        </ul>
+         
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
@@ -108,14 +94,14 @@
   
 
   <!-- ======= Hero Section ======= -->
-  {% block body %}
+  {% block contenu %}
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
     <div class="container" data-aos="fade-in">
       <h1>Bienvenue chez 4Roues Assurances </h1>
       <h2>Nous sommes Coding Squad</h2>
       <div class="d-flex align-items-center">
         <i class="bx bxs-right-arrow-alt get-started-icon"></i>
-        <a href="#about" class="btn-get-started scrollto">S'inscrire</a>
+        <a href="{{ path ('app_register')}}" class="btn-get-started scrollto">S'inscrire</a>
       </div>
     </div>
   </section><!-- End Hero -->
@@ -182,26 +168,24 @@
           <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
             
             <h3 data-aos="fade-up">A propos de nous  </h3>
-            <p data-aos="fade-up">Ingénieurs diplômés d'Ecole Superieur Privée d'Ingénierie et de Technologies, spécialistes reconnus dans leur domaine depuis des années, Coding Squad regroupe de multiples talents en interne,  pour vous apporter les meilleurs services</p>
+            <p data-aos="fade-up">description.......</p>
 
             <div class="icon-box" data-aos="fade-up">
               <div class="icon"><i class="bx bx-cube-alt"></i></div>
-              <h4 class="title"><a href="">Equipe</a></h4>
-              <p class="description"> Nous sommes une équipe de 6 personnes et nous nous efforçons de créer les meilleurs services pour aider nos clients à assurer
-leurs véhicules et payer leurs constats en ligne. </p>
+              <h4 class="title"><a href="">desc 1?</a></h4>
+              <p class="description"> wassef 1 </p>
             </div>
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="bx bx-cube-alt"></i></div>
-              <h4 class="title"><a href="">Objectif</a></h4>
-              <p class="description"> Nous avons toujours cherché à faire les choses un peu différemment par rapport aux autres assurances. Depuis les premiers jours, nous avons
-concentré sur la création de l'une des applications les plus uniques et les plus enrichissantes de Tunisie. </p>
+              <h4 class="title"><a href="">desc 2?</a></h4>
+              <p class="description"> wassef 2 </p>
             </div>
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
               <div class="icon"><i class="bx bx-cube-alt"></i></div>
-              <h4 class="title"><a href="">Slogan</a></h4>
-              <p class="description">La plupart des entreprises mettent leurs valeurs dans un manifeste. Nous les mettons en action. Voici à quoi ça ressemble de notre premier jour à notre dernier jour.</p>
+              <h4 class="title"><a href="">desc 3?</a></h4>
+              <p class="description">wassedf 3</p>
             </div>
 
           </div>
@@ -431,11 +415,7 @@ Notre devoir est de vous offrir un accompagnement expert garantissant à chacun 
       <div class="container">
 
         <div class="section-title">
-<<<<<<< HEAD
           <h2 data-aos="fade-up">Nos Agences</h2>
-=======
-          <h2 data-aos="fade-up">Nos Offres</h2>
->>>>>>> a4f151410050ce02585d4c28b864e9bd07b58f42
           <p data-aos="fade-up">.......</p>
         </div>
 
@@ -676,7 +656,7 @@ Notre devoir est de vous offrir un accompagnement expert garantissant à chacun 
       <div class="container">
 
         <div class="section-title">
-          <h2 data-aos="fade-up">Nos Agences</h2>
+          <h2 data-aos="fade-up">Nos Prix</h2>
           <p data-aos="fade-up">chwaya wassef.........</p>
         </div>
 
@@ -873,17 +853,17 @@ Notre devoir est de vous offrir un accompagnement expert garantissant à chacun 
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Nom" >
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Nom" required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" >
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                 </div>
               </div>
               <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Sujet" >
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Sujet" required>
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" ></textarea>
+                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
               </div>
               <div class="my-3">
                 <div class="loading">Loading</div>
@@ -905,28 +885,7 @@ Notre devoir est de vous offrir un accompagnement expert garantissant à chacun 
 
   <!-- ======= Footer ======= -->
   {% block footer %}
-  
-  {% endblock %}
-  <!-- End Footer -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  {% block js %}
-  <script src="{{asset ('assets/vendor/aos/aos.js')}}"></script>
-  <script src="{{asset ('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{asset ('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
-  <script src="{{asset ('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
-  <script src="{{asset ('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
-  <script src="{{asset ('assets/vendor/php-email-form/validate.js')}}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  {% endblock %}
-
-</body>
-
-<footer id="footer">
+  <footer id="footer">
 
     <div class="footer-top">
       <div class="container">
@@ -944,12 +903,12 @@ Notre devoir est de vous offrir un accompagnement expert garantissant à chacun 
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Liens</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#hero">Acceuil</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#about">A propos</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#services">Nos conseils</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#portfolio">Nos offres</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#team">Notre équipe</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#pricing">Nos agences </a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Acceuil</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">A propos</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Nos conseils</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Nos agences</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Notre équipe</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Nos offres </a></li>
             </ul>
           </div>
 
@@ -1014,10 +973,8 @@ Notre devoir est de vous offrir un accompagnement expert garantissant à chacun 
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
   {% endblock %}
 
 </body>
-
+{% endblock %}
 </html>
