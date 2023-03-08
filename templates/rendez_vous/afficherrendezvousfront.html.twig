@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block team %}
+
+
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+
+				<th scope="col">Date</th>
+				<th scope="col">Lieux</th>
+
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr>
+				{% for rendezvous in rendezvouss %}
+
+
+					<td>
+						{{rendezvous.date.format('Y-m-d H:i:s')}}
+					</td>
+					<td>{{rendezvous.lieu}}</td>
+
+				</tr>
+			</tr>
+
+		</tbody>
+	{% endfor %}
+	
+</tbody></table>{% endblock %}
