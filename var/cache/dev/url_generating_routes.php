@@ -12,6 +12,7 @@ return [
     'app_contrat_index' => [[], ['_controller' => 'App\\Controller\\ContratController::index'], [], [['text', '/contrat/']], [], [], []],
     'app_modcontrat_index' => [[], ['_controller' => 'App\\Controller\\ContratController::index2'], [], [['text', '/contrat/mod']], [], [], []],
     'app_supcontrat_index' => [[], ['_controller' => 'App\\Controller\\ContratController::index3'], [], [['text', '/contrat/sup']], [], [], []],
+    'app_contratpdf' => [['id'], ['_controller' => 'App\\Controller\\ContratController::generatePdfAction'], [], [['text', '/pdf'], ['variable', '/', '[^/]++', 'id', true], ['text', '/contrat']], [], [], []],
     'app_contratfront_index' => [[], ['_controller' => 'App\\Controller\\ContratController::index4'], [], [['text', '/contrat/front']], [], [], []],
     'app_contrat_new' => [[], ['_controller' => 'App\\Controller\\ContratController::new'], [], [['text', '/contrat/new']], [], [], []],
     'app_contrat_show' => [['id'], ['_controller' => 'App\\Controller\\ContratController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/contrat']], [], [], []],

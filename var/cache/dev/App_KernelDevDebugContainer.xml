@@ -5744,6 +5744,7 @@
       <argument type="abstract">Authenticators</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
       <argument>true</argument>
+      <argument type="service" id="security.token_storage"/>
       <deprecated package="symfony/security-bundle" version="5.3">The "%service_id%" service is deprecated, use the new authenticator system instead.</deprecated>
     </service>
     <service id="debug.security.access.decision_manager" class="Symfony\Component\Security\Core\Authorization\TraceableAccessDecisionManager">

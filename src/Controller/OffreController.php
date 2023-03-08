@@ -45,6 +45,8 @@ class OffreController extends AbstractController
             'offres' => $offreRepository->findAll(),
         ]);
     }
+
+    
     #[Route('/front', name: 'app_offrefront_index', methods: ['GET'])]
    
     public function index4(OffreRepository $offreRepository,PaginatorInterface $paginator,Request $request): Response

@@ -165,10 +165,14 @@ class __TwigTemplate_c9118854dd51733e5b14cbeb9940a987 extends Template
         echo "\">Modifier</a></td>
                  
                  <td><form>
-                    <input id=\"impression\" class=\"btn btn-primary mr-2\" name=\"impression\" type=\"button\" onclick=\"imprimer_page()\" value=\"Imprimer Contrat\" />
+                    
+                    <a href=\"";
+        // line 70
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_contratpdf", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["contrat"]) || array_key_exists("contrat", $context) ? $context["contrat"] : (function () { throw new RuntimeError('Variable "contrat" does not exist.', 70, $this->source); })()), "id", [], "any", false, false, false, 70)]), "html", null, true);
+        echo "\" class=\"btn btn-primary mr-2\" target=\"_blank\">Imprimer</a>
                 </form></td>
                 <td><a class=\"btn btn-primary mr-2\" href=\"";
-        // line 71
+        // line 72
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_contrat_index");
         echo "\">Retour</a></td>
             </tr>
@@ -209,7 +213,7 @@ class __TwigTemplate_c9118854dd51733e5b14cbeb9940a987 extends Template
 
     public function getDebugInfo()
     {
-        return array (  172 => 71,  164 => 66,  148 => 52,  140 => 46,  133 => 42,  126 => 38,  119 => 34,  112 => 29,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  176 => 72,  171 => 70,  164 => 66,  148 => 52,  140 => 46,  133 => 42,  126 => 38,  119 => 34,  112 => 29,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -282,7 +286,8 @@ class __TwigTemplate_c9118854dd51733e5b14cbeb9940a987 extends Template
                 <td><a  class=\"btn btn-primary mr-2\" href=\"{{ path('app_contrat_edit', {'id': contrat.id}) }}\">Modifier</a></td>
                  
                  <td><form>
-                    <input id=\"impression\" class=\"btn btn-primary mr-2\" name=\"impression\" type=\"button\" onclick=\"imprimer_page()\" value=\"Imprimer Contrat\" />
+                    
+                    <a href=\"{{ path('app_contratpdf', {'id': contrat.id}) }}\" class=\"btn btn-primary mr-2\" target=\"_blank\">Imprimer</a>
                 </form></td>
                 <td><a class=\"btn btn-primary mr-2\" href=\"{{ path('app_contrat_index') }}\">Retour</a></td>
             </tr>
@@ -303,6 +308,6 @@ class __TwigTemplate_c9118854dd51733e5b14cbeb9940a987 extends Template
 
   </main>
 {% endblock %}
-", "contrat/show.html.twig", "C:\\xampp\\htdocs\\PiDEV_V06\\PiDEV_V06\\templates\\contrat\\show.html.twig");
+", "contrat/show.html.twig", "C:\\xampp\\htdocs\\PiDEV_V12\\PiDEV_V06\\PiDEV_V06\\templates\\contrat\\show.html.twig");
     }
 }
